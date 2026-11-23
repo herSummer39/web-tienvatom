@@ -95,28 +95,34 @@ export default function ChatbotWidget() {
 
       {open && (
         <div className="cb-window" role="dialog" aria-label="Chatbot AI Tư vấn">
-          <div className="cb-head">
-            <div>
-              <div style={{ fontWeight: 700, fontSize: 15 }}>Trợ lý AI · Studio Web</div>
-              <div style={{ fontSize: 11, color: '#a1a1aa' }}>Đọc đúng bảng giá · Kết nối Zalo/CRM</div>
+          <span className="cb-pin" aria-hidden="true" />
+          <div className="cb-inner">
+            <div className="cb-head">
+              <div>
+                <div className="studio-mono" style={{ fontSize: 11, color: '#2563eb', fontWeight: 600 }}>
+                  01 · TRỰC 24/7
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 15, color: '#111111' }}>
+                  Trợ lý AI · Studio Web
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowLeadForm((v) => !v)}
+                style={{
+                  background: '#111111',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 999,
+                  padding: '7px 13px',
+                  fontSize: 12,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                }}
+              >
+                Để lại SĐT
+              </button>
             </div>
-            <button
-              type="button"
-              onClick={() => setShowLeadForm((v) => !v)}
-              style={{
-                background: '#0057ff',
-                color: '#fff',
-                border: 'none',
-                borderRadius: 999,
-                padding: '6px 12px',
-                fontSize: 12,
-                fontWeight: 600,
-                cursor: 'pointer',
-              }}
-            >
-              Để lại SĐT
-            </button>
-          </div>
 
           <div className="cb-messages">
             {messages.map((m, i) => (
@@ -198,12 +204,13 @@ export default function ChatbotWidget() {
             />
             <button
               type="submit"
-              className="studio-btn studio-btn--primary"
-              style={{ padding: '8px 14px', fontSize: 13 }}
+              className="studio-btn studio-btn--dark"
+              style={{ padding: '8px 15px', fontSize: 13 }}
             >
               Gửi
             </button>
           </form>
+          </div>
         </div>
       )}
     </>

@@ -460,7 +460,7 @@ a.studio-card:hover {
   color: var(--studio-muted);
 }
 
-/* Floating AI Chatbot — Clean Black & Solid Flat Color Accents (No Gradients) */
+/* Floating AI Chatbot — Pinned Pastel Paper Card Style */
 .cb-launcher {
   position: fixed;
   right: 22px;
@@ -474,8 +474,8 @@ a.studio-card:hover {
   border-radius: 50%;
   background: #111111;
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+  border: 2px solid #ffffff;
+  box-shadow: 0 12px 30px rgba(17, 17, 17, 0.22);
   cursor: pointer;
   overflow: hidden;
   transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.2s;
@@ -488,35 +488,73 @@ a.studio-card:hover {
 }
 
 .cb-launcher:hover {
-  background: #0057ff;
+  background: #2563eb;
   transform: scale(1.06);
 }
 
 .cb-window {
   position: fixed;
   right: 22px;
-  bottom: 88px;
+  bottom: 92px;
   z-index: 9991;
   width: min(385px, calc(100vw - 32px));
-  height: 510px;
-  max-height: calc(100vh - 115px);
+  height: 515px;
+  max-height: calc(100vh - 120px);
   background: #ffffff;
-  border: 1px solid rgba(17, 17, 17, 0.14);
-  border-radius: 20px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+  padding: 8px;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 24px 56px rgba(17, 17, 17, 0.14), 0 4px 14px rgba(17, 17, 17, 0.06);
   display: flex;
   flex-direction: column;
+  overflow: visible;
+}
+
+/* 3D Pushpin at top center of chatbox */
+.cb-pin {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fb923c 0%, #ea580c 65%, #9a3412 100%);
+  box-shadow: 0 6px 10px rgba(154, 52, 18, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.55);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.cb-pin::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fdba74 0%, #f97316 80%);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+}
+
+.cb-inner {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 17px;
   overflow: hidden;
+  border: 1px solid rgba(17, 17, 17, 0.06);
 }
 
 .cb-head {
-  padding: 14px 18px;
-  background: #111111;
-  color: #ffffff;
+  padding: 16px 16px 14px;
+  background: #eaf0ff;
+  color: #111111;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 3px solid #0057ff;
+  border-bottom: 1px dashed rgba(37, 99, 235, 0.2);
 }
 
 .cb-messages {
@@ -525,38 +563,47 @@ a.studio-card:hover {
   padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  background: #f5f5f7;
+  gap: 12px;
+  background-color: #fcfcfc;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 27px,
+    rgba(17, 17, 17, 0.045) 27px,
+    rgba(17, 17, 17, 0.045) 28px
+  );
 }
 
 .cb-msg {
-  max-width: 85%;
-  padding: 10px 14px;
-  border-radius: 14px;
-  font-size: 14px;
-  line-height: 1.5;
+  max-width: 86%;
+  padding: 11px 14px;
+  border-radius: 16px;
+  font-size: 13.5px;
+  line-height: 1.55;
   white-space: pre-line;
+  box-shadow: 0 4px 12px rgba(17, 17, 17, 0.05);
 }
 
 .cb-msg--bot {
   align-self: flex-start;
-  background: #ffffff;
-  border: 1px solid rgba(17, 17, 17, 0.1);
+  background: #fff1e8;
+  border: 3px solid #ffffff;
   color: #111111;
 }
 
 .cb-msg--user {
   align-self: flex-end;
-  background: #111111;
-  color: #ffffff;
+  background: #f5ebff;
+  border: 3px solid #ffffff;
+  color: #111111;
 }
 
 .cb-quick {
-  padding: 9px 12px;
+  padding: 10px 12px;
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
-  border-top: 1px solid rgba(17, 17, 17, 0.08);
+  border-top: 1px dashed rgba(17, 17, 17, 0.1);
   background: #ffffff;
 }
 
@@ -564,36 +611,36 @@ a.studio-card:hover {
   font-size: 12px;
   font-weight: 600;
   padding: 6px 12px;
-  border-radius: 999px;
-  border: none;
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(17, 17, 17, 0.06);
   cursor: pointer;
-  transition: transform 0.15s, opacity 0.15s;
+  transition: transform 0.15s;
 }
 
 .cb-quick button:nth-child(1) {
-  background: #0057ff;
-  color: #ffffff;
+  background: #fff1e8;
+  color: #c2410c;
 }
 
 .cb-quick button:nth-child(2) {
-  background: #ff5a1f;
-  color: #ffffff;
+  background: #eaf0ff;
+  color: #1d4ed8;
 }
 
 .cb-quick button:nth-child(3) {
-  background: #10b981;
-  color: #ffffff;
+  background: #f5ebff;
+  color: #6d28d9;
 }
 
 .cb-quick button:hover {
-  transform: translateY(-1px);
-  opacity: 0.9;
+  transform: translateY(-2px);
 }
 
 .cb-form {
   display: flex;
   gap: 8px;
   padding: 10px 12px;
-  border-top: 1px solid rgba(17, 17, 17, 0.08);
+  border-top: 1px solid rgba(17, 17, 17, 0.06);
   background: #ffffff;
 }
