@@ -1,0 +1,97 @@
+/*    Lista de cards de servicio    */
+
+/*
+ * Este bloque sólo define el layout del listado y su rótulo. Los estilos de cada
+ * fila viven en blocks/card-servicio/card-servicio.css y no deben pisarse desde
+ * acá.
+ */
+
+.lista-cards-servicio,
+.lista-cards-servicio::before,
+.lista-cards-servicio::after,
+.lista-cards-servicio *,
+.lista-cards-servicio *::before,
+.lista-cards-servicio *::after {
+    box-sizing: border-box;
+}
+
+.lista-cards-servicio {
+    max-width: var(--wp--style--global--wide-size);
+    margin: 0 auto;
+    margin-top: 0 !important;
+    width: 100%;
+}
+
+/* La separación entre listados es parte del componente: dos listados apilados
+   se separan igual en cualquier página, sin depender del contenedor. Lleva
+   !important porque tiene que ganarle al margin-top: 0 !important de la raíz. */
+.lista-cards-servicio + .lista-cards-servicio {
+    margin-top: 80px !important;
+}
+
+/* Rótulo del listado: mono, chico y en mayúsculas, como el resto de los
+   microtextos del sitio (ver .footer .texto-anio-actual). */
+.lista-cards-servicio__etiqueta {
+    font-family: var(--wp--preset--font-family--jetbrains-mono);
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--custom-titulos);
+    margin-bottom: 30px;
+    padding: 0;
+    transition: color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lista-cards-servicio__lista {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    width: 100%;
+}
+
+/* Animación de entrada, aplicada sobre el wrapper de cada fila */
+.lista-cards-servicio .card-servicio-article {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease var(--item-delay, 0s),
+                transform 0.6s ease var(--item-delay, 0s);
+}
+
+.lista-cards-servicio .card-servicio-article.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lista-cards-servicio .card-servicio-article {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/*    Modo oscuro    */
+
+body.is-dark .lista-cards-servicio__etiqueta {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/*    Preview del editor    */
+
+.lista-cards-servicio-editor__vacio {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #888;
+}
+
+/*    Móvil    */
+
+@media (max-width: 1023px) {
+
+    .lista-cards-servicio + .lista-cards-servicio {
+        margin-top: 60px !important;
+    }
+}

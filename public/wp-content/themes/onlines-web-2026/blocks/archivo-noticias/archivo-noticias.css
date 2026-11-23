@@ -1,0 +1,170 @@
+/*    Archivo de Noticias    */
+
+.archivo-noticias {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: var(--archivo-noticias-padding-top-desktop, 0);
+    padding-bottom: var(--archivo-noticias-padding-bottom-desktop, 0);
+    box-sizing: border-box;
+}
+
+.archivo-noticias,
+.archivo-noticias * {
+    box-sizing: border-box;
+}
+
+.archivo-noticias__contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    max-width: var(--wp--style--global--wide-size);
+}
+
+/* Mismo rotulo mono, chico y en mayusculas que el resto de los listados del
+   sitio (ver .faqs__etiqueta). Solo aparece en el archivo de autor. */
+.archivo-noticias__etiqueta {
+    width: 100%;
+    font-family: var(--wp--preset--font-family--jetbrains-mono);
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--wp--preset--color--custom-titulos);
+    margin-top: 0 !important;
+    margin-bottom: 30px;
+    padding: 0;
+}
+
+.archivo-noticias .archivo-noticias__grilla {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--archivo-noticias-card-gap-desktop, 30px);
+    width: 100%;
+    margin-bottom: 70px;
+}
+
+.archivo-noticias__horizontales {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.archivo-noticias__entrada {
+    width: 100%;
+    margin: 0;
+    border-bottom: 1px dashed rgba(18, 18, 19, 0.1);
+}
+
+.archivo-noticias__entrada-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.archivo-noticias__titulo {
+    width: min(761px, 100%);
+    margin: 0;
+    padding: 0;
+    font-family: var(--wp--preset--font-family--inter-display);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.25;
+    color: var(--wp--preset--color--custom-titulos);
+    transition: all .2s ease-in-out;
+    text-wrap: balance;
+}
+
+.archivo-noticias__fecha {
+    flex: 0 0 auto;
+    font-family: var(--wp--preset--font-family--jetbrains-mono);
+    font-size: 10px;
+    font-weight: 500;
+    line-height: normal;
+    color: var(--wp--preset--color--custom-texto-corrido);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.archivo-noticias__entrada:hover .archivo-noticias__titulo {
+    color: var(--wp--preset--color--custom-azul);
+}
+
+.archivo-noticias__paginacion {
+    width: auto;
+    min-height: 29px;
+    margin-top: 70px;
+    font-family: var(--wp--preset--font-family--inter-display);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: normal;
+    color: rgba(66,66,66,.4);
+}
+
+.archivo-noticias__paginacion-link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+}
+
+a.archivo-noticias__paginacion-link:hover {
+    color: var(--wp--preset--color--custom-azul);
+}
+
+.archivo-noticias__paginacion-link.is-disabled {
+    cursor: inherit;
+    opacity: 50%;
+}
+
+.archivo-noticias__paginacion-separador {
+    color: inherit;
+}
+
+.archivo-noticias-editor {
+    width: 100%;
+}
+
+.archive-author .archivo-noticias {
+    padding-bottom: 0;
+}
+
+@media (max-width: 1023px) {
+    .archivo-noticias {
+        padding-top: var(--archivo-noticias-padding-top-mobile, 0);
+        padding-bottom: var(--archivo-noticias-padding-bottom-mobile, 0);
+    }
+
+    .archivo-noticias .archivo-noticias__grilla {
+        grid-template-columns: 1fr;
+        gap: var(--archivo-noticias-card-gap-mobile, 24px);
+        margin-bottom: 40px;
+    }
+
+    .archivo-noticias__entrada-link {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 16px;
+        padding-top: 28px;
+        padding-bottom: 28px;
+    }
+
+    .archivo-noticias__titulo {
+        width: 100%;
+        font-size: 20px;
+    }
+
+    .archivo-noticias__paginacion {
+        align-self: flex-start;
+        margin-top: 40px;
+        font-size: 20px;
+    }
+}

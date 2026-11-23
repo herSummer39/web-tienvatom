@@ -1,0 +1,105 @@
+/*    Slider de logos    */
+
+.slider-logos,
+.slider-logos *,
+.slider-logos *::before,
+.slider-logos *::after {
+    box-sizing: border-box;
+}
+
+/* El espacio superior va en padding y no en margin: la convención del proyecto
+   pide margin-top: 0 !important en el selector raíz de cada bloque. */
+.slider-logos {
+    margin-top: 0 !important;
+    padding-top: 100px;
+    overflow: hidden;
+}
+
+.slider-logos .swiper {
+    overflow: hidden;
+}
+
+.slider-logos .swiper-wrapper {
+    transition-timing-function: linear !important;
+    align-items: center;
+}
+
+.slider-logos__slide {
+    width: auto !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+.slider-logos__link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.slider-logos__link:hover {
+    transform: scale(1.03);
+}
+
+.slider-logos__img {
+    display: block;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.slider-logos__slide:hover .slider-logos__img,
+.slider-logos__link:hover .slider-logos__img {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.single-servicio .slider-logos {
+    padding-top: 0;
+}
+
+@media (max-width: 1023px) {
+    .slider-logos {
+        padding-top: 50px;
+    }
+}
+
+/* ==================== EDITOR ==================== */
+
+/* El bloque no es insertable: este preview sólo aparecería si alguien
+   habilita el insertor o si el bloque llegara a guardarse en el contenido. */
+.slider-logos-editor {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(0, 0, 0, 0.08);
+}
+
+.slider-logos-editor__logo {
+    display: block;
+    height: 30px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.6;
+}
+
+.slider-logos-editor__placeholder {
+    display: block;
+    width: 80px;
+    height: 30px;
+    background: #e0e0e0;
+    border-radius: 4px;
+}
+
+.slider-logos-editor__vacio {
+    color: #888;
+    font-size: 13px;
+    margin: 0;
+}

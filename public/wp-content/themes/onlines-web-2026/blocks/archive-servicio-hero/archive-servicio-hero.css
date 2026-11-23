@@ -1,0 +1,338 @@
+/*    Archivo de servicios - Hero    */
+
+.archive-servicio-hero,
+.archive-servicio-hero-editor {
+    margin-top: 0 !important;
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    overflow-x: clip;
+    overflow-y: visible;
+}
+
+.archive-servicio-hero,
+.archive-servicio-hero::before,
+.archive-servicio-hero::after,
+.archive-servicio-hero *,
+.archive-servicio-hero *::before,
+.archive-servicio-hero *::after,
+.archive-servicio-hero-editor,
+.archive-servicio-hero-editor::before,
+.archive-servicio-hero-editor::after,
+.archive-servicio-hero-editor *,
+.archive-servicio-hero-editor *::before,
+.archive-servicio-hero-editor *::after {
+    box-sizing: border-box;
+}
+
+.archive-servicio-hero__inner {
+    --hero-title-center: 50%;
+    position: relative;
+    width: 100%;
+    max-width: 1520px;
+    height: 550px;
+    margin: 0 auto;
+    overflow: visible;
+}
+
+/* El template de columnas y filas lo fija el componente compartido
+   grilla-celdas, que es la única fuente de verdad para cols/rows. */
+.archive-servicio-hero__grilla {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    opacity: 0;
+    pointer-events: auto;
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.archive-servicio-hero.is-started .archive-servicio-hero__grilla {
+    opacity: 1;
+}
+
+/* pointer-events: none deja pasar el mouse a la grilla; el título lo recupera
+   para poder seleccionar el texto. */
+.archive-servicio-hero__contenido {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 9;
+    width: min(calc(100% - 80px), 1440px);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+}
+
+.archive-servicio-hero__titulo {
+    max-width: 880px;
+    margin: 0 auto;
+    font-family: var(--wp--preset--font-family--inter-display);
+    font-size: 96px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.96px;
+    color: var(--wp--preset--color--custom-titulos);
+    text-align: center;
+    pointer-events: auto;
+}
+
+/*    Burbuja de comentario    */
+
+/* La presentación de la tarjeta (.comentario-figma) es global y vive en
+   css/partials/_main.scss. Acá solo va la posición y el fade de entrada, igual
+   que en blog-hero. */
+.archive-servicio-hero__elemento {
+    position: absolute;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.archive-servicio-hero__elemento.is-visible {
+    opacity: 1;
+}
+
+.archive-servicio-hero__comentario {
+    top: calc(var(--hero-title-center) + 88px);
+    left: 50%;
+    z-index: 7;
+    transform: translateX(-50%);
+}
+
+.archive-servicio-hero__cursores {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.archive-servicio-hero__cursor {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    will-change: transform;
+}
+
+/* Sin transition de transform sobre el cursor: el recorrido lo escribe el RAF
+   frame a frame y una transición CSS encima lo vuelve arrastrado. */
+
+.archive-servicio-hero__cursor.is-visible {
+    opacity: 1;
+}
+
+.archive-servicio-hero__cursor svg {
+    display: block;
+    width: 15px;
+    height: 17px;
+    flex-shrink: 0;
+    transform-origin: top left;
+    transition: transform 0.16s ease;
+}
+
+.archive-servicio-hero__cursor.is-clicking svg {
+    transform: scale(0.9);
+}
+
+.archive-servicio-hero__cursor-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 6px;
+    margin-left: 9px;
+    margin-top: 2px;
+    background: var(--archive-servicio-hero-cursor-color);
+    color: var(--archive-servicio-hero-cursor-texto, #fff);
+    font-family: var(--wp--preset--font-family--inter-display);
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.45;
+    letter-spacing: 0.13px;
+    white-space: nowrap;
+    border-radius: 0 5px 5px 5px;
+    transition: transform 0.16s ease;
+}
+
+.archive-servicio-hero__cursor.is-clicking .archive-servicio-hero__cursor-label {
+    transform: translate(1px, 1px);
+}
+
+/* --archive-servicio-hero-cursor-color la heredan el SVG (fill) y la etiqueta (background).
+   Los left van en % sobre el ancho de 1520 del diseño para que las posiciones no
+   se descoloquen entre 1024px y 1520px de viewport, y son los mismos que en
+   servicio-hero: el nodo 2633:27969 repite esas posiciones.
+   Los top sí cambian: acá no hay botón, así que el centro del contenido es el
+   centro del título y las distancias se miden desde ahí. */
+.archive-servicio-hero__cursor--ux {
+    --archive-servicio-hero-cursor-color: var(--wp--preset--color--custom-figma-rosa);
+    top: calc(var(--hero-title-center) - 121px);
+    left: 36.3%;
+}
+
+.archive-servicio-hero__cursor--desarrollador {
+    --archive-servicio-hero-cursor-color: var(--wp--preset--color--custom-figma-amarillo);
+    --archive-servicio-hero-cursor-texto: var(--wp--preset--color--custom-titulos);
+    top: calc(var(--hero-title-center) + 65px);
+    left: 70.9%;
+}
+
+.archive-servicio-hero__cursor--ui {
+    --archive-servicio-hero-cursor-color: var(--wp--preset--color--custom-figma-violeta);
+    top: calc(var(--hero-title-center) + 128px);
+    left: 26.4%;
+}
+
+/*    Preview del editor    */
+
+.archive-servicio-hero-editor__preview {
+    position: relative;
+    min-height: 520px;
+    overflow: hidden;
+    border: 1px dashed rgba(18, 18, 19, 0.12);
+    border-radius: 28px;
+    background: #fff;
+}
+
+.archive-servicio-hero-editor__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(to right, rgba(18, 18, 19, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(18, 18, 19, 0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+}
+
+.archive-servicio-hero-editor__contenido {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 5;
+    width: min(calc(100% - 48px), 1280px);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.archive-servicio-hero-editor__titulo {
+    max-width: 880px;
+    margin: 0 auto;
+    font-family: var(--wp--preset--font-family--inter-display);
+    font-size: clamp(40px, 5.2vw, 96px);
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.96px;
+    color: var(--wp--preset--color--custom-titulos);
+    text-align: center;
+}
+
+.archive-servicio-hero-editor__comentario {
+    position: absolute;
+    top: 62%;
+    left: 50%;
+    z-index: 7;
+    transform: translateX(-50%);
+}
+
+.archive-servicio-hero-editor__cursor {
+    position: absolute;
+    z-index: 6;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Flecha aproximada con clip-path: el editor es una preview, no necesita el SVG
+   completo del frontend. */
+.archive-servicio-hero-editor__cursor::before {
+    content: '';
+    display: block;
+    width: 13px;
+    height: 15px;
+    background: var(--archive-servicio-hero-cursor-color);
+    clip-path: polygon(0 0, 100% 62%, 44% 68%, 26% 100%);
+}
+
+.archive-servicio-hero-editor__cursor-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 6px;
+    margin-left: 9px;
+    margin-top: 2px;
+    background: var(--archive-servicio-hero-cursor-color);
+    color: var(--archive-servicio-hero-cursor-texto, #fff);
+    font-family: var(--wp--preset--font-family--inter-display);
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.45;
+    letter-spacing: 0.13px;
+    white-space: nowrap;
+    border-radius: 0 5px 5px 5px;
+}
+
+.archive-servicio-hero-editor__cursor--ux {
+    --archive-servicio-hero-cursor-color: var(--wp--preset--color--custom-figma-rosa);
+    top: 16%;
+    left: 34%;
+}
+
+.archive-servicio-hero-editor__cursor--desarrollador {
+    --archive-servicio-hero-cursor-color: var(--wp--preset--color--custom-figma-amarillo);
+    --archive-servicio-hero-cursor-texto: var(--wp--preset--color--custom-titulos);
+    top: 46%;
+    left: 70%;
+}
+
+.archive-servicio-hero-editor__cursor--ui {
+    --archive-servicio-hero-cursor-color: var(--wp--preset--color--custom-figma-violeta);
+    top: 70%;
+    left: 24%;
+}
+
+.archive-servicio-hero-editor__label {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 12px 18px;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #888;
+    text-align: center;
+}
+
+@media (max-width: 1023px) {
+    .archive-servicio-hero__contenido {
+        width: calc(100% - 48px);
+    }
+
+    .archive-servicio-hero__titulo {
+        max-width: 100%;
+        font-size: clamp(50px, 8vw, 60px);
+        letter-spacing: -0.32px;
+    }
+
+    .archive-servicio-hero__comentario {
+        top: calc(var(--hero-title-center) + 60px);
+    }
+
+    .archive-servicio-hero__cursor-label {
+        padding: 0 4px;
+        font-size: 10px;
+    }
+
+    /* En mobile los cursores esquivan la burbuja, que queda centrada bajo el título. */
+    .archive-servicio-hero__cursor--ux            { top: 150px; left: 8%; }
+    .archive-servicio-hero__cursor--desarrollador { top: 205px; left: 58%; }
+    .archive-servicio-hero__cursor--ui            { top: 430px; left: 12%; }
+
+    .archive-servicio-hero-editor__preview {
+        min-height: 420px;
+    }
+
+    .archive-servicio-hero-editor__cursor-label {
+        padding: 0 4px;
+        font-size: 10px;
+    }
+}
