@@ -3,21 +3,25 @@ import { NextResponse } from 'next/server';
 const STUDIO_CONTEXT = `
 Bạn là trợ lý tư vấn AI của Studio Thiết kế Web, Web App & Giải pháp AI Automation (hoạt động tại Việt Nam theo mô hình Team / Studio Freelance trực tiếp với kỹ sư).
 Thông tin chính xác để tư vấn (tuyệt đối không bịa giá ngoài bảng này):
-1. Thiết kế + Lập trình Website chuẩn SEO (Next.js / Vercel / Supabase): từ 7.000.000đ - 15.000.000đ tùy số trang & tính năng.
+1. Thiết kế + Lập trình Website chuẩn SEO: từ 7.000.000đ (1 – 3 trang), 5 trang +2.000.000đ. Website trên 10 trang / hệ thống: liên hệ để báo giá riêng.
 2. Lập trình Web App quản lý (đặt lịch, quản lý đơn hàng, CRM mini thay thế Excel): từ 15.000.000đ+.
-3. Tính năng Add-on:
-   - Chatbot AI đọc đúng bảng giá/tài liệu riêng của doanh nghiệp: +3.000.000đ
-   - Automation đẩy Lead tự động về Zalo OA / Fanpage / Telegram / Google Sheet: +2.000.000đ
+3. Chỉ thiết kế UI/UX (Figma): từ 4.500.000đ.
+4. Tính năng Add-on:
+   - Chatbot AI đọc đúng bảng giá/tài liệu riêng của doanh nghiệp: +3.000.000đ (phí API OpenAI hằng tháng do khách hàng chi trả theo mức sử dụng)
+   - Automation đẩy Lead tự động về Zalo / Fanpage / Telegram: +2.000.000đ
    - Thanh toán trực tuyến (VietQR / MoMo / VNPay): +2.500.000đ
    - Trang quản trị bài viết chuẩn SEO Google + llms.txt: +2.000.000đ
-4. Thời gian hoàn thành: 5 - 14 ngày làm việc.
+   - Xuất báo cáo Excel / Đồng bộ Google Sheet: +1.000.000đ
+5. Giá chưa bao gồm tên miền và hosting (khách hàng tự đăng ký, bên mình hỗ trợ cài đặt).
+6. Bảo hành trọn đời.
+7. Thời gian hoàn thành: 5 - 14 ngày làm việc.
 Hãy trả lời ngắn gọn, thân thiện, thực tế, bằng tiếng Việt. Nếu khách quan tâm, gợi ý họ bấm vào trang /bao-gia để tự tính chi phí hoặc để lại SĐT/Zalo ngay trong khung chat.
 `;
 
 function fallbackReply(message: string): string {
   const q = message.toLowerCase();
   if (q.includes('giá') || q.includes('bao nhiêu') || q.includes('chi phí')) {
-    return 'Chi phí bên mình phụ thuộc vào nhu cầu thực tế:\n• Website chuẩn SEO trọn gói: từ 7 – 12 triệu\n• Chatbot AI đọc đúng bảng giá riêng: +3 triệu\n• Automation đẩy đơn về Zalo / Fanpage: +2 triệu\n• Web App quản lý nội bộ: từ 15 triệu\n\nBạn có thể tự chọn tính năng ở trang Báo giá (/bao-gia) hoặc để lại SĐT/Zalo tại đây để team gửi demo nhé!';
+    return 'Chi phí bên mình phụ thuộc vào nhu cầu thực tế:\n• Website chuẩn SEO: từ 7 triệu (trên 10 trang / hệ thống: liên hệ báo giá riêng)\n• Chatbot AI đọc đúng bảng giá riêng: +3 triệu (phí API OpenAI hằng tháng do khách chi trả)\n• Automation đẩy đơn về Zalo / Fanpage: +2 triệu\n• Xuất Excel / Google Sheet: +1 triệu\n• Web App quản lý nội bộ: từ 15 triệu\n\nGiá chưa gồm tên miền & hosting, bảo hành trọn đời.\n\nBạn có thể tự chọn tính năng ở trang Báo giá (/bao-gia) hoặc để lại SĐT/Zalo tại đây để team gửi demo nhé!';
   }
   if (q.includes('chatbot') || q.includes('ai') || q.includes('zalo') || q.includes('automation')) {
     return 'Bên mình tích hợp Chatbot AI đọc đúng dữ liệu bảng giá/sản phẩm của doanh nghiệp (không trả lời bừa) và tự động đẩy thông tin khách hàng mới về Zalo, Fanpage hoặc Telegram ngay lập tức. Bạn đang kinh doanh ngành nào để mình tư vấn luồng phù hợp?';

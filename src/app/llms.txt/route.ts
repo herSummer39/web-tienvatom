@@ -22,7 +22,7 @@ export async function GET() {
     `- [Tích hợp Chatbot AI & Automation](${siteUrl}/dich-vu): Chatbot đọc dữ liệu riêng của doanh nghiệp, tự động thông báo khách mới về Zalo OA / Fanpage / Telegram.`,
     '',
     '## Báo giá tham khảo',
-    `- [Công cụ tính báo giá tương tác](${siteUrl}/bao-gia): Website từ 7.000.000đ, Web App từ 15.000.000đ, Chatbot AI +3.000.000đ, Automation Zalo/Fanpage +2.000.000đ.`,
+    `- [Công cụ tính báo giá tương tác](${siteUrl}/bao-gia): Website từ 7.000.000đ, Web App từ 15.000.000đ, Chatbot AI +3.000.000đ, Automation Zalo/Fanpage +2.000.000đ, Excel/Google Sheet +1.000.000đ. Website trên 10 trang / hệ thống: liên hệ. Chưa gồm tên miền & hosting; phí API OpenAI của Chatbot do khách chi trả; bảo hành trọn đời.`,
     '',
     '## Dự án & Giải pháp mẫu',
     `- [Portfolio & Live Demo](${siteUrl}/du-an): 2 dự án thực tế và các bản demo giải pháp theo ngành.`,

@@ -10,18 +10,24 @@ const SERVICE_MODES = [
   { id: 'design', label: 'Chỉ Thiết kế UI/UX (Figma)', base: 4500000 },
 ];
 
-const PAGE_SCALES = [
+// extra = null: quy mô lớn, báo giá riêng sau khi trao đổi
+const PAGE_SCALES: { id: string; label: string; extra: number | null }[] = [
   { id: '1-3', label: '1 – 3 trang (Landing)', extra: 0 },
   { id: '5', label: '5 trang (Doanh nghiệp)', extra: 2000000 },
-  { id: '10+', label: 'Trên 10 trang / Hệ thống', extra: 5000000 },
+  { id: '10+', label: 'Trên 10 trang / Hệ thống', extra: null },
 ];
 
-const ADDONS = [
-  { id: 'chatbot', label: 'Chatbot AI đọc đúng bảng giá / tài liệu riêng', price: 3000000 },
+const ADDONS: { id: string; label: string; price: number; note?: string }[] = [
+  {
+    id: 'chatbot',
+    label: 'Chatbot AI đọc đúng bảng giá / tài liệu riêng',
+    price: 3000000,
+    note: 'Phí API OpenAI hằng tháng do khách hàng chi trả theo mức sử dụng thực tế.',
+  },
   { id: 'automation', label: 'Automation đẩy Lead về Zalo / Fanpage / Telegram', price: 2000000 },
   { id: 'seo-cms', label: 'Trang quản trị /admin đăng bài chuẩn SEO + llms.txt', price: 2000000 },
   { id: 'payment', label: 'Thanh toán trực tuyến (VietQR / MoMo / VNPay)', price: 2500000 },
-  { id: 'excel', label: 'Xuất dữ liệu báo cáo Excel / Đồng bộ Google Sheet', price: 1500000 },
+  { id: 'excel', label: 'Xuất dữ liệu báo cáo Excel / Đồng bộ Google Sheet', price: 1000000 },
 ];
 
 export default function QuotePage() {
@@ -37,7 +43,8 @@ export default function QuotePage() {
   const mode = SERVICE_MODES.find((m) => m.id === modeId)!;
   const scale = PAGE_SCALES.find((s) => s.id === scaleId)!;
   const addonItems = ADDONS.filter((a) => selectedAddons.includes(a.id));
-  const total = mode.base + scale.extra + addonItems.reduce((sum, a) => sum + a.price, 0);
+  const needsContact = scale.extra === null;
+  const total = mode.base + (scale.extra ?? 0) + addonItems.reduce((sum, a) => sum + a.price, 0);
 
   function toggleAddon(id: string) {
     setSelectedAddons((prev) =>
@@ -100,7 +107,8 @@ export default function QuotePage() {
                   className={`calc-pill${scaleId === s.id ? ' active' : ''}`}
                   onClick={() => setScaleId(s.id)}
                 >
-                  {s.label} {s.extra > 0 ? `(+${(s.extra / 1000000).toFixed(0)}tr)` : ''}
+                  {s.label}{' '}
+                  {s.extra === null ? '(Liên hệ)' : s.extra > 0 ? `(+${(s.extra / 1000000).toFixed(0)}tr)` : ''}
                 </button>
               ))}
             </div>
@@ -119,7 +127,12 @@ export default function QuotePage() {
                   onClick={() => toggleAddon(a.id)}
                   onKeyDown={(e) => e.key === 'Enter' && toggleAddon(a.id)}
                 >
-                  <div style={{ fontSize: 15, fontWeight: 500 }}>{a.label}</div>
+                  <div>
+                    <div style={{ fontSize: 15, fontWeight: 500 }}>{a.label}</div>
+                    {a.note && (
+                      <div style={{ fontSize: 12.5, color: 'var(--studio-muted)', marginTop: 4 }}>{a.note}</div>
+                    )}
+                  </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
                     <span className="studio-mono" style={{ fontSize: 14, fontWeight: 600 }}>
                       +{a.price.toLocaleString('vi-VN')}đ
@@ -141,11 +154,27 @@ export default function QuotePage() {
           </div>
 
           <div style={{ fontSize: 40, fontWeight: 700, color: '#0057ff', letterSpacing: '-0.03em' }}>
+            {needsContact ? 'Từ ' : ''}
             {total.toLocaleString('vi-VN')}đ
           </div>
 
-          <div style={{ fontSize: 13, color: 'var(--studio-muted)', borderBottom: '1px solid var(--studio-border)', paddingBottom: 14 }}>
-            Đã bao gồm: tối ưu tốc độ Core Web Vitals, chuẩn SEO Google, deploy Vercel + Supabase và hướng dẫn sử dụng.
+          {needsContact && (
+            <div style={{ fontSize: 13, color: '#0057ff', fontWeight: 500 }}>
+              Website trên 10 trang / hệ thống: liên hệ để nhận báo giá chi tiết theo yêu cầu.
+            </div>
+          )}
+
+          <div style={{ fontSize: 13, color: 'var(--studio-muted)', borderBottom: '1px solid var(--studio-border)', paddingBottom: 14, display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <span>
+              <strong>Đã bao gồm:</strong> tối ưu tốc độ Core Web Vitals, chuẩn SEO Google, hướng dẫn sử dụng và{' '}
+              <strong>bảo hành trọn đời</strong>.
+            </span>
+            <span>
+              <strong>Chưa bao gồm:</strong> tên miền và hosting (khách hàng tự đăng ký, bên mình hỗ trợ cài đặt).
+            </span>
+            {selectedAddons.includes('chatbot') && (
+              <span>Chatbot AI: phí API OpenAI hằng tháng do khách hàng chi trả theo mức sử dụng.</span>
+            )}
           </div>
 
           {sent ? (
