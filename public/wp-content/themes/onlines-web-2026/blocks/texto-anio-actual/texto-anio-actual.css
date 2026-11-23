@@ -1,18 +1,1 @@
-.texto-anio-actual,
-.texto-anio-actual-editor {
-    margin-top: 0 !important;
-    box-sizing: border-box;
-}
-
-.texto-anio-actual *,
-.texto-anio-actual *::before,
-.texto-anio-actual *::after,
-.texto-anio-actual-editor *,
-.texto-anio-actual-editor *::before,
-.texto-anio-actual-editor *::after {
-    box-sizing: border-box;
-}
-
-.texto-anio-actual-editor__texto {
-    margin: 0;
-}
+.texto-anio-actual,.texto-anio-actual-editor{margin-top:0!important;box-sizing:border-box}.texto-anio-actual *,.texto-anio-actual ::after,.texto-anio-actual ::before,.texto-anio-actual-editor *,.texto-anio-actual-editor ::after,.texto-anio-actual-editor ::before{box-sizing:border-box}.texto-anio-actual-editor__texto{margin:0}
