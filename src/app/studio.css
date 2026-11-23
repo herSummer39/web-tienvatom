@@ -1,22 +1,22 @@
-/* Tiệm Code — 3-Color Palette (#329002 Green Bg · #f8fafc Bold White Text · #c02f33 Crimson Buttons & Accents) */
+/* Tiệm Code — 3-Color Palette (#5DABD6 Sky Blue Bg · #f8fafc Bold White Text · #c02f33 Crimson Buttons & Accents) */
 
 :root {
-  --studio-bg: #329002;
-  --studio-surface: #287502;
-  --studio-surface-deep: #226302;
+  --studio-bg: #5DABD6;
+  --studio-surface: #4596c4;
+  --studio-surface-deep: #3481af;
   --studio-ink: #f8fafc;
-  --studio-muted: rgba(248, 250, 252, 0.88);
+  --studio-muted: rgba(248, 250, 252, 0.92);
   --studio-blue: #c02f33;
   --studio-blue-hover: #a62428;
   --studio-blue-soft: rgba(192, 47, 51, 0.28);
-  --studio-border: rgba(248, 250, 252, 0.28);
+  --studio-border: rgba(248, 250, 252, 0.34);
 
   /* Override WordPress theme variables */
   --wp--preset--color--custom-azul: #c02f33 !important;
   --wp--preset--color--custom-titulos: #f8fafc !important;
   --wp--preset--color--custom-textos: #f8fafc !important;
-  --wp--preset--color--custom-fondo: #329002 !important;
-  --wp--preset--color--white: #329002 !important;
+  --wp--preset--color--custom-fondo: #5DABD6 !important;
+  --wp--preset--color--white: #5DABD6 !important;
 }
 
 /* Force Vietnamese-capable Inter & JetBrains Mono + ALWAYS BOLD across all elements */
@@ -81,7 +81,7 @@ body,
 .archive-servicio,
 .archive-servicio-hero,
 .ultimas-noticias {
-  background-color: #329002 !important;
+  background-color: #5DABD6 !important;
   color: #f8fafc !important;
 }
 
@@ -587,7 +587,7 @@ a.studio-card:hover {
   width: min(365px, calc(100vw - 24px));
   height: 485px;
   max-height: calc(100vh - 112px);
-  background: #329002;
+  background: #5DABD6;
   border: 2px solid #f8fafc;
   border-radius: 20px;
   box-shadow: 0 20px 48px rgba(0, 0, 0, 0.3);
@@ -652,7 +652,7 @@ a.studio-card:hover {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: #329002;
+  background: #5DABD6;
 }
 
 .cb-msg {
@@ -1125,7 +1125,7 @@ a.studio-card:hover {
   overflow-y: auto;
   padding: 28px;
   border-radius: 22px;
-  background: #329002;
+  background: #5DABD6;
   border: 2px solid #f8fafc;
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
   animation: leadUp 0.22s cubic-bezier(0.22, 1, 0.36, 1);
@@ -1172,7 +1172,7 @@ a.studio-card:hover {
 /* ===== Footer ===== */
 .site-footer {
   border-top: 2px dashed var(--studio-border);
-  background: #287502 !important;
+  background: #4596c4 !important;
   color: #f8fafc !important;
 }
 
