@@ -12,7 +12,7 @@ export default function ChatbotWidget() {
   const [messages, setMessages] = useState<Msg[]>([
     {
       role: 'bot',
-      text: 'Chào bạn! Mình là Trợ lý AI của Studio. Bạn cần tư vấn làm Website, Web App hay Chatbot AI đẩy đơn về Zalo/Fanpage?',
+      text: 'Chào bạn! Mình là trợ lý của Tiệm Code. Bạn cần làm website, phần mềm hay phần mềm Zalo marketing?',
     },
   ]);
   const [input, setInput] = useState('');
@@ -39,7 +39,7 @@ export default function ChatbotWidget() {
     } catch {
       setMessages((prev) => [
         ...prev,
-        { role: 'bot', text: 'Kết nối tạm gián đoạn, bạn có thể để lại SĐT/Zalo để team liên hệ ngay!' },
+        { role: 'bot', text: 'Kết nối tạm gián đoạn, bạn để lại SĐT/Zalo hoặc nhắn Zalo 0565567789 giúp mình nhé!' },
       ]);
     } finally {
       setLoading(false);
@@ -66,7 +66,7 @@ export default function ChatbotWidget() {
       ...prev,
       {
         role: 'bot',
-        text: 'Đã ghi nhận thông tin! Hệ thống Automation vừa gửi thông báo tới Zalo/Telegram của team, tụi mình sẽ nhắn lại bạn trong ít phút.',
+        text: 'Đã ghi nhận thông tin! Tụi mình sẽ nhắn lại bạn sớm nhất.',
       },
     ]);
   }
@@ -100,10 +100,10 @@ export default function ChatbotWidget() {
             <div className="cb-head">
               <div>
                 <div className="studio-mono" style={{ fontSize: 11, color: '#2563eb', fontWeight: 600 }}>
-                  01 · TRỰC 24/7
+                  TƯ VẤN MIỄN PHÍ
                 </div>
                 <div style={{ fontWeight: 700, fontSize: 15, color: '#111111' }}>
-                  Trợ lý AI · Studio Web
+                  Trợ lý · Tiệm Code
                 </div>
               </div>
               <button
@@ -177,11 +177,11 @@ export default function ChatbotWidget() {
           </div>
 
           <div className="cb-quick">
-            <button type="button" onClick={() => sendMessage('Báo giá làm Website chuẩn SEO?')}>
+            <button type="button" onClick={() => sendMessage('Làm website giá bao nhiêu?')}>
               Báo giá Web?
             </button>
-            <button type="button" onClick={() => sendMessage('Chatbot AI & Automation Zalo là gì?')}>
-              Chatbot AI?
+            <button type="button" onClick={() => sendMessage('Phần mềm Zalo marketing làm được gì?')}>
+              Phần mềm Zalo?
             </button>
             <button type="button" onClick={() => sendMessage('Thời gian hoàn thành bao lâu?')}>
               Bao lâu xong?

@@ -2,25 +2,27 @@ import type { Metadata } from 'next';
 import './inline-styles.css';
 import './studio.css';
 import ClickEffects from '@/components/ClickEffects';
+import { SITE } from '@/lib/siteConfig';
 
 export const metadata: Metadata = {
-  title: 'Studio Thiết kế Website, Web App & Giải pháp AI Automation',
-  description:
-    'Team / Studio Freelance tại Việt Nam chuyên thiết kế Website chuẩn SEO, lập trình Web App theo yêu cầu, tích hợp Chatbot AI và Automation Zalo/Fanpage.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:6688'),
+  title: {
+    default: `${SITE.name} – ${SITE.tagline}`,
+    template: `%s | ${SITE.name}`,
+  },
+  description: SITE.description,
   icons: {
-    icon: '/wp-content/uploads/2026/03/cropped-favicon-32x32-1-32x32.png',
-    apple: '/wp-content/uploads/2026/03/cropped-favicon-32x32-1-180x180.png',
+    icon: '/images/tiemcode-avatar.svg',
   },
 };
 
 const orgJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  name: 'Studio Thiết kế Web & Giải pháp AI',
-  description:
-    'Team / Studio Freelance chuyên thiết kế Website chuẩn SEO, lập trình Web App theo yêu cầu, tích hợp Chatbot AI và Automation đa kênh.',
+  name: SITE.name,
+  description: SITE.description,
+  telephone: SITE.zalo,
   areaServed: 'VN',
-  priceRange: '7.000.000đ - 50.000.000đ',
 };
 
 export default function RootLayout({

@@ -1,35 +1,51 @@
 import { NextResponse } from 'next/server';
+import { SITE } from '@/lib/siteConfig';
 
 const STUDIO_CONTEXT = `
-Bạn là trợ lý tư vấn AI của Studio Thiết kế Web, Web App & Giải pháp AI Automation (hoạt động tại Việt Nam theo mô hình Team / Studio Freelance trực tiếp với kỹ sư).
-Thông tin chính xác để tư vấn (tuyệt đối không bịa giá ngoài bảng này):
-1. Thiết kế + Lập trình Website chuẩn SEO: từ 7.000.000đ (1 – 3 trang), 5 trang +2.000.000đ. Website trên 10 trang / hệ thống: liên hệ để báo giá riêng.
-2. Lập trình Web App quản lý (đặt lịch, quản lý đơn hàng, CRM mini thay thế Excel): từ 15.000.000đ+.
-3. Chỉ thiết kế UI/UX (Figma): từ 4.500.000đ.
-4. Tính năng Add-on:
-   - Chatbot AI đọc đúng bảng giá/tài liệu riêng của doanh nghiệp: +3.000.000đ (phí API OpenAI hằng tháng do khách hàng chi trả theo mức sử dụng)
-   - Automation đẩy Lead tự động về Zalo / Fanpage / Telegram: +2.000.000đ
+Bạn là trợ lý tư vấn của Tiệm Code (Việt Nam). Xưng "mình", gọi khách là "bạn", nói về studio là "tụi mình".
+Về tụi mình (trả lời khi khách hỏi "bên bạn là ai", "có uy tín không"): ${SITE.about.join(" ")}
+Thông tin chính xác để tư vấn (tuyệt đối không bịa giá hay dịch vụ ngoài danh sách này):
+1. Website trọn gói (thiết kế giao diện + lập trình + trang quản trị để khách tự đăng bài làm marketing): từ 7.000.000đ cho 1–3 trang, 5 trang +2.000.000đ, trên 10 trang / hệ thống: liên hệ báo giá riêng.
+2. Chỉ thiết kế giao diện (Figma): từ 4.500.000đ.
+3. Phần mềm theo nhu cầu doanh nghiệp (quản lý bán hàng, kho, đặt lịch…): giá liên hệ.
+4. Phần mềm Zalo Marketing (sản phẩm của tụi mình): quản lý nhiều tài khoản Zalo trên một màn hình, trả lời tự động, hẹn giờ gửi tin, gửi tin chăm sóc khách hàng, kết bạn tự động, đăng bài nhóm, lọc khách hàng trong nhóm. Giá: liên hệ để nhận demo.
+5. Tính năng thêm cho website:
+   - Chatbot AI tư vấn theo bảng giá / tài liệu của khách: +3.000.000đ (phí API OpenAI hằng tháng do khách hàng chi trả)
+   - Báo khách mới tự động về Zalo / Telegram / Google Sheet: +2.000.000đ
    - Thanh toán trực tuyến (VietQR / MoMo / VNPay): +2.500.000đ
-   - Trang quản trị bài viết chuẩn SEO Google + llms.txt: +2.000.000đ
-   - Xuất báo cáo Excel / Đồng bộ Google Sheet: +1.000.000đ
-5. Giá chưa bao gồm tên miền và hosting (khách hàng tự đăng ký, bên mình hỗ trợ cài đặt).
-6. Bảo hành trọn đời.
-7. Thời gian hoàn thành: 5 - 14 ngày làm việc.
-Hãy trả lời ngắn gọn, thân thiện, thực tế, bằng tiếng Việt. Nếu khách quan tâm, gợi ý họ bấm vào trang /bao-gia để tự tính chi phí hoặc để lại SĐT/Zalo ngay trong khung chat.
+   - Xuất báo cáo Excel / đồng bộ Google Sheet: +1.000.000đ
+6. Giá chưa bao gồm tên miền và hosting (khách tự đăng ký, tụi mình hỗ trợ cài đặt).
+7. Bảo hành trọn đời: website tụi mình làm gặp sự cố hay ngừng chạy thì tụi mình sửa miễn phí (không áp dụng khi tên miền/hosting hết hạn hoặc bên khác sửa mã nguồn).
+8. Thời gian làm website: khoảng 5–14 ngày làm việc.
+9. Liên hệ: Zalo / điện thoại ${SITE.zalo}.
+Trả lời ngắn gọn, thân thiện, bằng tiếng Việt. Khi khách quan tâm, gợi ý vào trang /bao-gia để tự tính chi phí hoặc để lại SĐT/Zalo ngay trong khung chat.
 `;
 
 function fallbackReply(message: string): string {
   const q = message.toLowerCase();
-  if (q.includes('giá') || q.includes('bao nhiêu') || q.includes('chi phí')) {
-    return 'Chi phí bên mình phụ thuộc vào nhu cầu thực tế:\n• Website chuẩn SEO: từ 7 triệu (trên 10 trang / hệ thống: liên hệ báo giá riêng)\n• Chatbot AI đọc đúng bảng giá riêng: +3 triệu (phí API OpenAI hằng tháng do khách chi trả)\n• Automation đẩy đơn về Zalo / Fanpage: +2 triệu\n• Xuất Excel / Google Sheet: +1 triệu\n• Web App quản lý nội bộ: từ 15 triệu\n\nGiá chưa gồm tên miền & hosting, bảo hành trọn đời.\n\nBạn có thể tự chọn tính năng ở trang Báo giá (/bao-gia) hoặc để lại SĐT/Zalo tại đây để team gửi demo nhé!';
+  if (q.includes("zalo") && (q.includes("phần mềm") || q.includes("tool") || q.includes("marketing"))) {
+    return `Phần mềm Zalo Marketing của tụi mình giúp bạn quản lý nhiều tài khoản Zalo trên một màn hình, trả lời tự động, hẹn giờ gửi tin, đăng bài nhóm và lọc khách hàng trong nhóm. Bạn nhắn Zalo ${SITE.zalo} để nhận video demo và báo giá nhé!`;
   }
-  if (q.includes('chatbot') || q.includes('ai') || q.includes('zalo') || q.includes('automation')) {
-    return 'Bên mình tích hợp Chatbot AI đọc đúng dữ liệu bảng giá/sản phẩm của doanh nghiệp (không trả lời bừa) và tự động đẩy thông tin khách hàng mới về Zalo, Fanpage hoặc Telegram ngay lập tức. Bạn đang kinh doanh ngành nào để mình tư vấn luồng phù hợp?';
+  if (q.includes("giá") || q.includes("bao nhiêu") || q.includes("chi phí")) {
+    return `Chi phí tham khảo bên mình:
+• Website trọn gói: từ 7 triệu (trên 10 trang: liên hệ)
+• Chỉ thiết kế giao diện: từ 4,5 triệu
+• Phần mềm theo nhu cầu, phần mềm Zalo: liên hệ
+• Thêm Chatbot AI: +3 triệu (phí OpenAI hằng tháng do bạn trả)
+• Báo khách mới về Zalo/Telegram: +2 triệu
+
+Giá chưa gồm tên miền & hosting, bảo hành trọn đời. Bạn tự tính chi phí ở trang /bao-gia hoặc để lại SĐT/Zalo để tụi mình tư vấn nhé!`;
   }
-  if (q.includes('bao lâu') || q.includes('thời gian')) {
-    return 'Thời gian hoàn thành trung bình từ 5–10 ngày cho Website chuẩn SEO + Chatbot AI, và 2–4 tuần cho Web App quản lý riêng. Bạn cần triển khai gấp trong tháng này không?';
+  if (q.includes("bao lâu") || q.includes("thời gian")) {
+    return "Website thường mất khoảng 5–14 ngày làm việc tùy số trang và tính năng. Phần mềm theo nhu cầu thì tụi mình báo tiến độ sau khi trao đổi yêu cầu. Bạn cần làm gấp không?";
   }
-  return 'Chào bạn! Mình là trợ lý AI của Studio Web & Automation. Team mình chuyên làm Website tốc độ cao (Next.js + Supabase), Web App quản lý và Chatbot AI đẩy lead về Zalo/Fanpage. Bạn đang muốn tìm hiểu làm Web mới, Web App hay tự động hóa quy trình?';
+  if (q.includes("là ai") || q.includes("uy tín") || q.includes("sinh viên") || q.includes("giới thiệu")) {
+    return SITE.about.join(" ");
+  }
+  if (q.includes("chatbot") || q.includes("ai")) {
+    return "Tụi mình gắn Chatbot AI lên website để tư vấn khách theo đúng bảng giá, tài liệu của bạn, kèm báo khách mới về Zalo/Telegram ngay lập tức. Bạn đang kinh doanh ngành gì để mình tư vấn kỹ hơn?";
+  }
+  return "Chào bạn! Mình là trợ lý của Tiệm Code. Tụi mình làm website trọn gói, thiết kế giao diện, phần mềm theo nhu cầu và phần mềm Zalo marketing. Bạn đang cần làm gì nè?";
 }
 
 export async function POST(req: Request) {
