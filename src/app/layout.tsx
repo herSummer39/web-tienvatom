@@ -37,7 +37,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=JetBrains+Mono:wght@600;700&display=swap"
         />
         <link rel="stylesheet" href="/wp-content/themes/onlines-web-2026/blocks/header-logo/header-logo.css" />
         <link rel="stylesheet" href="/wp-content/themes/onlines-web-2026/blocks/home-hero/home-hero.css" />

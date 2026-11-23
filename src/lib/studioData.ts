@@ -15,6 +15,7 @@ export interface LeadRecord {
   id: string;
   name: string;
   contact: string;
+  email?: string;
   source: string;
   service_type?: string;
   pages_count?: string;

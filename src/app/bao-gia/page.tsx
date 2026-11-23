@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import StudioShell from '@/components/StudioShell';
+import LeadForm from '@/components/LeadForm';
 import { makeHeroHtml } from '@/components/siteChrome';
 import { SITE } from '@/lib/siteConfig';
 
@@ -51,8 +52,7 @@ const SERVICE_MODES: Mode[] = [
 
 // extra = null: quy mô lớn, báo giá riêng sau khi trao đổi
 const PAGE_SCALES: { id: string; label: string; extra: number | null }[] = [
-  { id: '1-3', label: '1 – 3 trang (Landing)', extra: 0 },
-  { id: '5', label: '5 trang (Doanh nghiệp)', extra: 2000000 },
+  { id: 'upto10', label: 'Đến 10 trang', extra: 0 },
   { id: '10+', label: 'Trên 10 trang / Hệ thống', extra: null },
 ];
 
@@ -77,14 +77,8 @@ const fmtTr = (v: number) => `${(v / 1000000).toFixed(1).replace('.0', '')}tr`;
 
 export default function QuotePage() {
   const [modeId, setModeId] = useState('website');
-  const [scaleId, setScaleId] = useState('1-3');
+  const [scaleId, setScaleId] = useState('upto10');
   const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
-  const [name, setName] = useState('');
-  const [contact, setContact] = useState('');
-  const [notes, setNotes] = useState('');
-  const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
-  const [error, setError] = useState('');
 
   const mode = SERVICE_MODES.find((m) => m.id === modeId)!;
   const scale = PAGE_SCALES.find((s) => s.id === scaleId)!;
@@ -102,34 +96,6 @@ export default function QuotePage() {
     setSelectedAddons((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
   }
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!name.trim() || !contact.trim() || sending) return;
-    setSending(true);
-    setError('');
-    try {
-      const res = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name,
-          contact,
-          source: 'bao-gia',
-          service_type: mode.label,
-          pages_count: mode.pages ? scale.label : undefined,
-          addons: addonItems.map((a) => a.label),
-          estimated_total: total ?? 0,
-          notes,
-        }),
-      });
-      if (!res.ok) throw new Error('send failed');
-      setSent(true);
-    } catch {
-      setError(`Gửi chưa được, bạn nhắn Zalo ${SITE.zalo} giúp tụi mình nhé.`);
-    } finally {
-      setSending(false);
-    }
-  }
 
   return (
     <StudioShell heroHtml={makeHeroHtml('Báo giá', 'Chọn nhu cầu, xem chi phí tạm tính ngay.')}>
@@ -205,12 +171,12 @@ export default function QuotePage() {
           {contactOnly && (
             <p className="studio-note" style={{ margin: 0 }}>
               Mỗi phần mềm có yêu cầu khác nhau nên tụi mình báo giá sau khi trao đổi. Để lại thông tin bên cạnh hoặc
-              nhắn Zalo {SITE.zalo}.
+              nhắn Zalo cho tụi mình.
             </p>
           )}
         </div>
 
-        <div className="studio-card" style={{ position: 'sticky', top: 88, background: '#fff' }}>
+        <div className="studio-card" style={{ position: 'sticky', top: 88, background: 'var(--studio-surface-deep)' }}>
           <span className="studio-badge" style={{ marginBottom: 4 }}>
             Chi phí tạm tính
           </span>
@@ -219,12 +185,12 @@ export default function QuotePage() {
             {mode.pages ? ` · ${scale.label}` : ''}
           </div>
 
-          <div style={{ fontSize: 40, fontWeight: 700, color: '#0057ff', letterSpacing: '-0.03em' }}>
+          <div style={{ fontSize: 40, fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.03em' }}>
             {total === null ? 'Liên hệ' : `${fromPrice ? 'Từ ' : ''}${total.toLocaleString('vi-VN')}đ`}
           </div>
 
           {fromPrice && (
-            <div style={{ fontSize: 13, color: '#0057ff', fontWeight: 500 }}>
+            <div style={{ fontSize: 13, color: '#f8fafc', fontWeight: 700 }}>
               Website trên 10 trang / hệ thống: liên hệ để nhận báo giá chi tiết.
             </div>
           )}
@@ -254,56 +220,29 @@ export default function QuotePage() {
             {addonItems.some((a) => a.id === 'chatbot') && (
               <span>Chatbot AI: phí API OpenAI hằng tháng do khách hàng chi trả theo mức sử dụng.</span>
             )}
-            <span>Giá chính thức được chốt sau khi trao đổi chi tiết.</span>
+            <span>Chỉ làm đúng tính năng bạn cần, dễ mở rộng về sau. Giá chính thức được chốt trước khi bắt đầu.</span>
           </div>
 
-          {sent ? (
-            <div style={{ padding: 16, borderRadius: 14, background: '#eef3ff', color: '#0057ff', fontWeight: 500 }}>
-              Đã gửi yêu cầu! Tụi mình sẽ liên hệ bạn qua Zalo / điện thoại sớm nhất.
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <input
-                className="studio-input"
-                placeholder="Tên của bạn *"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <input
-                className="studio-input"
-                placeholder="Số Zalo / SĐT *"
-                required
-                value={contact}
-                onChange={(e) => setContact(e.target.value)}
-              />
-              <textarea
-                className="studio-textarea"
-                rows={3}
-                placeholder="Bạn kinh doanh gì, cần thêm gì…"
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-              />
-              {error && <div style={{ fontSize: 13, color: '#d93025' }}>{error}</div>}
-              <button
-                type="submit"
-                disabled={sending}
-                className="studio-btn studio-btn--primary"
-                style={{ width: '100%', padding: '14px 20px', fontSize: 15 }}
-              >
-                {sending ? 'Đang gửi...' : 'Nhận tư vấn miễn phí →'}
-              </button>
-              <a
-                href={SITE.zaloUrl}
-                target="_blank"
-                rel="noopener"
-                className="studio-btn studio-btn--outline"
-                style={{ width: '100%', padding: '12px 20px' }}
-              >
-                Hoặc nhắn Zalo {SITE.zalo}
-              </a>
-            </form>
-          )}
+          <LeadForm
+            source="bao-gia"
+            submitLabel="Nhận tư vấn miễn phí →"
+            notesPlaceholder="Bạn kinh doanh gì, cần thêm gì? (không bắt buộc)"
+            extra={{
+              service_type: mode.label,
+              pages_count: mode.pages ? scale.label : undefined,
+              addons: addonItems.map((a) => a.label),
+              estimated_total: total ?? 0,
+            }}
+          />
+          <a
+            href={SITE.zaloUrl}
+            target="_blank"
+            rel="noopener"
+            className="studio-btn studio-btn--outline"
+            style={{ width: "100%", padding: "12px 20px" }}
+          >
+            Hoặc nhắn Zalo
+          </a>
         </div>
       </div>
     </StudioShell>

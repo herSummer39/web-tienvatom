@@ -152,7 +152,7 @@ export default function AdminPage() {
           <form onSubmit={handlePublish} className="studio-card" style={{ gap: 14 }}>
             <h2>Đăng bài viết mới (Chuẩn SEO Google)</h2>
             {statusMsg && (
-              <div style={{ padding: 12, borderRadius: 10, background: '#eef3ff', color: '#0057ff', fontSize: 14 }}>
+              <div style={{ padding: 12, borderRadius: 10, background: '#c02f33', color: '#f8fafc', fontSize: 14 }}>
                 {statusMsg}
               </div>
             )}
@@ -205,17 +205,17 @@ export default function AdminPage() {
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
-            <div style={{ padding: 14, borderRadius: 12, background: '#fff', border: '1px solid var(--studio-border)' }}>
+            <div style={{ padding: 14, borderRadius: 12, background: 'var(--studio-surface-deep)', border: '1px solid var(--studio-border)' }}>
               <div style={{ fontSize: 11, textTransform: 'uppercase', color: 'var(--studio-muted)', marginBottom: 4 }}>
                 Xem trước trên Google Search
               </div>
-              <div style={{ color: '#1a0dab', fontSize: 17, fontWeight: 500 }}>
+              <div style={{ color: '#f8fafc', fontSize: 17, fontWeight: 800 }}>
                 {metaTitle || title || 'Tiêu đề bài viết SEO sẽ hiện ở đây'}
               </div>
-              <div style={{ color: '#006621', fontSize: 13 }}>
+              <div style={{ color: 'var(--studio-muted)', fontSize: 13 }}>
                 https://tenmiencuaban.vn/blog/{slug || 'duong-dan-bai-viet'}
               </div>
-              <div style={{ color: '#545454', fontSize: 13, marginTop: 2 }}>
+              <div style={{ color: 'var(--studio-muted)', fontSize: 13, marginTop: 2 }}>
                 {metaDesc || excerpt || 'Mô tả ngắn chuẩn SEO giúp tăng tỷ lệ click từ kết quả tìm kiếm Google.'}
               </div>
             </div>
@@ -252,7 +252,8 @@ export default function AdminPage() {
               <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 12 }}>
                 <div>
                   <strong style={{ fontSize: 18 }}>{lead.name}</strong> ·{' '}
-                  <span style={{ color: '#0057ff', fontWeight: 600 }}>{lead.contact}</span>
+                  <span style={{ color: '#f8fafc', background: '#c02f33', padding: '2px 8px', borderRadius: 999 }}>{lead.contact}</span>
+                  {lead.email && <> · <span>{lead.email}</span></>}
                 </div>
                 <span className="studio-tag">Nguồn: {lead.source}</span>
               </div>

@@ -11,8 +11,8 @@ export const SITE = {
   since: 2026,
   // Đoạn "Về tụi mình" dùng ở trang chủ, trang Dịch vụ, chatbot và llms.txt
   about: [
-    'Tiệm Code là một nhóm sinh viên IT cùng nhau làm website và phần mềm cho khách hàng. Tụi mình làm trực tiếp, không qua trung gian, nên giá mềm và trao đổi nhanh qua Zalo.',
-    'Mỗi dự án đều được bàn giao đầy đủ mã nguồn, tài khoản quản trị, và website đứng tên bạn. Tụi mình bảo hành trọn đời: website có sự cố là tụi mình sửa.',
+    'Tiệm Code là một nhóm sinh viên IT cùng nhau làm website và phần mềm cho khách hàng.',
+    'Mỗi dự án đều được bàn giao đầy đủ mã nguồn và tài khoản quản trị. Website được bảo hành trọn đời: có sự cố là tụi mình sửa.',
   ],
 };
 

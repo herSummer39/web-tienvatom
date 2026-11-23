@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getAllPosts } from '@/lib/posts';
 import { SITE } from '@/lib/siteConfig';
+import { SERVICES } from '@/lib/services';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,13 +18,12 @@ export async function GET() {
     ...SITE.about,
     '',
     '## Dịch vụ',
-    `- [Website trọn gói](${siteUrl}/dich-vu): Thiết kế giao diện, lập trình, trang quản trị để khách tự đăng bài làm marketing. Từ 7.000.000đ.`,
-    `- [Thiết kế giao diện](${siteUrl}/dich-vu): Thiết kế trên Figma, bàn giao cho đội lập trình. Từ 4.500.000đ.`,
-    `- [Phần mềm theo nhu cầu](${siteUrl}/dich-vu): Quản lý bán hàng, kho, đặt lịch… làm riêng theo doanh nghiệp. Giá: liên hệ.`,
-    `- [Phần mềm Zalo Marketing](${siteUrl}/phan-mem-zalo): Quản lý nhiều tài khoản Zalo trên một màn hình, trả lời tự động, hẹn giờ gửi tin, đăng bài nhóm. Giá: liên hệ.`,
+    ...SERVICES.map(
+      (s) => `- [${s.name}](${siteUrl}${s.id === 'zalo' ? '/phan-mem-zalo' : `/dich-vu#${s.id}`}): ${s.pain} Giá: ${s.price}.`
+    ),
     '',
     '## Báo giá',
-    `- [Công cụ tính báo giá](${siteUrl}/bao-gia): Website từ 7.000.000đ (1–3 trang), 5 trang +2.000.000đ, trên 10 trang liên hệ. Tính năng thêm: Chatbot AI +3.000.000đ (phí API OpenAI hằng tháng do khách trả), báo khách mới về Zalo/Telegram/Google Sheet +2.000.000đ, thanh toán trực tuyến +2.500.000đ, xuất Excel/Google Sheet +1.000.000đ.`,
+    `- [Công cụ tính báo giá](${siteUrl}/bao-gia): Website đến 10 trang 7.000.000đ, trên 10 trang liên hệ. Tính năng thêm: Chatbot AI +3.000.000đ (phí API OpenAI hằng tháng do khách trả), báo khách mới về Zalo/Telegram/Google Sheet +2.000.000đ, thanh toán trực tuyến +2.500.000đ, xuất Excel/Google Sheet +1.000.000đ.`,
     '- Giá chưa gồm tên miền và hosting. Website được bảo hành trọn đời.',
     '',
     ...(posts.length

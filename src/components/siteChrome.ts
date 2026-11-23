@@ -1,5 +1,6 @@
 // Header, footer và khối hero dùng chung cho toàn site (HTML tĩnh giữ hiệu ứng của theme).
 import { NAV_LINKS, SITE } from '@/lib/siteConfig';
+import { SERVICES } from '@/lib/services';
 
 export const SITE_HEADER_HTML = `<header class="header wp-block-template-part">
             <div class="wp-block-group alignfull header__wrapper px-1rem-mob is-layout-constrained wp-container-core-group-is-layout-48e5bebc wp-block-group-is-layout-constrained"
@@ -12,15 +13,15 @@ export const SITE_HEADER_HTML = `<header class="header wp-block-template-part">
                             <a class="header-logo__link js-header-logo" href="/" rel="follow"
                                 title="${SITE.name} - ${SITE.tagline}" aria-label="${SITE.name} - Trang chủ">
 
-                                <span class="header-logo__small header-logo__small--hidden"><svg xmlns="http://www.w3.org/2000/svg" width="29" height="12" viewBox="0 0 29 12" aria-hidden="true"><text x="0" y="10.5" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="currentColor">tc</text></svg></span>
-                                <span class="header-logo__full header-logo__full--visible"><svg width="620" height="140" viewBox="0 0 620 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="0" y="104" font-family="Inter, Arial, sans-serif" font-size="128" font-weight="800" letter-spacing="-4" fill="#060606">tiệm code</text></svg></span>
+                                <span class="header-logo__small header-logo__small--hidden"><svg xmlns="http://www.w3.org/2000/svg" width="29" height="12" viewBox="0 0 29 12" aria-hidden="true"><text x="0" y="10.5" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#f8fafc">tc</text></svg></span>
+                                <span class="header-logo__full header-logo__full--visible"><svg width="620" height="140" viewBox="0 0 620 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="0" y="104" font-family="Inter, Arial, sans-serif" font-size="128" font-weight="800" letter-spacing="-4" fill="#f8fafc">tiệm code</text></svg></span>
                             </a>
                         </div>
                     </div>
 
 
 
-                    <nav class="studio-top-nav" aria-label="Menu chính">${NAV_LINKS.map((l) => `<a href="${l.href}">${l.label}</a>`).join('')}</nav><div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+                    <nav class="studio-top-nav" aria-label="Menu chính">${NAV_LINKS.map((l) => `<a href="${l.href}">${l.label}</a>`).join('')}</nav><details class="studio-mobile-menu"><summary aria-label="Mở menu"><span></span><span></span><span></span></summary><nav aria-label="Menu">${NAV_LINKS.map((l) => `<a href="${l.href}">${l.label}</a>`).join("")}<a href="/lien-he">Liên hệ</a></nav></details><div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
                         <div class="wp-block-button header__btn-call"><a class="wp-block-button__link wp-element-button"
                                 href="/lien-he" rel="noreferrer noopener nofollow">Liên hệ <span class="btn-arrow" aria-hidden="true">↗</span></a></div>
                     </div>
@@ -28,20 +29,40 @@ export const SITE_HEADER_HTML = `<header class="header wp-block-template-part">
             </div>
         </header>`;
 
-const footerLinks = [
-  `<a href="${SITE.zaloUrl}" target="_blank" rel="noopener">Zalo ${SITE.zalo}</a>`,
-  SITE.fanpageUrl ? `<a href="${SITE.fanpageUrl}" target="_blank" rel="noopener">Fanpage</a>` : '',
-  '<a href="/dich-vu">Dịch vụ</a>',
-  '<a href="/dieu-khoan">Điều khoản sử dụng</a>',
-  '<a href="/bao-mat">Chính sách bảo mật</a>',
-].filter(Boolean);
+const link = (href: string, label: string, external = false) =>
+  `<li><a href="${href}"${external ? ' target="_blank" rel="noopener"' : ''}>${label}</a></li>`;
 
-export const SITE_FOOTER_HTML = `<footer class="footer mt-0 wp-block-template-part">
-  <div class="wp-block-group alignfull footer__wrapper px-1rem-mob has-background is-layout-constrained wp-block-group-is-layout-constrained"
-    style="border-top-color:#1212131a;border-top-style:dashed;border-top-width:1px;background-color:#fbfbfb;margin:0;padding-top:var(--wp--preset--spacing--90);padding-bottom:var(--wp--preset--spacing--90)">
-    <div class="wp-block-group alignwide container is-content-justification-center is-layout-flex wp-block-group-is-layout-flex">
-      <p class="texto-anio-actual wp-block-onlines-texto-anio-actual">© ${SITE.since} ${SITE.name}. ${footerLinks.join(' · ')}</p>
+const contactLinks = [
+  link(SITE.zaloUrl, 'Nhắn Zalo', true),
+  link(`tel:${SITE.zalo}`, `Gọi ${SITE.zalo}`),
+  SITE.fanpageUrl ? link(SITE.fanpageUrl, 'Fanpage', true) : '',
+  link('/lien-he', 'Để lại thông tin'),
+].join('');
+
+export const SITE_FOOTER_HTML = `<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <a class="site-footer__logo" href="/">${SITE.name}</a>
+      <p>${SITE.about[0]}</p>
+      <a class="site-footer__cta" href="${SITE.zaloUrl}" target="_blank" rel="noopener">Nhắn Zalo tư vấn <span class="btn-arrow" aria-hidden="true">↗</span></a>
     </div>
+    <nav class="site-footer__col" aria-label="Trang">
+      <h3>Trang</h3>
+      <ul>${NAV_LINKS.map((l) => link(l.href, l.label)).join('')}${link('/lien-he', 'Liên hệ')}</ul>
+    </nav>
+    <nav class="site-footer__col" aria-label="Dịch vụ">
+      <h3>Dịch vụ</h3>
+      <ul>${SERVICES.map((s) => link(s.id === 'zalo' ? '/phan-mem-zalo' : `/dich-vu#${s.id}`, s.short)).join('')}</ul>
+    </nav>
+    <div class="site-footer__col">
+      <h3>Liên hệ</h3>
+      <ul>${contactLinks}</ul>
+      <p class="site-footer__note">Làm việc online với khách hàng trên toàn quốc.</p>
+    </div>
+  </div>
+  <div class="site-footer__bottom">
+    <span>© ${SITE.since} ${SITE.name}</span>
+    <span><a href="/dieu-khoan">Điều khoản sử dụng</a> · <a href="/bao-mat">Chính sách bảo mật</a></span>
   </div>
 </footer>`;
 
