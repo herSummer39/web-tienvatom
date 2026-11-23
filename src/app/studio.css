@@ -192,33 +192,64 @@ button:active,
   color: var(--studio-ink);
 }
 
+.header .header__btn-call .wp-block-button__link,
 .studio-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 20px;
-  border-radius: 999px;
+  padding: 11px 22px !important;
+  border-radius: 999px !important;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   text-decoration: none;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background-color 0.22s ease, transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s;
+}
+
+.header .header__btn-call .wp-block-button__link {
+  background: #0b0b0c !important;
+  color: #ffffff !important;
+}
+
+.header .header__btn-call .wp-block-button__link:hover {
+  background: var(--studio-blue) !important;
+  transform: translateY(-1px);
+}
+
+.btn-arrow {
+  display: inline-block;
+  font-size: 13px;
+  line-height: 1;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.header .header__btn-call .wp-block-button__link:hover .btn-arrow,
+.studio-btn:hover .btn-arrow {
+  transform: translate(2px, -2px);
 }
 
 .studio-btn--primary {
-  background: var(--studio-blue);
+  background: #0b0b0c;
   color: #ffffff !important;
 }
 
 .studio-btn--primary:hover {
-  background: #0044cc;
+  background: var(--studio-blue);
+  transform: translateY(-1px);
 }
 
 .studio-btn--dark {
-  background: var(--studio-ink);
+  background: #0b0b0c;
   color: #ffffff !important;
+}
+
+.studio-btn--dark:hover {
+  background: var(--studio-blue);
+  transform: translateY(-1px);
 }
 
 .studio-btn--outline {
@@ -228,7 +259,7 @@ button:active,
 }
 
 .studio-btn--outline:hover {
-  border-color: var(--studio-ink);
+  border-color: #0b0b0c;
 }
 
 .studio-container {

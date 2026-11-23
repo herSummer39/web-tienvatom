@@ -22,8 +22,7 @@ export const SITE_HEADER_HTML = `<header class="header wp-block-template-part">
 
                     <nav class="studio-top-nav" aria-label="Menu chính">${NAV_LINKS.map((l) => `<a href="${l.href}">${l.label}</a>`).join('')}</nav><div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
                         <div class="wp-block-button header__btn-call"><a class="wp-block-button__link wp-element-button"
-                                href="/lien-he" style="padding-top:7px;padding-bottom:7px"
-                                 rel="noreferrer noopener nofollow">Liên hệ</a></div>
+                                href="/lien-he" rel="noreferrer noopener nofollow">Liên hệ <span class="btn-arrow" aria-hidden="true">↗</span></a></div>
                     </div>
                 </div>
             </div>
