@@ -39,7 +39,7 @@ export async function POST(req: Request) {
       content,
       category: String(body.category || 'SEO & Web'),
       cover_image: String(
-        body.cover_image || '/wp-content/uploads/2026/08/ambar-ultramar-1024x576.webp'
+        body.cover_image || ''
       ),
       meta_title: String(body.meta_title || title),
       meta_description: String(body.meta_description || excerpt || content.slice(0, 155)),

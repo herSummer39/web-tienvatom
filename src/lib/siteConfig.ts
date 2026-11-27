@@ -15,12 +15,3 @@ export const SITE = {
     'Mỗi dự án đều được bàn giao đầy đủ mã nguồn và tài khoản quản trị. Website được bảo hành trọn đời: có sự cố là tụi mình sửa.',
   ],
 };
-
-export const NAV_LINKS = [
-  { href: '/', label: 'Trang chủ' },
-  { href: '/dich-vu', label: 'Dịch vụ' },
-  { href: '/phan-mem-zalo', label: 'Phần mềm Zalo' },
-  { href: '/du-an', label: 'Dự án' },
-  { href: '/bao-gia', label: 'Báo giá' },
-  { href: '/blog', label: 'Blog' },
-];

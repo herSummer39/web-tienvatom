@@ -7,7 +7,7 @@ create table if not exists public.posts (
   excerpt text not null,
   content text not null,
   category text default 'SEO & Web',
-  cover_image text default '/wp-content/uploads/2026/08/ambar-ultramar-1024x576.webp',
+  cover_image text default '',
   meta_title text,
   meta_description text,
   published boolean default true,
@@ -43,3 +43,6 @@ create policy "Public read published posts" on public.posts
 -- Cho phép tạo lead từ form công khai
 create policy "Public insert leads" on public.leads
   for insert with check (true);
+
+-- Bảng posts tạo từ bản web cũ: bỏ ảnh bìa mặc định cũ
+alter table public.posts alter column cover_image set default '';

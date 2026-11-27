@@ -2,11 +2,12 @@ import { NextResponse } from 'next/server';
 import { getAllPosts } from '@/lib/posts';
 import { SITE } from '@/lib/siteConfig';
 import { SERVICES } from '@/lib/services';
+import { SITE_URL } from '@/lib/render';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:6688';
+  const siteUrl = SITE_URL;
   const posts = (await getAllPosts()).slice(0, 10);
 
   const lines = [

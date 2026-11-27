@@ -26,14 +26,11 @@ export interface LeadRecord {
   created_at: string;
 }
 
-// Bài viết mẫu đã được xoá — bài mới đăng qua trang /admin (lưu vào Supabase nếu đã cấu hình).
-export const INITIAL_POSTS: BlogPost[] = [];
-
-// In-memory runtime store for local demo when Supabase keys are not yet set
+// Lưu tạm trong bộ nhớ khi chưa cấu hình Supabase (chỉ để thử trên máy, mất khi khởi động lại)
 export const runtimeStore: {
   posts: BlogPost[];
   leads: LeadRecord[];
 } = {
-  posts: [...INITIAL_POSTS],
+  posts: [],
   leads: [],
 };
