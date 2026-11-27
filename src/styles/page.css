@@ -1,0 +1,491 @@
+/* Giao diện cho các khối nội dung riêng của từng trang (cùng phong cách với thiết kế gốc) */
+:root {
+  --ink: #252122;
+  --cream: #F4F0EC;
+  --orange: #FC5702;
+  --yellow: #F1E044;
+  --blue: #91CEEF;
+  --pink: #F380E7;
+  --green: #25D572;
+}
+.tcp-page {
+  width: 100%;
+  background: var(--cream);
+  color: var(--ink);
+  padding: 130px 0 40px;
+  font-family: "Montserrat Alternates", "Montserrat", sans-serif;
+  box-sizing: border-box;
+}
+.tcp-page *, .tcp-page *::before, .tcp-page *::after { box-sizing: border-box; }
+.tcp-wrap { max-width: 1240px; margin: 0 auto; padding: 0 48px 80px; }
+
+.tcp-bg-orange { background: var(--orange); }
+.tcp-bg-yellow { background: var(--yellow); }
+.tcp-bg-blue { background: var(--blue); }
+.tcp-bg-pink { background: var(--pink); }
+.tcp-bg-green { background: var(--green); }
+.tcp-bg-dark { background: var(--ink); color: var(--cream); }
+
+/* đầu trang */
+.tcp-hero { text-align: center; padding: 30px 0 70px; }
+.tcp-sticker {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  transform: rotate(-3deg);
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+.tcp-title {
+  font-family: "Anton", "Bebas Neue", Impact, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(54px, 9vw, 128px);
+  line-height: 1.26;
+  margin: 0 0 22px;
+  color: var(--ink);
+}
+.tcp-lead { font-size: clamp(17px, 1.6vw, 20px); line-height: 1.55; max-width: 760px; margin: 0 auto 26px; }
+.tcp-hero .tcp-lead { margin-left: auto; margin-right: auto; }
+.tcp-actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+.tcp-h2 {
+  font-family: "Anton", "Bebas Neue", Impact, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.26;
+  margin: 0 0 14px;
+}
+
+/* nút giống nút gốc: vàng, viền đen, đổ bóng lệch */
+.tcp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 40px;
+  border: 2px solid var(--ink);
+  background: var(--yellow);
+  color: var(--ink) !important;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.tcp-btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+.tcp-btn svg { width: 16px; height: 12px; }
+.tcp-btn[data-variant="ghost"] { background: transparent; }
+.tcp-btn[data-variant="dark"] { background: var(--ink); color: var(--cream) !important; border-color: var(--ink); box-shadow: 4px 4px 0 rgba(37, 33, 34, 0.35); }
+
+/* thẻ màu, hơi nghiêng như các thẻ trong thiết kế */
+.tcp-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.tcp-grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.tcp-card {
+  position: relative;
+  border-radius: 24px;
+  padding: 38px 36px;
+  color: var(--ink);
+  transform: rotate(var(--tilt, 0deg));
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-decoration: none !important;
+  transition: transform 0.2s ease;
+}
+.tcp-card:hover { transform: rotate(0deg) translateY(-4px); }
+.tcp-card.tcp-bg-dark { color: var(--cream); }
+.tcp-card-sm { padding: 30px 28px; }
+.tcp-card-title {
+  font-family: "Anton", "Bebas Neue", Impact, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(28px, 2.6vw, 40px);
+  line-height: 1.26;
+  margin: 0;
+}
+.tcp-card-sm .tcp-card-title { font-size: 28px; }
+.tcp-card p { margin: 0; font-size: 17px; line-height: 1.55; }
+.tcp-price {
+  align-self: flex-start;
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 30px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.tcp-bg-dark .tcp-price { background: var(--yellow); color: var(--ink); }
+.tcp-pain { font-weight: 600; }
+.tcp-card-cta { margin-top: auto; padding-top: 10px; }
+
+.tcp-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.tcp-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 17px; line-height: 1.5; }
+.tcp-check { width: 20px; height: 20px; flex: 0 0 20px; margin-top: 2px; }
+.tcp-check circle { fill: var(--ink); }
+
+/* quy trình */
+.tcp-steps { list-style: none; margin: 30px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.tcp-step { border-radius: 22px; padding: 26px 22px; transform: rotate(-1deg); }
+.tcp-step:nth-child(even) { transform: rotate(1deg); }
+.tcp-step-num { font-family: "Anton", sans-serif; font-size: 44px; line-height: 1; }
+.tcp-step h3 { font-family: "Anton", sans-serif; font-weight: 400; text-transform: uppercase; font-size: 24px; line-height: 1.26; margin: 14px 0 8px; }
+.tcp-step p { margin: 0; font-size: 15px; line-height: 1.5; }
+
+.tcp-group { margin-top: 60px; }
+.tcp-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; margin-top: 70px; }
+.tcp-split .tcp-lead { margin-left: 0; }
+.tcp-note { margin-top: 40px; font-size: 14px; line-height: 1.6; opacity: 0.75; }
+
+/* hỏi đáp giống khối FAQ gốc */
+.tcp-faq { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+.tcp-faq details { background: var(--ink); color: var(--cream); border-radius: 20px; padding: 22px 26px; }
+.tcp-faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 18px; font-weight: 600; }
+.tcp-faq summary::-webkit-details-marker { display: none; }
+.tcp-faq summary i {
+  font-style: normal; flex: 0 0 34px; height: 34px; border-radius: 50%;
+  background: var(--yellow); color: var(--ink); display: grid; place-items: center; font-size: 22px; font-weight: 700;
+  transition: transform 0.2s ease;
+}
+.tcp-faq details[open] summary i { transform: rotate(45deg); }
+.tcp-faq details p { margin: 14px 0 0; font-size: 16px; line-height: 1.6; opacity: 0.85; }
+
+/* liên hệ */
+.tcp-contact { min-height: 210px; justify-content: flex-end; }
+
+/* chính sách */
+.tcp-prose { max-width: 820px; margin: 0 auto; font-size: 17px; line-height: 1.75; }
+.tcp-prose h2 { font-family: "Anton", sans-serif; font-weight: 400; text-transform: uppercase; font-size: 30px; line-height: 1.26; margin: 40px 0 10px; }
+.tcp-prose p, .tcp-prose ul { margin: 0 0 14px; }
+.tcp-prose ul { padding-left: 22px; }
+.tcp-prose a { color: inherit; font-weight: 600; }
+.tcp-updated { margin-top: 36px !important; font-size: 14px; opacity: 0.7; }
+
+/* menu: trang đang xem */
+.tc-nav-active { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
+.tc-footer-legal { display: inline-flex; gap: 14px; margin-left: 18px; font-size: 14px; }
+.tc-footer-legal a { color: #F4F0EC; opacity: 0.75; font-family: "Montserrat Alternates", sans-serif; text-decoration: none; }
+.tc-footer-legal a:hover { opacity: 1; text-decoration: underline; }
+
+@media (max-width: 1000px) {
+  .tcp-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tcp-grid-3 { grid-template-columns: 1fr; }
+}
+@media (max-width: 810px) {
+  .tcp-page { padding-top: 110px; }
+  .tcp-wrap { padding: 0 18px 60px; }
+  .tcp-grid-2, .tcp-split { grid-template-columns: 1fr; }
+  .tcp-steps { grid-template-columns: 1fr; }
+  .tcp-card { padding: 28px 24px; }
+  .tc-footer-legal { margin: 8px 0 0; flex-wrap: wrap; }
+}
+
+/* chân trang: bỏ cờ Canada cạnh giờ Việt Nam */
+[data-framer-name="Footer"] [data-framer-name="Frame 4075833"],
+[data-framer-name="Footer"] [data-framer-name="canada"] { display: none !important; }
+
+/* khối nội dung thêm ở cuối trang (được chuyển vào trước phần "Liên hệ ngay") */
+body > .tcp-after { display: none; }
+.tcp-page.tcp-after { padding: 90px 0 10px; }
+.tcp-sec { margin-bottom: 90px; }
+.tcp-sec > .tcp-lead { margin-left: 0; }
+.tcp-sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; margin-bottom: 30px; }
+.tcp-sec-head .tcp-lead { margin: 0; max-width: 560px; }
+.tcp-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+
+/* số liệu nổi bật */
+.tcp-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.tcp-stat { border-radius: 24px; padding: 30px 26px; transform: rotate(var(--tilt, 0deg)); }
+.tcp-stat b { display: block; font-family: "Anton", sans-serif; font-weight: 400; font-size: clamp(34px, 3.4vw, 52px); line-height: 1.2; text-transform: uppercase; white-space: nowrap; }
+.tcp-stat span { display: block; margin-top: 6px; font-size: 16px; line-height: 1.45; }
+
+/* gồm / chưa gồm */
+.tcp-compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.tcp-compare .tcp-card { gap: 18px; }
+.tcp-list-x li .tcp-check circle { fill: #FC5702; }
+.tcp-bg-dark .tcp-list .tcp-check circle { fill: var(--yellow); }
+.tcp-bg-dark .tcp-list .tcp-check path { stroke: var(--ink); }
+
+/* thẻ chọn dịch vụ (Nếu bạn... -> chọn ...) */
+.tcp-pick { display: flex; flex-direction: column; gap: 12px; }
+.tcp-pick small { font-size: 14px; font-weight: 600; text-transform: uppercase; opacity: 0.75; }
+.tcp-pick .tcp-card-title { font-size: 26px; }
+.tcp-pick .tcp-more { margin-top: auto; font-weight: 700; font-size: 15px; display: inline-flex; gap: 8px; align-items: center; color: inherit; }
+
+/* bài viết sắp có */
+.tcp-post { min-height: 230px; }
+.tcp-post small { font-size: 13px; font-weight: 600; text-transform: uppercase; }
+.tcp-post .tcp-card-title { font-size: 26px; }
+.tcp-post .tcp-soon { margin-top: auto; font-size: 14px; opacity: 0.75; }
+
+/* hỏi đáp chia 2 cột theo nhóm */
+.tcp-faq-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 28px; }
+.tcp-faq-groups h3 { font-family: "Anton", sans-serif; font-weight: 400; text-transform: uppercase; font-size: 30px; line-height: 1.26; margin: 0 0 6px; }
+
+.tcp-cta-card { display: flex; justify-content: space-between; align-items: center; gap: 30px; flex-wrap: wrap; border-radius: 28px; padding: 44px 48px; }
+.tcp-cta-card .tcp-h2 { margin: 0 0 8px; }
+.tcp-cta-card p { margin: 0; font-size: 18px; line-height: 1.5; max-width: 620px; }
+.tcp-cta-card .tcp-actions { justify-content: flex-end; }
+
+@media (max-width: 1000px) {
+  .tcp-grid-4, .tcp-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 810px) {
+  .tcp-grid-4, .tcp-stats, .tcp-compare, .tcp-faq-groups { grid-template-columns: 1fr; }
+  .tcp-cta-card { padding: 30px 24px; }
+  .tcp-cta-card .tcp-actions { justify-content: flex-start; }
+}
+
+/* ================= FORM ĐĂNG KÝ TƯ VẤN ================= */
+.tc-form { display: flex; flex-direction: column; gap: 14px; font-family: "Montserrat Alternates", "Montserrat", sans-serif; color: var(--ink); }
+.tc-form fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.tc-form legend { display: block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; margin-bottom: 8px; padding: 0; }
+.tc-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.tc-chip { position: relative; }
+.tc-chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.tc-chip span {
+  display: inline-block; padding: 9px 14px; border-radius: 40px; border: 2px solid var(--ink);
+  background: #fff; font-size: 14px; font-weight: 600; line-height: 1.2; transition: background .15s, transform .15s;
+}
+.tc-chip input:checked + span { background: var(--yellow); box-shadow: 3px 3px 0 var(--ink); transform: translate(-1px, -1px); }
+.tc-chip input:focus-visible + span { outline: 3px solid var(--blue); outline-offset: 2px; }
+.tc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tc-field { display: flex; flex-direction: column; gap: 6px; }
+.tc-field > span { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; }
+.tc-field > span i { font-style: normal; color: var(--orange); }
+.tc-field input, .tc-field textarea {
+  width: 100%; border: 2px solid var(--ink); border-radius: 14px; padding: 13px 16px; background: #fff; color: var(--ink);
+  font: inherit; font-size: 16px; outline: none; transition: box-shadow .15s;
+}
+.tc-field textarea { resize: vertical; min-height: 92px; }
+.tc-field input::placeholder, .tc-field textarea::placeholder { color: rgba(37, 33, 34, .45); }
+.tc-field input:focus, .tc-field textarea:focus { box-shadow: 4px 4px 0 var(--ink); }
+.tc-hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
+.tc-form-foot { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 4px; }
+.tc-form-foot .tcp-btn:disabled { opacity: .6; cursor: wait; }
+.tc-form-alt { margin: 0; font-size: 14px; }
+.tc-form-alt a { color: inherit; font-weight: 700; }
+.tc-form-note { margin: 0; font-size: 12.5px; line-height: 1.5; opacity: .7; }
+.tc-form-note a { color: inherit; }
+.tcp-form-msg { margin: 0; padding: 12px 14px; border-radius: 12px; background: #FFE3D6; color: var(--ink); font-size: 14.5px; line-height: 1.5; }
+.tcp-form-msg[hidden] { display: none; }
+.tcp-form-msg a { color: inherit; font-weight: 700; }
+.tc-lead-done { text-align: center; padding: 20px 6px 6px; color: var(--ink); }
+.tc-lead-done[hidden] { display: none; }
+.tc-done-icon { width: 72px; height: 72px; margin: 0 auto 14px; border-radius: 50%; background: var(--green); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); display: grid; place-items: center; }
+.tc-lead-done h3 { font-family: "Anton", sans-serif; font-weight: 400; text-transform: uppercase; font-size: 34px; line-height: 1.26; margin: 0 0 8px; }
+.tc-lead-done p { margin: 0 auto 18px; max-width: 380px; font-size: 16px; line-height: 1.55; }
+.tc-lead-done .tcp-actions { justify-content: center; }
+
+/* popup */
+.tc-lead { position: fixed; inset: 0; z-index: 2147483000; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.tc-lead[hidden] { display: none; }
+.tc-lead-backdrop { position: absolute; inset: 0; background: rgba(37, 33, 34, .55); opacity: 0; transition: opacity .2s ease; }
+.tc-lead-box {
+  position: relative; width: min(600px, 100%); max-height: calc(100vh - 40px); overflow: auto; overscroll-behavior: contain;
+  background: var(--cream); border: 2px solid var(--ink); border-radius: 28px; box-shadow: 8px 8px 0 var(--ink);
+  padding: 34px 34px 28px; transform: translateY(16px) scale(.98); opacity: 0; transition: transform .2s ease, opacity .2s ease;
+}
+.tc-lead.is-open .tc-lead-backdrop { opacity: 1; }
+.tc-lead.is-open .tc-lead-box { transform: none; opacity: 1; }
+.tc-lead-close {
+  position: absolute; top: 16px; right: 16px; width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--ink);
+  background: #fff; color: var(--ink); font-size: 24px; line-height: 1; cursor: pointer; display: grid; place-items: center;
+}
+.tc-lead-close:hover { background: var(--yellow); }
+.tc-lead-box .tcp-sticker { margin-bottom: 10px; }
+.tc-lead-title { font-family: "Anton", sans-serif; font-weight: 400; text-transform: uppercase; font-size: clamp(36px, 5vw, 48px); line-height: 1.22; margin: 0 0 6px; color: var(--ink); }
+.tc-lead-sub { margin: 0 0 20px; font-size: 16px; line-height: 1.5; color: var(--ink); max-width: 460px; font-family: "Montserrat Alternates", sans-serif; }
+html.tc-lead-open, html.tc-lead-open body { overflow: hidden !important; }
+
+/* form trên trang Liên hệ */
+.tc-lead-inline { background: var(--cream); border: 2px solid var(--ink); border-radius: 28px; box-shadow: 8px 8px 0 var(--ink); padding: 32px; scroll-margin-top: 120px; }
+.tc-lead-inline .tc-lead-title { font-size: 42px; }
+
+/* ================= KHỐI MỚI ================= */
+.tcp-feature { border-radius: 22px; padding: 26px 24px; display: flex; flex-direction: column; gap: 10px; transform: rotate(var(--tilt, 0deg)); }
+.tcp-feature .tcp-ico { width: 46px; height: 46px; border-radius: 14px; background: var(--ink); color: var(--cream); display: grid; place-items: center; }
+.tcp-feature .tcp-ico svg { width: 24px; height: 24px; }
+.tcp-feature h3 { font-family: "Anton", sans-serif; font-weight: 400; text-transform: uppercase; font-size: 24px; line-height: 1.26; margin: 4px 0 0; }
+.tcp-feature p { margin: 0; font-size: 15.5px; line-height: 1.55; }
+.tcp-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.tcp-chips span { padding: 10px 18px; border-radius: 40px; border: 2px solid var(--ink); background: #fff; font-weight: 600; font-size: 15px; }
+.tcp-chips span:nth-child(5n+1) { background: var(--yellow); }
+.tcp-chips span:nth-child(5n+2) { background: var(--blue); }
+.tcp-chips span:nth-child(5n+3) { background: var(--pink); }
+.tcp-chips span:nth-child(5n+4) { background: var(--green); }
+.tcp-chips span:nth-child(5n+5) { background: var(--orange); }
+.tcp-timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.tcp-timeline li { display: grid; grid-template-columns: 190px 1fr; gap: 24px; align-items: start; border-radius: 22px; padding: 24px 28px; }
+.tcp-timeline b { font-family: "Anton", sans-serif; font-weight: 400; font-size: 30px; line-height: 1.2; text-transform: uppercase; }
+.tcp-timeline h3 { margin: 0 0 4px; font-size: 19px; font-weight: 700; }
+.tcp-timeline p { margin: 0; font-size: 16px; line-height: 1.55; }
+.tcp-example table { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+.tcp-example td { padding: 8px 0; border-bottom: 1px dashed rgba(37, 33, 34, .35); vertical-align: top; }
+.tcp-example td:last-child { text-align: right; white-space: nowrap; font-weight: 600; padding-left: 12px; }
+.tcp-example tr.tcp-total td { border-bottom: 0; padding-top: 12px; font-size: 18px; font-weight: 800; }
+.tcp-bg-dark.tcp-example td { border-bottom-color: rgba(244, 240, 236, .3); }
+.tcp-glossary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 0; }
+.tcp-term { border: 2px solid var(--ink); border-radius: 22px; padding: 24px; background: #fff; }
+.tcp-term dt { font-family: "Anton", sans-serif; font-size: 26px; line-height: 1.26; text-transform: uppercase; margin-bottom: 8px; }
+.tcp-term dt small { display: block; font-family: "Montserrat Alternates", sans-serif; font-size: 13px; font-weight: 600; text-transform: none; opacity: .65; }
+.tcp-term dd { margin: 0; font-size: 15.5px; line-height: 1.6; }
+
+/* ================= BLOG ================= */
+.tcp-cats { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: -20px 0 40px; }
+.tcp-cats button { font: inherit; font-size: 14px; font-weight: 700; text-transform: uppercase; padding: 10px 18px; border-radius: 40px; border: 2px solid var(--ink); background: #fff; color: var(--ink); cursor: pointer; }
+.tcp-cats button[aria-pressed="true"] { background: var(--ink); color: var(--cream); }
+.tcp-posts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; }
+.tcp-post-card { display: flex; flex-direction: column; border: 2px solid var(--ink); border-radius: 24px; overflow: hidden; background: #fff; color: var(--ink) !important; text-decoration: none !important; transition: transform .2s ease, box-shadow .2s ease; }
+.tcp-post-card[hidden] { display: none; }
+.tcp-post-card:hover { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 var(--ink); }
+.tcp-post-cover { aspect-ratio: 16 / 10; display: grid; place-items: center; padding: 22px; border-bottom: 2px solid var(--ink); position: relative; overflow: hidden; }
+.tcp-post-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tcp-post-cover b { font-family: "Anton", sans-serif; font-weight: 400; font-size: 30px; line-height: 1.2; text-transform: uppercase; text-align: center; }
+.tcp-post-body { padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.tcp-post-meta { font-size: 13px; font-weight: 600; text-transform: uppercase; opacity: .7; display: flex; gap: 10px; flex-wrap: wrap; }
+.tcp-post-body h2, .tcp-post-body h3 { margin: 0; font-size: 21px; line-height: 1.35; font-weight: 800; }
+.tcp-post-body p { margin: 0; font-size: 15.5px; line-height: 1.55; opacity: .85; }
+.tcp-post-body .tcp-more { margin-top: auto; padding-top: 6px; font-weight: 700; font-size: 15px; display: inline-flex; gap: 8px; align-items: center; }
+.tcp-post-card.tcp-featured { grid-column: 1 / -1; flex-direction: row; }
+.tcp-post-card.tcp-featured .tcp-post-cover { flex: 0 0 48%; aspect-ratio: auto; min-height: 320px; border-bottom: 0; border-right: 2px solid var(--ink); }
+.tcp-post-card.tcp-featured .tcp-post-cover b { font-size: 46px; }
+.tcp-post-card.tcp-featured .tcp-post-body { padding: 36px; justify-content: center; }
+.tcp-post-card.tcp-featured h2 { font-size: 32px; }
+
+/* bài viết */
+.tcp-article-head { text-align: center; max-width: 920px; margin: 0 auto; padding: 30px 0 40px; }
+.tcp-article-head .tcp-title { font-size: clamp(38px, 5.2vw, 72px); }
+.tcp-article-head .tcp-post-meta { justify-content: center; }
+.tcp-crumbs { font-size: 14px; margin-bottom: 18px; }
+.tcp-crumbs a { color: inherit; font-weight: 600; }
+.tcp-article-cover { max-width: 1000px; margin: 0 auto 50px; border: 2px solid var(--ink); border-radius: 28px; overflow: hidden; aspect-ratio: 16 / 7; display: grid; place-items: center; }
+.tcp-article-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tcp-article-cover b { font-family: "Anton", sans-serif; font-weight: 400; font-size: clamp(34px, 4.6vw, 60px); text-transform: uppercase; text-align: center; padding: 30px; line-height: 1.2; }
+.tcp-article { max-width: 760px; margin: 0 auto; font-size: 18px; line-height: 1.8; }
+.tcp-article h2 { font-family: "Anton", sans-serif; font-weight: 400; text-transform: uppercase; font-size: 34px; line-height: 1.26; margin: 46px 0 12px; scroll-margin-top: 110px; }
+.tcp-article h3 { font-size: 21px; font-weight: 800; margin: 30px 0 8px; line-height: 1.4; }
+.tcp-article p, .tcp-article ul, .tcp-article ol { margin: 0 0 18px; }
+.tcp-article ul, .tcp-article ol { padding-left: 24px; }
+.tcp-article li { margin-bottom: 6px; }
+.tcp-article a { color: inherit; font-weight: 700; text-decoration-color: var(--orange); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.tcp-article blockquote { margin: 26px 0; padding: 20px 24px; border-radius: 20px; background: var(--yellow); border: 2px solid var(--ink); font-weight: 600; }
+.tcp-article blockquote p { margin: 0; }
+.tcp-article table { width: 100%; border-collapse: collapse; margin: 0 0 22px; font-size: 16px; }
+.tcp-article th, .tcp-article td { border: 2px solid var(--ink); padding: 10px 12px; text-align: left; vertical-align: top; }
+.tcp-article th { background: var(--ink); color: var(--cream); }
+.tcp-article img { max-width: 100%; border-radius: 18px; border: 2px solid var(--ink); }
+.tcp-toc { border: 2px solid var(--ink); border-radius: 20px; padding: 20px 24px; margin: 0 0 34px; background: #fff; font-size: 16px; line-height: 1.7; }
+.tcp-toc b { display: block; font-size: 13px; text-transform: uppercase; margin-bottom: 8px; }
+.tcp-toc ol { margin: 0; padding-left: 20px; }
+.tcp-toc a { font-weight: 600; text-decoration: none; }
+.tcp-article-cta { max-width: 760px; margin: 50px auto 0; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; border-radius: 24px; padding: 28px 30px; }
+.tcp-article-cta h2 { font-family: "Anton", sans-serif; font-weight: 400; text-transform: uppercase; font-size: 30px; line-height: 1.26; margin: 0 0 4px; }
+.tcp-article-cta p { margin: 0; font-size: 16px; }
+.tcp-related { margin-top: 90px; }
+
+@media (max-width: 1000px) {
+  .tcp-posts, .tcp-glossary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tcp-post-card.tcp-featured { flex-direction: column; }
+  .tcp-post-card.tcp-featured .tcp-post-cover { min-height: 220px; border-right: 0; border-bottom: 2px solid var(--ink); }
+}
+@media (max-width: 810px) {
+  .tc-row, .tcp-posts, .tcp-glossary { grid-template-columns: 1fr; }
+  .tc-lead { padding: 10px; align-items: flex-end; }
+  .tc-lead-box { padding: 26px 20px 22px; border-radius: 24px; max-height: calc(100vh - 20px); }
+  .tc-lead-inline { padding: 22px 18px; }
+  .tcp-timeline li { grid-template-columns: 1fr; gap: 6px; }
+  .tcp-article { font-size: 17px; }
+  .tcp-post-card.tcp-featured h2 { font-size: 24px; }
+}
+
+/* hiệu năng: khối nằm ngoài màn hình thì trình duyệt tạm bỏ qua việc vẽ */
+.tcp-sec, .tcp-related { content-visibility: auto; contain-intrinsic-size: auto 800px; }
+.tc-lead-inline [data-close] { display: none !important; }
+
+/* hiệu năng: popup "chi tiết dự án" của thiết kế gốc có 8 khung luôn được tính bố cục dù đang ẩn,
+   làm mỗi lần cuộn tốn ~50ms. Khung nào đang ẩn thì bỏ hẳn khỏi trang; khi mở vẫn trượt vào như cũ. */
+[data-framer-name="Case Study Overlay"] [data-framer-name="Panel Slot"][style*="visibility: hidden"] { display: none !important; }
+@starting-style {
+  [data-framer-name="Case Study Overlay"] [data-framer-name="Panel Slot"] { transform: translate3d(105%, 0, 0) !important; }
+}
+.tc-form[hidden] { display: none !important; }
+
+/* ================= DỰ ÁN ================= */
+.tcp-badge { display: inline-block; padding: 5px 12px; border-radius: 30px; border: 2px solid var(--ink); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; color: var(--ink); opacity: 1 !important; }
+.tcp-article-head .tcp-badge { margin-bottom: 16px; font-size: 13px; }
+.tcp-article-head .tcp-lead { margin-left: auto; margin-right: auto; }
+.tcp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tcp-tags span { padding: 4px 10px; border-radius: 20px; background: var(--cream); border: 1px solid rgba(37, 33, 34, .25); font-size: 12.5px; font-weight: 600; }
+.tcp-project-card .tcp-post-cover { padding: 0; }
+.tcp-project-card .tcp-post-cover img { object-position: top center; }
+.tcp-post-cover svg, .tcp-article-cover svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tcp-article-cover { position: relative; }
+.tcp-article-cover img { object-position: top center; }
+.tcp-posts-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.tcp-posts-4 .tcp-post-body h3 { font-size: 18px; }
+.tcp-facts { max-width: 1000px; margin: -20px auto 50px; display: grid; grid-template-columns: repeat(4, auto); justify-content: space-between; gap: 18px 30px; padding: 22px 28px; border: 2px solid var(--ink); border-radius: 22px; background: #fff; }
+.tcp-facts dt { font-size: 12px; font-weight: 800; text-transform: uppercase; opacity: .6; margin-bottom: 4px; }
+.tcp-facts dd { margin: 0; font-weight: 700; font-size: 16px; }
+@media (max-width: 1100px) { .tcp-posts-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 810px) {
+  .tcp-posts-4 { grid-template-columns: 1fr; }
+  .tcp-facts { grid-template-columns: 1fr 1fr; }
+}
+
+/* công cụ ước tính chi phí (trang Báo giá) */
+.tcp-est-wrap, .tcp-est { scroll-margin-top: 110px; }
+.tcp-est {
+  max-width: 880px; margin: 0 auto; background: #fff; border: 2px solid var(--ink); border-radius: 28px;
+  box-shadow: 8px 8px 0 var(--ink); padding: 40px 44px 34px; display: flex; flex-direction: column; gap: 22px;
+}
+.tcp-est-head { text-align: center; }
+.tcp-est-head .tcp-sticker { margin-bottom: 14px; }
+.tcp-est-title { margin: 0 0 22px; font-size: 34px; line-height: 1.15; font-weight: 700; letter-spacing: -.02em; }
+.tcp-est-bar { height: 10px; border: 2px solid var(--ink); border-radius: 10px; overflow: hidden; background: var(--cream); }
+.tcp-est-bar i { display: block; height: 100%; width: 0; background: var(--green); transition: width .3s ease; }
+.tcp-est-count { margin: 10px 0 0; font-size: 14px; font-weight: 600; opacity: .75; }
+.tcp-est-step { animation: tcpEstIn .25s ease; }
+.tcp-est-step[hidden] { display: none !important; }
+@keyframes tcpEstIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.tcp-est-step h3 { margin: 0 0 6px; font-size: 24px; font-weight: 700; text-align: center; }
+.tcp-est-hint { margin: 0 0 6px; text-align: center; font-size: 14px; opacity: .7; }
+.tcp-est-step .tc-chips { justify-content: center; margin-top: 14px; gap: 10px; }
+.tcp-est-step .tc-chip span { font-size: 15px; padding: 11px 18px; cursor: pointer; }
+.tcp-est-step .tc-chip span em { font-style: normal; font-weight: 700; color: var(--orange); margin-left: 4px; }
+.tcp-est-step .tc-chip:hover span { background: var(--cream); }
+.tcp-est-step .tc-chip input:checked + span { background: var(--yellow); }
+.tcp-est-big { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tcp-est-big .tc-chip span { display: flex; flex-direction: column; gap: 4px; border-radius: 18px; padding: 18px 20px; text-align: left; height: 100%; }
+.tcp-est-big .tc-chip span b { font-size: 18px; }
+.tcp-est-big .tc-chip span small { font-size: 14px; font-weight: 500; opacity: .7; }
+.tcp-est-nav { display: flex; justify-content: space-between; align-items: center; min-height: 10px; }
+.tcp-est-nav [hidden] { display: none !important; }
+.tcp-est-nav [data-est-next] { margin-left: auto; }
+.tcp-est-back { background: none; border: 0; font: inherit; font-weight: 600; font-size: 15px; cursor: pointer; color: var(--ink); padding: 8px 0; }
+.tcp-est-back:hover { text-decoration: underline; }
+.tcp-est-result { text-align: center; }
+.tcp-est-label { margin: 0; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; opacity: .7; }
+.tcp-est-price { margin: 6px 0 4px; font-size: 48px; line-height: 1.1; font-weight: 800; letter-spacing: -.02em; }
+.tcp-est-price::after { content: ""; display: block; width: 120px; height: 10px; margin: 6px auto 0; background: var(--yellow); border-radius: 6px; }
+.tcp-est-days { margin: 8px 0 0; font-weight: 600; }
+.tcp-est-lines { list-style: none; margin: 18px auto 0; padding: 0; max-width: 460px; text-align: left; }
+.tcp-est-lines:empty { display: none; }
+.tcp-est-lines li { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px dashed rgba(37, 33, 34, .3); font-size: 15px; }
+.tcp-est-note { margin: 16px auto 0; max-width: 560px; font-size: 15px; line-height: 1.55; }
+.tcp-est-note:empty { display: none; }
+.tcp-est-result .tcp-actions { justify-content: center; margin-top: 22px; }
+.tcp-est-small { margin: 14px 0 0; font-size: 13px; opacity: .65; }
+@media (max-width: 810px) {
+  .tcp-est { padding: 28px 20px 24px; box-shadow: 5px 5px 0 var(--ink); }
+  .tcp-est-title { font-size: 26px; }
+  .tcp-est-big { grid-template-columns: 1fr; }
+  .tcp-est-price { font-size: 38px; }
+}

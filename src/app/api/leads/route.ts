@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isSupabaseConfigured, supabaseInsert, supabaseSelect } from '@/lib/supabase';
 import { LeadRecord, runtimeStore } from '@/lib/studioData';
+import { isAdmin } from '@/lib/admin';
 
 async function triggerAutomationWebhook(lead: LeadRecord) {
   const webhookUrl = process.env.LEAD_WEBHOOK_URL;
@@ -46,7 +47,9 @@ async function triggerAutomationWebhook(lead: LeadRecord) {
   }
 }
 
-export async function GET() {
+export async function GET(req: Request) {
+  // danh sách khách chỉ dành cho quản trị
+  if (!isAdmin(req)) return NextResponse.json({ error: 'Sai mật khẩu quản trị.' }, { status: 401 });
   if (isSupabaseConfigured()) {
     const rows = await supabaseSelect<LeadRecord>('leads', '?order=created_at.desc');
     if (rows) return NextResponse.json({ leads: rows, source: 'supabase' });

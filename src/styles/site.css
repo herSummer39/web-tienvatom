@@ -1,0 +1,68 @@
+/* Hiệu ứng thay cho JS của Framer (thông số lấy đúng từ bản gốc). Điều khiển bởi public/site.js */
+
+/* ---------- chuyển động lặp: dải chữ chạy, chữ xoay ---------- */
+[data-tc-loop] {
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+[data-tc-loop="green"] { animation-name: tcLoopGreen; animation-duration: 59s; }
+[data-tc-loop="blue"] { animation-name: tcLoopBlue; animation-duration: 62s; }
+[data-tc-loop="spin24"] { animation-name: tcSpin; animation-duration: 24s; }
+[data-tc-loop="spin16"] { animation-name: tcSpin; animation-duration: 16s; }
+[data-tc-loop].tc-off { animation-play-state: paused; }
+@keyframes tcLoopGreen { from { transform: translateX(0); } to { transform: translateX(2072px); } }
+@keyframes tcLoopBlue { from { transform: translateX(0); } to { transform: translateX(-2173px); } }
+@keyframes tcSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ---------- hiện dần khi cuộn tới ---------- */
+/* lò xo của Framer: stiffness 380, damping 26, mass 1 */
+:root {
+  --tc-spring: linear(0, 0.095, 0.299, 0.526, 0.726, 0.877, 0.977, 1.033, 1.057, 1.059, 1.051, 1.037, 1.024, 1.013, 1.005, 1, 0.997, 0.996, 0.997, 0.997, 0.998, 0.999, 0.999, 1, 1);
+  --tc-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tc-js [data-tc-reveal="wipe"]:not(.tc-in) { clip-path: inset(0% 100% 0% 0%); }
+[data-tc-reveal="wipe"] { transition: clip-path 0.8s var(--tc-ease) 0.25s; }
+.tc-js [data-tc-reveal="pop"]:not(.tc-in) { opacity: 0; translate: 0 28px; scale: 0.92; }
+[data-tc-reveal="pop"] {
+  transition: opacity 0.35s ease var(--tc-delay, 0s), translate 0.7s var(--tc-spring) var(--tc-delay, 0s), scale 0.7s var(--tc-spring) var(--tc-delay, 0s);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-tc-loop] { animation: none !important; }
+  .tc-js [data-tc-reveal]:not(.tc-in) { clip-path: none; opacity: 1; translate: none; scale: none; }
+}
+
+/* ---------- nút: rê chuột đổi sang nền tối, chữ vàng ---------- */
+.framer-51pMF [data-framer-name="Face"] { transition: background-color 0.25s ease, box-shadow 0.25s ease; }
+.framer-51pMF [data-framer-name="Label"] .framer-text { transition: color 0.25s ease; }
+.framer-51pMF:hover [data-framer-name="Face"] { background-color: rgb(37, 33, 34) !important; box-shadow: rgb(0, 0, 0) 0 0 0 0 !important; }
+.framer-51pMF:hover [data-framer-name="Label"] .framer-text { --framer-text-color: rgb(242, 225, 68) !important; color: rgb(242, 225, 68) !important; }
+.framer-51pMF:hover [data-framer-name="Arrow"] { color: rgb(242, 225, 68) !important; fill: rgb(242, 225, 68) !important; }
+
+/* link ở chân trang: rê chuột thành vàng */
+[data-framer-name="Footer"] a .framer-text,
+[data-framer-name="Footer"] a { transition: color 0.2s ease; }
+[data-framer-name="Footer"] a:hover,
+[data-framer-name="Footer"] a:hover .framer-text { --framer-text-color: rgb(241, 224, 68) !important; color: rgb(241, 224, 68) !important; }
+
+/* ---------- menu máy tính: cuộn xuống thì ẩn các mục, chỉ còn logo + nút ---------- */
+nav[data-tc-nav="desktop"] [data-framer-name="Links"] { transition: opacity 0.3s var(--tc-ease), translate 0.3s var(--tc-ease); }
+nav[data-tc-nav="desktop"].tc-collapsed [data-framer-name="Links"] { opacity: 0 !important; pointer-events: none; }
+
+/* ---------- hỏi đáp ---------- */
+[data-tc-faq] { cursor: pointer; }
+[data-tc-faq] [data-framer-name="Icon"] { transition: transform 0.35s var(--tc-ease), background-color 0.35s var(--tc-ease); }
+[data-tc-faq].tc-open [data-framer-name="Icon"] { background-color: rgb(243, 128, 231) !important; transform: rotate(45deg) !important; }
+[data-tc-answer] { overflow: hidden; transition: height 0.4s var(--tc-ease), opacity 0.3s ease; }
+[data-tc-answer][hidden] { display: none !important; }
+
+/* ---------- khung chat ---------- */
+.tc-chat-host-fixed { position: fixed; z-index: 9998; inset: auto 0 0 auto; width: 0; height: 0; }
+.tc-chat-panel [data-tc-chat-log] a { color: rgb(241, 224, 68); }
+.tc-chat-typing span { display: inline-block; width: 6px; height: 6px; margin: 0 2px; border-radius: 50%; background: rgba(250, 250, 250, 0.6); animation: tcTyping 1s infinite ease-in-out; }
+.tc-chat-typing span:nth-child(2) { animation-delay: 0.15s; }
+.tc-chat-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes tcTyping { 0%, 80%, 100% { opacity: 0.3; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+
+/* menu điện thoại khi mở: khóa cuộn trang */
+html.tc-menu-open, html.tc-menu-open body { overflow: hidden; }

@@ -1,22 +1,15 @@
 import type { MetadataRoute } from 'next';
-import { INITIAL_POSTS } from '@/lib/studioData';
+import { loadSite, SITE_URL } from '@/lib/render';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:6688';
-  const staticRoutes = ['', '/dich-vu', '/phan-mem-zalo', '/du-an', '/bao-gia', '/blog', '/lien-he', '/bao-mat', '/dieu-khoan'];
+export const revalidate = 3600;
 
-  return [
-    ...staticRoutes.map((route) => ({
-      url: `${siteUrl}${route}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: route === '' ? 1 : 0.8,
-    })),
-    ...INITIAL_POSTS.map((post) => ({
-      url: `${siteUrl}/blog/${post.slug}`,
-      lastModified: new Date(post.created_at),
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    })),
-  ];
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const { all, blog } = await loadSite();
+  const dates = new Map(blog.posts.map((p: { slug: string; date: string }) => [`blog/${p.slug}`, p.date]));
+  const legal = new Set(['bao-mat', 'dieu-khoan']);
+  return all.map((p) => ({
+    url: p.slug === 'home' ? `${SITE_URL}/` : `${SITE_URL}/${p.slug}`,
+    lastModified: dates.get(p.slug) || new Date().toISOString().slice(0, 10),
+    priority: p.slug === 'home' ? 1 : legal.has(p.slug) ? 0.3 : p.slug.startsWith('blog/') ? 0.6 : 0.8,
+  }));
 }

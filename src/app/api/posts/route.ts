@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isSupabaseConfigured, supabaseDelete, supabaseInsert, supabaseSelect } from '@/lib/supabase';
 import { BlogPost, runtimeStore } from '@/lib/studioData';
+import { isAdmin } from '@/lib/admin';
 
 export async function GET() {
   if (isSupabaseConfigured()) {
@@ -14,9 +15,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
-    const adminPass = process.env.ADMIN_PASSWORD || 'studio2026';
-    const authHeader = req.headers.get('x-admin-password');
-    if (authHeader !== adminPass) {
+    if (!isAdmin(req)) {
       return NextResponse.json({ error: 'Sai mật khẩu quản trị.' }, { status: 401 });
     }
 
@@ -69,9 +68,7 @@ export async function POST(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  const adminPass = process.env.ADMIN_PASSWORD || 'studio2026';
-  const authHeader = req.headers.get('x-admin-password');
-  if (authHeader !== adminPass) {
+  if (!isAdmin(req)) {
     return NextResponse.json({ error: 'Sai mật khẩu quản trị.' }, { status: 401 });
   }
 

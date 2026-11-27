@@ -1,8 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import StudioShell from '@/components/StudioShell';
+import './admin.css';
 import type { BlogPost, LeadRecord } from '@/lib/studioData';
+
+function StudioShell({ children }: { children: React.ReactNode }) {
+  return (
+    <main className="studio-container" style={{ padding: '48px 20px 80px', maxWidth: 1100, margin: '0 auto' }}>
+      {children}
+    </main>
+  );
+}
 
 export default function AdminPage() {
   const [password, setPassword] = useState('');
@@ -24,7 +32,15 @@ export default function AdminPage() {
   const [statusMsg, setStatusMsg] = useState('');
 
   async function loadData() {
-    const [pRes, lRes] = await Promise.all([fetch('/api/posts'), fetch('/api/leads')]);
+    const [pRes, lRes] = await Promise.all([
+      fetch('/api/posts'),
+      fetch('/api/leads', { headers: { 'x-admin-password': password } }),
+    ]);
+    if (lRes.status === 401) {
+      setAuthed(false);
+      setStatusMsg('Sai mật khẩu quản trị.');
+      return;
+    }
     const pJson = await pRes.json();
     const lJson = await lRes.json();
     setPosts(pJson.posts || []);
@@ -98,11 +114,15 @@ export default function AdminPage() {
         <div style={{ maxWidth: 420, margin: '40px auto' }} className="studio-card">
           <span className="studio-badge">Khu vực quản trị</span>
           <h1>Đăng nhập Admin</h1>
-          <p>Mật khẩu mặc định khi chạy local: <code className="studio-mono">studio2026</code></p>
+          <p>Nhập mật khẩu đã đặt trong biến môi trường <code className="studio-mono">ADMIN_PASSWORD</code>.</p>
+          {statusMsg && <p style={{ color: '#c0392b' }}>{statusMsg}</p>}
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              if (password.trim()) setAuthed(true);
+              if (password.trim()) {
+                setStatusMsg('');
+                setAuthed(true);
+              }
             }}
             style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
           >

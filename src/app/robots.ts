@@ -1,16 +1,9 @@
 import type { MetadataRoute } from 'next';
+import { SITE_URL } from '@/lib/render';
 
 export default function robots(): MetadataRoute.Robots {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:6688';
   return {
-    rules: [
-      { userAgent: '*', allow: '/', disallow: ['/admin'] },
-      { userAgent: 'OAI-SearchBot', allow: '/' },
-      { userAgent: 'GPTBot', allow: '/' },
-      { userAgent: 'PerplexityBot', allow: '/' },
-      { userAgent: 'ClaudeBot', allow: '/' },
-      { userAgent: 'Google-Extended', allow: '/' },
-    ],
-    sitemap: `${siteUrl}/sitemap.xml`,
+    rules: { userAgent: '*', allow: '/', disallow: ['/api/', '/admin'] },
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }
