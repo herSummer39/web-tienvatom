@@ -10,7 +10,8 @@ async function triggerAutomationWebhook(lead: LeadRecord) {
   const summaryText = [
     `🔔 KHÁCH HÀNG MỚI (${lead.source.toUpperCase()})`,
     `• Tên: ${lead.name}`,
-    `• Liên hệ (SĐT/Zalo): ${lead.contact}`,
+    `• SĐT: ${lead.contact}`,
+    lead.email ? `• Email: ${lead.email}` : null,
     lead.service_type ? `• Dịch vụ: ${lead.service_type}` : null,
     lead.pages_count ? `• Quy mô: ${lead.pages_count}` : null,
     lead.addons?.length ? `• Tính năng thêm: ${lead.addons.join(', ')}` : null,
@@ -59,12 +60,13 @@ export async function POST(req: Request) {
     const name = String(body.name || '').trim();
     const contact = String(body.contact || '').trim();
     if (!name || !contact) {
-      return NextResponse.json({ error: 'Vui lòng nhập tên và SĐT/Zalo.' }, { status: 400 });
+      return NextResponse.json({ error: 'Vui lòng nhập họ tên và số điện thoại.' }, { status: 400 });
     }
 
     const payload = {
       name,
       contact,
+      email: body.email ? String(body.email).trim().slice(0, 200) : undefined,
       source: String(body.source || 'bao-gia'),
       service_type: body.service_type ? String(body.service_type) : undefined,
       pages_count: body.pages_count ? String(body.pages_count) : undefined,

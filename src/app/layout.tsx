@@ -2,25 +2,27 @@ import type { Metadata } from 'next';
 import './inline-styles.css';
 import './studio.css';
 import ClickEffects from '@/components/ClickEffects';
+import { SITE } from '@/lib/siteConfig';
 
 export const metadata: Metadata = {
-  title: 'Studio Thiết kế Website, Web App & Giải pháp AI Automation',
-  description:
-    'Team / Studio Freelance tại Việt Nam chuyên thiết kế Website chuẩn SEO, lập trình Web App theo yêu cầu, tích hợp Chatbot AI và Automation Zalo/Fanpage.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:6688'),
+  title: {
+    default: `${SITE.name} – ${SITE.tagline}`,
+    template: `%s | ${SITE.name}`,
+  },
+  description: SITE.description,
   icons: {
-    icon: '/wp-content/uploads/2026/03/cropped-favicon-32x32-1-32x32.png',
-    apple: '/wp-content/uploads/2026/03/cropped-favicon-32x32-1-180x180.png',
+    icon: '/images/tiemcode-avatar.svg',
   },
 };
 
 const orgJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  name: 'Studio Thiết kế Web & Giải pháp AI',
-  description:
-    'Team / Studio Freelance chuyên thiết kế Website chuẩn SEO, lập trình Web App theo yêu cầu, tích hợp Chatbot AI và Automation đa kênh.',
+  name: SITE.name,
+  description: SITE.description,
+  telephone: SITE.zalo,
   areaServed: 'VN',
-  priceRange: '7.000.000đ - 50.000.000đ',
 };
 
 export default function RootLayout({
@@ -35,7 +37,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=JetBrains+Mono:wght@600;700&display=swap"
         />
         <link rel="stylesheet" href="/wp-content/themes/onlines-web-2026/blocks/header-logo/header-logo.css" />
         <link rel="stylesheet" href="/wp-content/themes/onlines-web-2026/blocks/home-hero/home-hero.css" />

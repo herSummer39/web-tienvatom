@@ -17,7 +17,8 @@ create table if not exists public.posts (
 create table if not exists public.leads (
   id uuid default gen_random_uuid() primary key,
   name text not null,
-  contact text not null, -- SĐT / Zalo / Email
+  contact text not null, -- Số điện thoại
+  email text,
   source text default 'bao-gia', -- 'bao-gia' | 'chatbot' | 'lien-he'
   service_type text,
   pages_count text,
@@ -27,6 +28,9 @@ create table if not exists public.leads (
   status text default 'Mới',
   created_at timestamptz default now()
 );
+
+-- Nếu bảng leads đã tạo từ trước, thêm cột email:
+alter table public.leads add column if not exists email text;
 
 -- Bật RLS
 alter table public.posts enable row level security;

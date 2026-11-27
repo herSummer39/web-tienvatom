@@ -1,6 +1,6 @@
 'use client';
 
-import { ONLINES_FOOTER_HTML, ONLINES_HEADER_HTML } from './onlinesChrome';
+import { SITE_FOOTER_HTML, SITE_HEADER_HTML } from './siteChrome';
 import OnlinesRuntime from './OnlinesRuntime';
 import ChatbotWidget from './ChatbotWidget';
 
@@ -13,7 +13,7 @@ export default function StudioShell({
 }) {
   return (
     <div className="wp-site-blocks studio-page">
-      <div dangerouslySetInnerHTML={{ __html: ONLINES_HEADER_HTML }} />
+      <div dangerouslySetInnerHTML={{ __html: SITE_HEADER_HTML }} />
 
       {heroHtml && (
         <div
@@ -32,7 +32,7 @@ export default function StudioShell({
         {children}
       </main>
 
-      <div dangerouslySetInnerHTML={{ __html: ONLINES_FOOTER_HTML }} />
+      <div dangerouslySetInnerHTML={{ __html: SITE_FOOTER_HTML }} />
       <OnlinesRuntime />
       <ChatbotWidget />
     </div>
