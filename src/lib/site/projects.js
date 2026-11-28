@@ -112,6 +112,36 @@ function projectCard(p) {
   </a>`;
 }
 
+// trang chủ: thẻ dự án nổi bật (ảnh lớn trong khung nghiêng trên nền màu của dự án)
+function showcaseMain(p) {
+  return `
+  <a class="tcp-show-main" href="/du-an/${p.slug}">
+    <div class="tcp-show-stage tcp-bg-${p.color}">${coverHtml(p, 'tcp-show-cover')}</div>
+    <div class="tcp-show-info">
+      <div class="tcp-show-meta">${badge(p)}<span>${esc(p.industry)}</span></div>
+      <h3>${esc(p.title)}</h3>
+      <p>${esc(p.summary)}</p>
+      <div class="tcp-show-foot">
+        <div class="tcp-tags">${p.tags.slice(0, 3).map((t) => `<span>${esc(t)}</span>`).join('')}</div>
+        <span class="tcp-more">${p.type === 'mau' ? 'Xem mẫu' : 'Xem dự án'} ${arrow}</span>
+      </div>
+    </div>
+  </a>`;
+}
+
+// trang chủ: dòng dự án gọn (ảnh nhỏ + tên + nút mũi tên)
+function showcaseRow(p) {
+  return `
+  <a class="tcp-show-row" href="/du-an/${p.slug}">
+    ${coverHtml(p, 'tcp-show-thumb')}
+    <div class="tcp-show-text">
+      <div class="tcp-show-meta">${badge(p)}<span>${esc(p.industry)}</span></div>
+      <h3>${esc(p.title)}</h3>
+    </div>
+    <span class="tcp-show-go" aria-hidden="true">${arrow}</span>
+  </a>`;
+}
+
 const FILTER_JS = ""; // bộ lọc chạy trong public/site.js
 
 function projectPages() {
@@ -181,12 +211,19 @@ function projectPages() {
     };
   });
 
-  // dải "Dự án mới nhất" ở trang chủ
-  const homeStrip = projects.length ? `
+  // khối "Dự án & mẫu mới nhất" ở trang chủ: 1 thẻ nổi bật lớn bên trái + tối đa 3 dòng gọn bên phải
+  const [main, ...rest] = projects.slice(0, 4);
+  const homeStrip = main ? `
   <section class="tcp-wrap">
-    <div class="tcp-sec" style="margin-bottom:10px">
-      <div class="tcp-sec-head"><h2 class="tcp-h2">Dự án &amp;<br>mẫu mới nhất</h2>${btn('Xem tất cả', '/du-an', 'ghost')}</div>
-      <div class="tcp-posts tcp-posts-4">${projects.slice(0, 4).map(projectCard).join('')}</div>
+    <div class="tcp-sec tcp-showcase" style="margin-bottom:10px">
+      <div class="tcp-sec-head">
+        <div><span class="tcp-sticker tcp-bg-pink">Dự án thật · Mẫu có sẵn</span><h2 class="tcp-h2">Dự án &amp;<br>mẫu mới nhất</h2></div>
+        ${btn('Xem tất cả', '/du-an', 'ghost')}
+      </div>
+      <div class="tcp-showcase-grid${rest.length ? '' : ' tcp-showcase-solo'}">
+        ${showcaseMain(main)}
+        ${rest.length ? `<div class="tcp-show-list">${rest.map(showcaseRow).join('')}</div>` : ''}
+      </div>
     </div>
   </section>` : '';
 

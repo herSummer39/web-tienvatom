@@ -434,6 +434,62 @@ html.tc-lead-open, html.tc-lead-open body { overflow: hidden !important; }
 .tcp-facts { max-width: 1000px; margin: -20px auto 50px; display: grid; grid-template-columns: repeat(4, auto); justify-content: space-between; gap: 18px 30px; padding: 22px 28px; border: 2px solid var(--ink); border-radius: 22px; background: #fff; }
 .tcp-facts dt { font-size: 12px; font-weight: 800; text-transform: uppercase; opacity: .6; margin-bottom: 4px; }
 .tcp-facts dd { margin: 0; font-weight: 700; font-size: 16px; }
+/* trang chủ: khối "Dự án & mẫu mới nhất" — 1 thẻ nổi bật + danh sách dòng gọn */
+.tcp-showcase .tcp-sec-head .tcp-sticker { margin-bottom: 4px; }
+.tcp-showcase .tcp-sec-head .tcp-h2 { margin-bottom: 0; }
+.tcp-showcase-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 26px; align-items: stretch; }
+.tcp-showcase-solo { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+.tcp-show-main, .tcp-show-row {
+  color: var(--ink) !important; text-decoration: none !important; background: #fff; border: 2px solid var(--ink);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.tcp-show-main { display: flex; flex-direction: column; border-radius: 28px; overflow: hidden; box-shadow: 6px 6px 0 var(--ink); }
+.tcp-show-main:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--ink); }
+.tcp-show-stage { padding: 28px 36px 28px; border-bottom: 2px solid var(--ink); }
+.tcp-show-cover {
+  position: relative; aspect-ratio: 16 / 9; border: 2px solid var(--ink); border-radius: 18px; overflow: hidden;
+  background: var(--cream); box-shadow: 4px 5px 0 var(--ink); rotate: -1.5deg; transition: rotate .35s cubic-bezier(.22, 1, .36, 1);
+  display: grid; place-items: center;
+}
+.tcp-show-main:hover .tcp-show-cover { rotate: 0deg; }
+.tcp-show-cover img, .tcp-show-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.tcp-show-cover svg, .tcp-show-thumb svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tcp-show-cover b, .tcp-show-thumb b { font-family: "Anton", sans-serif; font-weight: 400; text-transform: uppercase; text-align: center; line-height: 1.2; }
+.tcp-show-cover b { font-size: 40px; }
+.tcp-show-thumb b { font-size: 15px; padding: 6px; }
+.tcp-show-info { padding: 24px 30px 28px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.tcp-show-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 13px; font-weight: 600; text-transform: uppercase; }
+.tcp-show-meta > span:not(.tcp-badge) { opacity: .7; }
+.tcp-show-info h3 { margin: 0; font-family: "Anton", "Bebas Neue", Impact, sans-serif; font-weight: 400; text-transform: uppercase; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.25; }
+.tcp-show-info p { margin: 0; font-size: 15.5px; line-height: 1.55; opacity: .85; }
+.tcp-show-foot { margin-top: auto; padding-top: 6px; display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
+.tcp-show-foot .tcp-more { font-weight: 700; font-size: 15px; display: inline-flex; gap: 8px; align-items: center; }
+.tcp-show-list { display: flex; flex-direction: column; gap: 18px; }
+.tcp-show-row {
+  flex: 1; display: grid; grid-template-columns: 168px minmax(0, 1fr) 46px; gap: 18px; align-items: center;
+  padding: 14px; border-radius: 22px;
+}
+.tcp-show-row:hover { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 var(--ink); }
+.tcp-show-thumb { position: relative; aspect-ratio: 4 / 3; border: 2px solid var(--ink); border-radius: 14px; overflow: hidden; display: grid; place-items: center; }
+.tcp-show-text { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.tcp-show-text h3 { margin: 0; font-size: 17px; line-height: 1.35; font-weight: 800; }
+.tcp-show-row .tcp-badge { font-size: 10.5px; padding: 3px 9px; }
+.tcp-show-row .tcp-show-meta { font-size: 11.5px; gap: 8px; }
+.tcp-show-go {
+  width: 46px; height: 46px; border-radius: 50%; background: var(--ink); color: var(--yellow);
+  display: grid; place-items: center; transition: background .2s ease, color .2s ease, rotate .2s ease;
+}
+.tcp-show-row:hover .tcp-show-go { background: var(--orange); color: #fff; rotate: -45deg; }
+@media (max-width: 1000px) {
+  .tcp-showcase-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .tcp-show-stage { padding: 20px; }
+  .tcp-show-info { padding: 20px; }
+  .tcp-show-row { grid-template-columns: 96px minmax(0, 1fr); gap: 14px; padding: 12px; }
+  .tcp-show-go { display: none; }
+}
+
 @media (max-width: 1100px) { .tcp-posts-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 810px) {
   .tcp-posts-4 { grid-template-columns: 1fr; }

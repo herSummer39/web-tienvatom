@@ -8298,6 +8298,8 @@
     margin: 0 !important;
     border-radius: 24px !important;
     overflow: hidden !important;
+    /* khung nổi nằm ngoài section gốc nên không còn ăn nền tối của Framer: đặt lại nền than */
+    background-color: #252122 !important;
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
     display: none !important;
     flex-direction: column !important;
@@ -8315,7 +8317,8 @@
   }
   .tc-chat-host-section { height: auto !important; }
   /* tiêu đề nhỏ lại */
-  .tc-chat-panel > :first-child { flex: 0 0 auto !important; height: auto !important; width: 100% !important; }
+  .tc-chat-panel > :first-child { flex: 0 0 auto !important; height: auto !important; width: 100% !important; position: relative !important; top: auto !important; left: auto !important; }
+  .tc-chat-panel > :first-child p.framer-text { line-height: 1.15 !important; --framer-line-height: 1.15 !important; }
   .tc-chat-panel p.framer-text[style*="Anton"],
   .tc-chat-panel > :first-child p.framer-text,
   .tc-chat-panel span.framer-text[style*="Anton"] { font-size: 28px !important; --framer-font-size: 28px !important; }

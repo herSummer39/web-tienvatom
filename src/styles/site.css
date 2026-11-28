@@ -11,8 +11,13 @@
 [data-tc-loop="spin24"] { animation-name: tcSpin; animation-duration: 24s; }
 [data-tc-loop="spin16"] { animation-name: tcSpin; animation-duration: 16s; }
 [data-tc-loop].tc-off { animation-play-state: paused; }
-@keyframes tcLoopGreen { from { transform: translateX(0); } to { transform: translateX(2072px); } }
-@keyframes tcLoopBlue { from { transform: translateX(0); } to { transform: translateX(-2173px); } }
+/* --tc-dist = đúng chiều dài 1 vòng chữ, do site.js đo, để hết vòng không bị giật */
+@keyframes tcLoopGreen { from { transform: translateX(0); } to { transform: translateX(var(--tc-dist, 2072px)); } }
+@keyframes tcLoopBlue { from { transform: translateX(0); } to { transform: translateX(calc(-1 * var(--tc-dist, 2173px))); } }
+/* chữ trên dải chạy: một dòng. Một số mục có dấu xuống dòng thừa ở cuối, trước đây làm mục đó
+   cao gấp đôi nên bị lệch lên/xuống so với các mục khác */
+[data-tc-loop="green"] .framer-text,
+[data-tc-loop="blue"] .framer-text { white-space: nowrap !important; }
 @keyframes tcSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
 /* ---------- hiện dần khi cuộn tới ---------- */
@@ -45,9 +50,19 @@
 [data-framer-name="Footer"] a:hover,
 [data-framer-name="Footer"] a:hover .framer-text { --framer-text-color: rgb(241, 224, 68) !important; color: rgb(241, 224, 68) !important; }
 
-/* ---------- menu máy tính: cuộn xuống thì ẩn các mục, chỉ còn logo + nút ---------- */
-nav[data-tc-nav="desktop"] [data-framer-name="Links"] { transition: opacity 0.3s var(--tc-ease), translate 0.3s var(--tc-ease); }
-nav[data-tc-nav="desktop"].tc-collapsed [data-framer-name="Links"] { opacity: 0 !important; pointer-events: none; }
+/* ---------- menu máy tính: cuộn xuống thì ẩn các mục, cuộn lên thì trượt vào lần lượt từ bên phải ---------- */
+/* --tc-i do site.js đặt: 0 = mục ngoài cùng bên phải */
+nav[data-tc-nav="desktop"] [data-framer-name="Links"] > * {
+  transition: opacity 0.45s var(--tc-ease), translate 0.6s var(--tc-ease);
+  transition-delay: calc(var(--tc-i, 0) * 70ms);
+}
+nav[data-tc-nav="desktop"].tc-collapsed [data-framer-name="Links"] { pointer-events: none; }
+nav[data-tc-nav="desktop"].tc-collapsed [data-framer-name="Links"] > * {
+  opacity: 0;
+  translate: 56px 0;
+  transition-duration: 0.25s, 0.3s;
+  transition-delay: 0s;
+}
 
 /* ---------- hỏi đáp ---------- */
 [data-tc-faq] { cursor: pointer; }

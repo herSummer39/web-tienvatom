@@ -23,6 +23,28 @@
     loops.forEach(function (el) { el.classList.add('tc-off'); loopIO.observe(el); });
   }
 
+  // 1b. dải chữ chạy: đo đúng chiều dài 1 vòng chữ (từ mục đầu tới lần lặp lại kế tiếp) để chạy liền mạch
+  var LOOP_SPEED = 35; // px mỗi giây, bằng tốc độ bản gốc
+  function offsetIn(el, anc) { var x = 0; while (el && el !== anc) { x += el.offsetLeft; el = el.offsetParent; } return x; }
+  function fitLoops() {
+    $$('[data-tc-loop="green"], [data-tc-loop="blue"]').forEach(function (track) {
+      var items = $$('[data-framer-component-type="RichTextContainer"]', track);
+      if (items.length < 2) return;
+      var first = items[0].textContent.trim();
+      var x0 = null, period = 0;
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].textContent.trim() !== first) continue;
+        var x = offsetIn(items[i], track);
+        if (x0 === null) x0 = x; else { period = x - x0; break; }
+      }
+      if (period <= 0) return;
+      track.style.setProperty('--tc-dist', period + 'px');
+      track.style.animationDuration = (period / LOOP_SPEED).toFixed(1) + 's';
+    });
+  }
+  fitLoops();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitLoops);
+
   // ---------- 2. hiện dần khi cuộn tới ----------
   var reveals = $$('[data-tc-reveal]');
   if (reduce || !('IntersectionObserver' in window)) reveals.forEach(function (el) { el.classList.add('tc-in'); });
@@ -50,19 +72,25 @@
   var resizeJobs = [];
   var rT = null;
   window.addEventListener('resize', function () { clearTimeout(rT); rT = setTimeout(function () { resizeJobs.forEach(function (f) { f(); }); onScroll(); }, 150); });
+  resizeJobs.push(fitLoops);
 
-  // 3a. menu máy tính: cuộn xuống thì thu gọn (Framer: biến thể "Collapsed")
+  // 3a. menu máy tính: cuộn xuống thì ẩn các mục (chỉ còn logo + nút); cuộn lên hoặc về đầu trang
+  //     thì các mục lần lượt trượt vào từ bên phải (mục ngoài cùng bên phải vào trước)
   var deskNav = $('nav[data-tc-nav="desktop"]');
   if (deskNav) {
-    var collapsed = null;
+    var navItems = $$('[data-framer-name="Links"] > *', deskNav);
+    navItems.forEach(function (el, i) { el.style.setProperty('--tc-i', String(navItems.length - 1 - i)); });
+    var collapsed = false;
+    var lastY = window.scrollY;
     scrollJobs.push(function () {
-      var c = window.scrollY > 10;
+      var y = window.scrollY;
+      var dy = y - lastY;
+      if (y > 10 && Math.abs(dy) < 6) return; // bỏ qua rung nhẹ của bàn di chuột
+      lastY = y;
+      var c = y > 10 && dy > 0;
       if (c === collapsed) return;
       collapsed = c;
-      deskNav.classList.toggle('framer-v-qmvhd8', c);
-      deskNav.classList.toggle('framer-v-1gyqge7', !c);
       deskNav.classList.toggle('tc-collapsed', c);
-      deskNav.setAttribute('data-framer-name', c ? 'Collapsed' : 'Default');
     });
   }
 
