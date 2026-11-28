@@ -1,5 +1,22 @@
 /* Hiệu ứng thay cho JS của Framer (thông số lấy đúng từ bản gốc). Điều khiển bởi public/site.js */
 
+/* ---------- chữ E và Z kiểu thường ----------
+   Montserrat Alternates vẽ E (và Ê, É, Ế, Ệ…), Z, z theo kiểu cách điệu ("Ɛmail", "Ƶalo") nhìn lạ.
+   Riêng các chữ này lấy nét từ Inter Tight (font có sẵn, đủ độ đậm); mọi chữ khác giữ nguyên Montserrat Alternates.
+   Khai báo riêng từng độ đậm để trình duyệt ưu tiên đúng như các khai báo gốc. */
+@font-face { font-family: "Montserrat Alternates"; font-style: normal; font-weight: 300; font-display: swap; src: url(/framer/fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsH8ag.woff2) format("woff2"); unicode-range: U+0045, U+005A, U+007A, U+00C8-00CB; }
+@font-face { font-family: "Montserrat Alternates"; font-style: normal; font-weight: 300; font-display: swap; src: url(/framer/fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsI8ah8QA.woff2) format("woff2"); unicode-range: U+1EB8, U+1EBA, U+1EBC, U+1EBE, U+1EC0, U+1EC2, U+1EC4, U+1EC6; }
+@font-face { font-family: "Montserrat Alternates"; font-style: normal; font-weight: 400; font-display: swap; src: url(/framer/fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsH8ag.woff2) format("woff2"); unicode-range: U+0045, U+005A, U+007A, U+00C8-00CB; }
+@font-face { font-family: "Montserrat Alternates"; font-style: normal; font-weight: 400; font-display: swap; src: url(/framer/fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsI8ah8QA.woff2) format("woff2"); unicode-range: U+1EB8, U+1EBA, U+1EBC, U+1EBE, U+1EC0, U+1EC2, U+1EC4, U+1EC6; }
+@font-face { font-family: "Montserrat Alternates"; font-style: normal; font-weight: 500; font-display: swap; src: url(/framer/fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsH8ag.woff2) format("woff2"); unicode-range: U+0045, U+005A, U+007A, U+00C8-00CB; }
+@font-face { font-family: "Montserrat Alternates"; font-style: normal; font-weight: 500; font-display: swap; src: url(/framer/fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsI8ah8QA.woff2) format("woff2"); unicode-range: U+1EB8, U+1EBA, U+1EBC, U+1EBE, U+1EC0, U+1EC2, U+1EC4, U+1EC6; }
+@font-face { font-family: "Montserrat Alternates"; font-style: normal; font-weight: 600; font-display: swap; src: url(/framer/fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsH8ag.woff2) format("woff2"); unicode-range: U+0045, U+005A, U+007A, U+00C8-00CB; }
+@font-face { font-family: "Montserrat Alternates"; font-style: normal; font-weight: 600; font-display: swap; src: url(/framer/fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsI8ah8QA.woff2) format("woff2"); unicode-range: U+1EB8, U+1EBA, U+1EBC, U+1EBE, U+1EC0, U+1EC2, U+1EC4, U+1EC6; }
+@font-face { font-family: "Montserrat Alternates"; font-style: normal; font-weight: 700; font-display: swap; src: url(/framer/fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsH8ag.woff2) format("woff2"); unicode-range: U+0045, U+005A, U+007A, U+00C8-00CB; }
+@font-face { font-family: "Montserrat Alternates"; font-style: normal; font-weight: 700; font-display: swap; src: url(/framer/fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsI8ah8QA.woff2) format("woff2"); unicode-range: U+1EB8, U+1EBA, U+1EBC, U+1EBE, U+1EC0, U+1EC2, U+1EC4, U+1EC6; }
+@font-face { font-family: "Montserrat Alternates"; font-style: normal; font-weight: 800; font-display: swap; src: url(/framer/fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsH8ag.woff2) format("woff2"); unicode-range: U+0045, U+005A, U+007A, U+00C8-00CB; }
+@font-face { font-family: "Montserrat Alternates"; font-style: normal; font-weight: 800; font-display: swap; src: url(/framer/fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsI8ah8QA.woff2) format("woff2"); unicode-range: U+1EB8, U+1EBA, U+1EBC, U+1EBE, U+1EC0, U+1EC2, U+1EC4, U+1EC6; }
+
 /* ---------- chuyển động lặp: dải chữ chạy, chữ xoay ---------- */
 [data-tc-loop] {
   animation-timing-function: linear;
