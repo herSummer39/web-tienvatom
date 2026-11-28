@@ -84,7 +84,7 @@ const LEAD_FORM = `
   <div class="tc-lead-done" hidden>
     <div class="tc-done-icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#252122" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
     <h3>Đã nhận thông tin!</h3>
-    <p>Cảm ơn bạn. Chúng mình sẽ liên hệ lại qua số điện thoại bạn để lại để tư vấn chi tiết.</p>
+    <p>Cảm ơn bạn! Chúng mình sẽ gọi lại cho bạn để tư vấn kỹ hơn.</p>
     <div class="tcp-actions"><a class="tcp-btn" href="#" data-tc-again data-variant="ghost"><span>Gửi thêm yêu cầu</span></a><button type="button" class="tcp-btn" data-close><span>Đóng</span></button></div>
   </div>`;
 
@@ -161,11 +161,11 @@ const dichVuContent = `
   </section>
   <section class="tcp-wrap">
     <div class="tcp-sec">
-      ${secHead('Website nào<br>cũng có sẵn', 'Những thứ cơ bản nhưng hay bị bỏ quên. Ở Tiệm Code, chúng nằm sẵn trong gói.')}
+      ${secHead('Website nào<br>cũng có sẵn', 'Những thứ cơ bản mà nhiều nơi hay bỏ qua. Ở Tiệm Code, gói nào cũng có sẵn.')}
       <div class="tcp-grid-4">${FEATURES.map(([ic, c, t, d], i) => `<article class="tcp-feature tcp-bg-${c}" style="--tilt:${tilt(i)}">${icon(ic)}<h3>${t}</h3><p>${d}</p></article>`).join('')}</div>
     </div>
     <div class="tcp-sec">
-      ${secHead('14 ngày<br>của một website', 'Thời gian tham khảo cho website khoảng 10 trang. Bạn luôn biết hôm nay dự án đang ở đâu.')}
+      ${secHead('14 ngày<br>của một website', 'Thời gian tham khảo cho website khoảng 10 trang. Ngày nào bạn cũng biết dự án đang tới đâu.')}
       <ol class="tcp-timeline">${TIMELINE.map(([c, d, t, p]) => `<li class="tcp-bg-${c}"><b>${d}</b><div><h3>${t}</h3><p>${p}</p></div></li>`).join('')}</ol>
     </div>
     <div class="tcp-sec" style="margin-bottom:0">
@@ -181,24 +181,24 @@ const aboutContent = `
       sticker: 'Về chúng mình',
       color: 'yellow',
       title: 'Xin chào,<br>chúng mình là Tiệm Code',
-      text: 'Một nhóm sinh viên IT thích làm ra sản phẩm thật. Chúng mình đồng hành cùng shop và doanh nghiệp nhỏ từ ý tưởng đầu tiên tới khi website chạy ổn định.',
+      text: 'Một nhóm sinh viên IT mê làm ra những sản phẩm người ta dùng thật. Chúng mình theo shop và doanh nghiệp nhỏ từ lúc mới có ý tưởng tới khi website chạy ổn định.',
       actions: lead('Đăng ký tư vấn') + btn('Xem dịch vụ', '/dich-vu', 'ghost'),
     })}
     <div class="tcp-split" style="margin-top:10px">
       <div>
         <h2 class="tcp-h2">Vì sao có<br>Tiệm Code?</h2>
         <p class="tcp-lead">Chúng mình thấy nhiều shop và doanh nghiệp nhỏ gặp cùng một chuyện: muốn có website thì giá cao, làm xong lại không tự sửa được, có lỗi thì không biết nhờ ai.</p>
-        <p class="tcp-lead">Tiệm Code ra đời năm 2026 để làm điều ngược lại: giá rõ ràng, làm đúng thứ bạn cần, bàn giao hết cho bạn và vẫn ở đó khi bạn cần hỗ trợ.</p>
+        <p class="tcp-lead">Tiệm Code ra đời năm 2026 để làm khác đi: giá nói rõ từ đầu, cần gì làm nấy, bàn giao hết cho bạn, có lỗi thì vẫn có người sửa.</p>
       </div>
       <div class="tcp-card tcp-bg-dark">
         <span class="tcp-price">Điểm khác biệt</span>
         <h3 class="tcp-card-title">Vì sao chọn một nhóm sinh viên?</h3>
-        ${list(['Chi phí hợp lý vì không tốn mặt bằng, bộ máy quản lý', 'Luôn cập nhật công nghệ mới: AI, tự động hóa', 'Có thời gian theo sát từng dự án', 'Làm bằng sự nhiệt tình: mỗi website là một sản phẩm để tự hào'])}
+        ${list(['Chi phí hợp lý vì không tốn mặt bằng, bộ máy quản lý', 'Luôn cập nhật công nghệ mới: AI, tự động hóa', 'Có thời gian theo sát từng dự án', 'Làm bằng cái tâm: website nào làm ra cũng muốn khoe với bạn bè'])}
       </div>
     </div>
   </section>`;
 const VALUES = [
-  ['yellow', 'Học nhanh, làm thật', 'Ngành của bạn mới với chúng mình? Chúng mình tìm hiểu kỹ trước khi đề xuất.'],
+  ['yellow', 'Học nhanh, làm thật', 'Ngành của bạn lạ với chúng mình? Thì chúng mình tìm hiểu kỹ rồi mới đề xuất.'],
   ['orange', 'Nói dễ hiểu', 'Không thuật ngữ khó. Bạn hỏi gì, chúng mình giải thích tới khi rõ thì thôi.'],
   ['blue', 'Đúng hẹn', 'Hẹn ngày nào giao ngày đó. Có trễ, chúng mình báo trước kèm lý do.'],
   ['green', 'Có trách nhiệm tới cùng', 'Website đã bàn giao vẫn là việc của chúng mình. Có lỗi là nhắn, có người sửa.'],
@@ -215,7 +215,7 @@ const aboutAfter = `
       ])}
     </div>
     <div class="tcp-sec" style="margin-bottom:0">
-      ${secHead('Cách chúng mình<br>làm việc', 'Bốn điều cả nhóm tự đặt ra cho mình.')}
+      ${secHead('Cách chúng mình<br>làm việc', 'Bốn điều cả nhóm luôn tự nhắc nhau.')}
       <div class="tcp-grid-4">${VALUES.map(([c, t, d], i) => `<article class="tcp-card tcp-card-sm tcp-bg-${c}" style="--tilt:${tilt(i)}"><h3 class="tcp-card-title">${t}</h3><p>${d}</p></article>`).join('')}</div>
     </div>
   </section>`;
@@ -263,7 +263,7 @@ const zaloContent = `
       sticker: 'Sản phẩm của Tiệm Code',
       color: 'green',
       title: 'Phần mềm<br>Zalo Marketing',
-      text: 'Phải dùng nhiều điện thoại cho nhiều tài khoản Zalo, khách nhắn tới mà trả lời không xuể? Phần mềm do chính chúng mình phát triển giúp bạn gom tất cả về một màn hình.',
+      text: 'Mỗi tài khoản Zalo một cái điện thoại, khách nhắn tới mà trả lời không xuể? Phần mềm do chính chúng mình làm sẽ gom hết về một màn hình.',
       actions: lead('Đăng ký nhận demo', 'zalo') + btn('Hỏi nhanh qua Zalo', ZALO, 'ghost'),
     })}
     ${ZALO_GROUPS.map(([title, color, items]) => `

@@ -46,13 +46,29 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitLoops);
 
   // ---------- 2. hiện dần khi cuộn tới ----------
+  var wipeJob = null; // kiểm tra nhãn dán đã vào màn hình chưa, chạy cùng các hiệu ứng cuộn ở mục 3
+  // mọi nhãn dán (nhãn trên tiêu đề các trang, nhãn trong các khối của trang chủ) trải ra như miếng dán
+  $$('.tcp-sticker, [data-framer-name="FAQ Sticker"], [data-framer-name="Why Branding Sticker"]').forEach(function (el) {
+    if (!el.hasAttribute('data-tc-reveal')) el.setAttribute('data-tc-reveal', 'wipe');
+  });
   var reveals = $$('[data-tc-reveal]');
   if (reduce || !('IntersectionObserver' in window)) reveals.forEach(function (el) { el.classList.add('tc-in'); });
   else {
-    // nhãn dán đầu trang: chạy ngay khi tải trang; bong bóng: khi khung bong bóng hiện 50%
-    reveals.filter(function (el) { return el.getAttribute('data-tc-reveal') === 'wipe'; }).forEach(function (el) {
-      requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.add('tc-in'); }); });
-    });
+    // nhãn dán: chạy khi nhãn vào màn hình (nhãn ở đầu trang thì chạy ngay khi vừa vào web).
+    // Không dùng IntersectionObserver vì lúc chưa dán, nhãn bị cắt (clip-path) về 0 nên luôn bị coi là "không thấy".
+    // Đoạn kiểm tra chạy ở mục 3 (scrollJobs), sau khi khai báo.
+    var pendingWipes = reveals.filter(function (el) { return el.getAttribute('data-tc-reveal') === 'wipe'; });
+    wipeJob = function () {
+      if (!pendingWipes.length) return;
+      var h = window.innerHeight;
+      pendingWipes = pendingWipes.filter(function (el) {
+        var r = el.getBoundingClientRect();
+        if (!r.width && !r.height) return true; // đang ẩn (vd. menu điện thoại), để sau
+        if (r.top < h * 0.92 && r.bottom > 0) { el.classList.add('tc-in'); return false; }
+        return true;
+      });
+    };
+    // bong bóng: khi khung bong bóng hiện 30%
     var popIO = new IntersectionObserver(function (list) {
       list.forEach(function (en) {
         if (!en.isIntersecting) return;
@@ -69,6 +85,7 @@
   function runScroll() { ticking = false; for (var i = 0; i < scrollJobs.length; i++) scrollJobs[i](); }
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(runScroll); } }
   window.addEventListener('scroll', onScroll, { passive: true });
+  if (wipeJob) scrollJobs.push(wipeJob);
   var resizeJobs = [];
   var rT = null;
   window.addEventListener('resize', function () { clearTimeout(rT); rT = setTimeout(function () { resizeJobs.forEach(function (f) { f(); }); onScroll(); }, 150); });
@@ -294,7 +311,7 @@
       '<button type="button" class="tc-lead-close" data-close aria-label="Đóng">×</button>' +
       '<span class="tcp-sticker tcp-bg-green">Miễn phí · Không ràng buộc</span>' +
       '<h2 id="tc-lead-title" class="tc-lead-title">Đăng ký tư vấn</h2>' +
-      '<p class="tc-lead-sub">Để lại thông tin, chúng mình gọi lại tư vấn và gửi báo giá rõ ràng cho bạn.</p>' +
+      '<p class="tc-lead-sub">Để lại tên và số điện thoại, chúng mình sẽ gọi lại tư vấn và gửi báo giá cho bạn.</p>' +
       tpl.innerHTML +
       '</div>';
     document.body.appendChild(wrap);
@@ -321,7 +338,16 @@
     lastFocus = document.activeElement;
     modal.hidden = false;
     root.classList.add('tc-lead-open');
+    // nhãn "Miễn phí" trong popup: dán lại mỗi lần mở popup
+    var sticker = $('.tcp-sticker', modal);
+    if (sticker && !reduce) {
+      sticker.setAttribute('data-tc-reveal', 'wipe');
+      sticker.style.setProperty('--tc-delay', '0.15s');
+      sticker.classList.remove('tc-in');
+      void sticker.offsetWidth;
+    }
     requestAnimationFrame(function () {
+      if (sticker) sticker.classList.add('tc-in');
       modal.classList.add('is-open');
       var f = $('input[name="name"]', form);
       if (f && window.matchMedia('(min-width: 811px)').matches) f.focus({ preventScroll: true });

@@ -26,16 +26,39 @@
   --tc-spring: linear(0, 0.095, 0.299, 0.526, 0.726, 0.877, 0.977, 1.033, 1.057, 1.059, 1.051, 1.037, 1.024, 1.013, 1.005, 1, 0.997, 0.996, 0.997, 0.997, 0.998, 0.999, 0.999, 1, 1);
   --tc-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
-.tc-js [data-tc-reveal="wipe"]:not(.tc-in) { clip-path: inset(0% 100% 0% 0%); }
-[data-tc-reveal="wipe"] { transition: clip-path 0.8s var(--tc-ease) 0.25s; }
+/* nhãn dán: trải ra từ trái sang phải rồi "ấn" nhẹ xuống như vừa dán lên giấy.
+   Khung cắt nới -20px ở trạng thái cuối để không cắt mất bóng đổ của nhãn */
+.tc-js [data-tc-reveal="wipe"]:not(.tc-in) { clip-path: inset(-20px 100% -20px -20px); }
+[data-tc-reveal="wipe"].tc-in { animation: tcPeel 0.8s var(--tc-ease) var(--tc-delay, 0.2s) both; }
+@keyframes tcPeel {
+  0% { clip-path: inset(-20px 100% -20px -20px); scale: 1.06; }
+  70% { clip-path: inset(-20px -20px -20px -20px); scale: 1.06; }
+  100% { clip-path: inset(-20px -20px -20px -20px); scale: 1; }
+}
 .tc-js [data-tc-reveal="pop"]:not(.tc-in) { opacity: 0; translate: 0 28px; scale: 0.92; }
 [data-tc-reveal="pop"] {
   transition: opacity 0.35s ease var(--tc-delay, 0s), translate 0.7s var(--tc-spring) var(--tc-delay, 0s), scale 0.7s var(--tc-spring) var(--tc-delay, 0s);
 }
 @media (prefers-reduced-motion: reduce) {
-  [data-tc-loop] { animation: none !important; }
+  [data-tc-loop], [data-tc-reveal="wipe"].tc-in { animation: none !important; }
   .tc-js [data-tc-reveal]:not(.tc-in) { clip-path: none; opacity: 1; translate: none; scale: none; }
 }
+
+/* bong bóng "Biến ý tưởng thành sản phẩm": mẫu gốc vẽ chữ tiếng Anh thành hình SVG,
+   nay đổi sang chữ thật nên tự tạo khung giống các bong bóng khác */
+.tc-bubble-text {
+  width: auto !important;
+  height: auto !important;
+  display: flex;
+  align-items: center;
+  padding: 18px 22px;
+  background-color: #d7cdc5;
+  border: 2px solid #252122;
+  border-radius: 16px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+.tc-bubble-text > [data-framer-component-type="RichTextContainer"] { position: relative !important; inset: auto !important; }
 
 /* ---------- nút: rê chuột đổi sang nền tối, chữ vàng ---------- */
 .framer-51pMF [data-framer-name="Face"] { transition: background-color 0.25s ease, box-shadow 0.25s ease; }

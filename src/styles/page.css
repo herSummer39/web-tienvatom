@@ -290,9 +290,11 @@ body > .tcp-after { display: none; }
 .tc-lead-backdrop { position: absolute; inset: 0; background: rgba(37, 33, 34, .55); opacity: 0; transition: opacity .2s ease; }
 .tc-lead-box {
   position: relative; width: min(600px, 100%); max-height: calc(100vh - 40px); overflow: auto; overscroll-behavior: contain;
+  scrollbar-width: none; -ms-overflow-style: none; /* vẫn cuộn được, chỉ ẩn thanh cuộn mặc định của trình duyệt */
   background: var(--cream); border: 2px solid var(--ink); border-radius: 28px; box-shadow: 8px 8px 0 var(--ink);
   padding: 34px 34px 28px; transform: translateY(16px) scale(.98); opacity: 0; transition: transform .2s ease, opacity .2s ease;
 }
+.tc-lead-box::-webkit-scrollbar { display: none; }
 .tc-lead.is-open .tc-lead-backdrop { opacity: 1; }
 .tc-lead.is-open .tc-lead-box { transform: none; opacity: 1; }
 .tc-lead-close {
