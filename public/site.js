@@ -405,8 +405,17 @@
   // ---------- 8. khung chat "Hỏi Tiệm Code" ----------
   var chatPanel = $('.tc-chat-panel');
   var launcher = $('.tc-chat-launcher');
+  var chatSticker = $('.tc-chat-host [data-framer-name="Say Hi Sticker"]');
   function setChat(open) {
     document.body.classList.toggle('tc-chat-open', open);
+    // nhãn "Chào trợ lý Tiệm Code": dán lại mỗi lần mở khung chat
+    if (open && chatSticker && !reduce) {
+      chatSticker.setAttribute('data-tc-reveal', 'wipe');
+      chatSticker.style.setProperty('--tc-delay', '0.18s');
+      chatSticker.classList.remove('tc-in');
+      void chatSticker.offsetWidth;
+      chatSticker.classList.add('tc-in');
+    }
     if (launcher) launcher.setAttribute('aria-label', open ? 'Đóng khung chat' : 'Mở khung chat hỏi Tiệm Code');
     if (open && chatPanel) { var input = $('input', chatPanel); if (input && window.matchMedia('(min-width: 811px)').matches) setTimeout(function () { input.focus(); }, 250); }
   }
