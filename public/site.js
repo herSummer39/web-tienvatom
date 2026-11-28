@@ -309,7 +309,7 @@
       '<div class="tc-lead-backdrop" data-close></div>' +
       '<div class="tc-lead-box">' +
       '<button type="button" class="tc-lead-close" data-close aria-label="Đóng">×</button>' +
-      '<span class="tcp-sticker tcp-bg-green">Miễn phí · Không ràng buộc</span>' +
+      '<span class="tcp-sticker tcp-bg-green">Tư vấn miễn phí</span>' +
       '<h2 id="tc-lead-title" class="tc-lead-title">Đăng ký tư vấn</h2>' +
       '<p class="tc-lead-sub">Để lại tên và số điện thoại, chúng mình sẽ gọi lại tư vấn và gửi báo giá cho bạn.</p>' +
       tpl.innerHTML +

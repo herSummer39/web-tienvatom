@@ -244,6 +244,13 @@ body > .tcp-after { display: none; }
 }
 
 /* ================= FORM ĐĂNG KÝ TƯ VẤN ================= */
+/* QUY TẮC KHỐI (ô nhập, ô chọn) — dùng chung cho popup, trang Liên hệ, công cụ ước tính:
+   1. Hình dạng: viền 2px màu than, bo góc 12px (--tc-box-r). Chỉ nút bấm hành động (.tcp-btn) mới bo tròn hình viên thuốc.
+   2. Bình thường: nền trắng, KHÔNG bóng đổ.
+   3. Rê chuột: nền kem nhạt, không bóng.
+   4. Đang chọn / đang nhập: nổi lên với bóng cứng 3px (--tc-box-lift). Ô chọn đang chọn thêm nền vàng.
+   Bóng to (6–8px) chỉ dành cho khung ngoài cùng (popup, thẻ), nút bấm dùng bóng 4px. */
+:root { --tc-box-r: 12px; --tc-box-lift: 3px 3px 0 var(--ink); }
 .tc-form { display: flex; flex-direction: column; gap: 14px; font-family: "Montserrat Alternates", "Montserrat", sans-serif; color: var(--ink); }
 .tc-form fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .tc-form legend { display: block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; margin-bottom: 8px; padding: 0; }
@@ -251,22 +258,25 @@ body > .tcp-after { display: none; }
 .tc-chip { position: relative; }
 .tc-chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
 .tc-chip span {
-  display: inline-block; padding: 9px 14px; border-radius: 40px; border: 2px solid var(--ink);
-  background: #fff; font-size: 14px; font-weight: 600; line-height: 1.2; transition: background .15s, transform .15s;
+  display: inline-block; padding: 9px 14px; border-radius: var(--tc-box-r); border: 2px solid var(--ink);
+  background: #fff; font-size: 14px; font-weight: 600; line-height: 1.2; cursor: pointer;
+  transition: background .15s, box-shadow .15s, transform .15s;
 }
-.tc-chip input:checked + span { background: var(--yellow); box-shadow: 3px 3px 0 var(--ink); transform: translate(-1px, -1px); }
+.tc-chip:hover span { background: var(--cream); }
+.tc-chip input:checked + span { background: var(--yellow); box-shadow: var(--tc-box-lift); transform: translate(-1px, -1px); }
 .tc-chip input:focus-visible + span { outline: 3px solid var(--blue); outline-offset: 2px; }
 .tc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .tc-field { display: flex; flex-direction: column; gap: 6px; }
 .tc-field > span { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; }
 .tc-field > span i { font-style: normal; color: var(--orange); }
 .tc-field input, .tc-field textarea {
-  width: 100%; border: 2px solid var(--ink); border-radius: 14px; padding: 13px 16px; background: #fff; color: var(--ink);
-  font: inherit; font-size: 16px; outline: none; transition: box-shadow .15s;
+  width: 100%; border: 2px solid var(--ink); border-radius: var(--tc-box-r); padding: 13px 16px; background: #fff; color: var(--ink);
+  font: inherit; font-size: 16px; outline: none; transition: background .15s, box-shadow .15s, transform .15s;
 }
 .tc-field textarea { resize: vertical; min-height: 92px; }
 .tc-field input::placeholder, .tc-field textarea::placeholder { color: rgba(37, 33, 34, .45); }
-.tc-field input:focus, .tc-field textarea:focus { box-shadow: 4px 4px 0 var(--ink); }
+.tc-field input:hover, .tc-field textarea:hover { background: #FBF9F7; }
+.tc-field input:focus, .tc-field textarea:focus { background: #fff; box-shadow: var(--tc-box-lift); transform: translate(-1px, -1px); }
 .tc-hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
 .tc-form-foot { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 4px; }
 .tc-form-foot .tcp-btn:disabled { opacity: .6; cursor: wait; }
@@ -306,6 +316,45 @@ body > .tcp-after { display: none; }
 .tc-lead-title { font-family: "Anton", sans-serif; font-weight: 400; text-transform: uppercase; font-size: clamp(36px, 5vw, 48px); line-height: 1.22; margin: 0 0 6px; color: var(--ink); }
 .tc-lead-sub { margin: 0 0 20px; font-size: 16px; line-height: 1.5; color: var(--ink); max-width: 460px; font-family: "Montserrat Alternates", sans-serif; }
 html.tc-lead-open, html.tc-lead-open body { overflow: hidden !important; }
+
+/* popup trên điện thoại: cũng gọn trong 1 màn hình */
+@media (max-width: 810px) {
+  .tc-lead-box { padding: 20px 16px 16px !important; }
+  .tc-lead-box .tcp-sticker { margin-bottom: 4px; font-size: 12px; padding: 5px 10px; }
+  .tc-lead-box .tc-lead-title { font-size: 30px; line-height: 1.15; margin-bottom: 2px; padding-right: 44px; }
+  .tc-lead-box .tc-lead-sub { font-size: 14px; margin-bottom: 10px; }
+  .tc-lead-box .tc-form { gap: 10px; }
+  .tc-lead-box .tc-form legend { margin-bottom: 6px; font-size: 12px; }
+  .tc-lead-box .tc-chips { gap: 6px; }
+  .tc-lead-box .tc-chip span { padding: 6px 10px; font-size: 12.5px; }
+  .tc-lead-box .tc-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .tc-lead-box .tc-field { gap: 4px; }
+  .tc-lead-box .tc-field > span { font-size: 11.5px; }
+  .tc-lead-box .tc-field input { padding: 10px 12px; font-size: 16px; }
+  .tc-lead-box .tc-field textarea { min-height: 56px; height: 56px; padding: 10px 12px; font-size: 16px; }
+  .tc-lead-box .tc-form-foot { gap: 8px; }
+  .tc-lead-box .tc-form-foot .tcp-btn { padding: 11px 18px; font-size: 14px; }
+  .tc-lead-box .tc-form-alt { font-size: 13px; }
+  .tc-lead-box .tc-form-note { font-size: 11.5px; }
+}
+
+/* popup gọn trong 1 màn hình: khung rộng hơn, Họ tên · SĐT · Email cùng một hàng, chữ và khoảng cách nhỏ lại */
+@media (min-width: 811px) {
+  .tc-lead-box { width: min(820px, 100%); padding: 26px 32px 22px; }
+  .tc-lead-box .tcp-sticker { margin-bottom: 6px; font-size: 13px; padding: 6px 12px; }
+  .tc-lead-box .tc-lead-title { font-size: 40px; line-height: 1.15; margin-bottom: 4px; }
+  .tc-lead-box .tc-lead-sub { font-size: 15px; margin-bottom: 14px; max-width: none; }
+  .tc-lead-box .tc-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 14px; }
+  .tc-lead-box .tc-form > * { grid-column: 1 / -1; }
+  .tc-lead-box .tc-row { display: contents; }
+  .tc-lead-box .tc-row > .tc-field,
+  .tc-lead-box .tc-form > .tc-field:has(input[name="email"]) { grid-column: auto; }
+  .tc-lead-box .tc-chip span { padding: 8px 12px; font-size: 13.5px; }
+  .tc-lead-box .tc-field input { padding: 11px 14px; font-size: 15px; }
+  .tc-lead-box .tc-field textarea { min-height: 70px; padding: 11px 14px; font-size: 15px; }
+  .tc-lead-box .tc-form-foot { margin-top: 0; }
+  .tc-lead-box .tc-form-foot .tcp-btn { padding: 12px 22px; }
+}
 
 /* form trên trang Liên hệ */
 .tc-lead-inline { background: var(--cream); border: 2px solid var(--ink); border-radius: 28px; box-shadow: 8px 8px 0 var(--ink); padding: 32px; scroll-margin-top: 120px; }
@@ -521,7 +570,7 @@ html.tc-lead-open, html.tc-lead-open body { overflow: hidden !important; }
 .tcp-est-step .tc-chip:hover span { background: var(--cream); }
 .tcp-est-step .tc-chip input:checked + span { background: var(--yellow); }
 .tcp-est-big { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.tcp-est-big .tc-chip span { display: flex; flex-direction: column; gap: 4px; border-radius: 18px; padding: 18px 20px; text-align: left; height: 100%; }
+.tcp-est-big .tc-chip span { display: flex; flex-direction: column; gap: 4px; border-radius: var(--tc-box-r); padding: 18px 20px; text-align: left; height: 100%; }
 .tcp-est-big .tc-chip span b { font-size: 18px; }
 .tcp-est-big .tc-chip span small { font-size: 14px; font-weight: 500; opacity: .7; }
 .tcp-est-nav { display: flex; justify-content: space-between; align-items: center; min-height: 10px; }
