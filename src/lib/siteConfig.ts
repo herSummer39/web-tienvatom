@@ -6,8 +6,10 @@ export const SITE = {
     'Tiệm Code làm website trọn gói có trang quản trị tự đăng bài, landing page, phần mềm theo nhu cầu doanh nghiệp và phần mềm Zalo marketing.',
   zalo: '0565567789',
   zaloUrl: 'https://zalo.me/0565567789',
-  // TODO: điền link Fanpage khi có, ví dụ 'https://facebook.com/tiemcode'
+  // TODO: điền Email / Fanpage / TikTok khi có
+  email: '',
   fanpageUrl: '',
+  tiktokUrl: '',
   since: 2026,
   // Đoạn "Về tụi mình" dùng ở trang chủ, trang Dịch vụ, chatbot và llms.txt
   about: [

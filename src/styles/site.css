@@ -34,7 +34,64 @@
   z-index: -1;
 }
 @keyframes tcUnderline { to { clip-path: inset(0 0 0 0); } }
-@media (prefers-reduced-motion: reduce) { .tc-underline::after { animation: none; clip-path: none; } }
+.tc-underline[data-tc-reveal="underline"]::after { animation: none; bottom: -0.02em; }
+.tc-underline[data-tc-reveal="underline"].tc-in::after { animation: tcUnderline 0.9s var(--tc-ease, ease) 0.15s forwards; }
+@media (prefers-reduced-motion: reduce) { .tc-underline::after, .tc-underline[data-tc-reveal="underline"]::after { animation: none; clip-path: none; } }
+
+/* ---------- khối Expert & khối Ideas: căn gọn tiêu đề + vị trí sticker tia sét & mặt cười ---------- */
+@media (min-width: 1440px) {
+  .framer-vcN5Y .framer-16vcrup { gap: 96px !important; }
+  .framer-vcN5Y .framer-61lak5,
+  .framer-vcN5Y .framer-1jdva9d { width: 580px !important; }
+}
+@media (min-width: 1000px) and (max-width: 1439.98px) {
+  .framer-vcN5Y .framer-61lak5,
+  .framer-vcN5Y .framer-1jdva9d { width: 472px !important; }
+}
+/* Tag tia sét cam-xanh: nằm ở khoảng trống ngay phía trước chữ "LÀM THÔI" */
+.framer-vcN5Y .framer-1li3nmt {
+  top: auto !important;
+  bottom: 30px !important;
+  left: auto !important;
+  right: 650px !important;
+  width: 142px !important;
+  height: 120px !important;
+}
+/* Tag mặt cười xanh-vàng: dịch gọn vào cạnh chữ "RỒI THÌ" và phóng to cho cân đối */
+.framer-vcN5Y .framer-1pu4afs {
+  width: 132px !important;
+  height: 132px !important;
+  top: 204px !important;
+  left: 488px !important;
+}
+@media (min-width: 810px) and (max-width: 1439.98px) {
+  .framer-vcN5Y .framer-1li3nmt {
+    bottom: 16px !important;
+    right: 414px !important;
+    width: 102px !important;
+    height: 86px !important;
+  }
+  .framer-vcN5Y .framer-1pu4afs {
+    width: 96px !important;
+    height: 96px !important;
+    top: 124px !important;
+    left: 308px !important;
+  }
+}
+@media (max-width: 809.98px) {
+  .framer-vcN5Y .framer-1li3nmt {
+    bottom: 4px !important;
+    right: 236px !important;
+    width: 72px !important;
+    height: 60px !important;
+  }
+  .framer-vcN5Y .framer-1pu4afs {
+    width: 68px !important;
+    height: 68px !important;
+    top: 67px !important;
+    left: 180px !important;
+  }
+}
 
 /* ---------- chuyển động lặp: dải chữ chạy, chữ xoay ---------- */
 [data-tc-loop] {
@@ -132,11 +189,77 @@ nav[data-tc-nav="desktop"].tc-collapsed [data-framer-name="Links"] > * {
 
 /* ---------- khung chat ---------- */
 .tc-chat-host-fixed { position: fixed; z-index: 9998; inset: auto 0 0 auto; width: 0; height: 0; }
-.tc-chat-panel [data-tc-chat-log] a { color: rgb(241, 224, 68); }
+.tc-chat-panel [data-tc-chat-log] a,
+.tc-chat-panel [aria-live] a { color: rgb(241, 224, 68); }
+/* thanh cuộn mảnh, tối, đồng bộ nền #252122 của khung chat (bỏ thanh kéo trắng mặc định của trình duyệt) */
+.tc-chat-panel [aria-live] {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(250, 250, 250, 0.24) transparent;
+  padding-right: 6px !important;
+}
+.tc-chat-panel [aria-live]::-webkit-scrollbar { width: 5px; height: 5px; }
+.tc-chat-panel [aria-live]::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+.tc-chat-panel [aria-live]::-webkit-scrollbar-track { background: transparent; margin: 6px 0; }
+.tc-chat-panel [aria-live]::-webkit-scrollbar-thumb {
+  background: rgba(250, 250, 250, 0.22);
+  border-radius: 999px;
+}
+.tc-chat-panel [aria-live]::-webkit-scrollbar-thumb:hover {
+  background: rgba(241, 224, 68, 0.72);
+}
 .tc-chat-typing span { display: inline-block; width: 6px; height: 6px; margin: 0 2px; border-radius: 50%; background: rgba(250, 250, 250, 0.6); animation: tcTyping 1s infinite ease-in-out; }
 .tc-chat-typing span:nth-child(2) { animation-delay: 0.15s; }
 .tc-chat-typing span:nth-child(3) { animation-delay: 0.3s; }
 @keyframes tcTyping { 0%, 80%, 100% { opacity: 0.3; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+
+/* ---------- trang Bảng giá (/bao-gia): con dấu vàng xoay nằm gọn ngay cạnh chữ "GÌ?" ---------- */
+.framer-vcN5Y .framer-gpx5zh {
+  top: 98px !important;
+  left: 112px !important;
+  overflow: visible !important;
+}
+@media (max-width: 809.98px) {
+  .framer-vcN5Y .framer-14jfvhx { max-width: 240px !important; }
+  .framer-vcN5Y .framer-gpx5zh {
+    width: 74px !important;
+    height: 74px !important;
+    top: 88px !important;
+    left: 92px !important;
+  }
+}
+
+/* ---------- chân trang: cột trái có thêm mô tả + 3 cột liên kết cân đối ---------- */
+.tc-footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 320px;
+  flex-shrink: 0;
+}
+.tc-footer-desc {
+  margin: 0;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.65;
+  color: rgba(250, 250, 250, 0.74);
+}
+@media (min-width: 1200px) {
+  [data-framer-name="Footer"] [data-framer-name="Frame 2147227681"] {
+    gap: 64px !important;
+    justify-content: space-between !important;
+  }
+  [data-framer-name="Footer"] [data-framer-name="Frame 2147227678"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    column-gap: 40px !important;
+    margin-left: 0 !important;
+    max-width: 760px;
+  }
+}
+@media (max-width: 1199.98px) {
+  .tc-footer-brand { max-width: 460px; }
+}
 
 /* menu điện thoại khi mở: khóa cuộn trang */
 html.tc-menu-open, html.tc-menu-open body { overflow: hidden; }

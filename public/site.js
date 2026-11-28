@@ -57,7 +57,10 @@
     // nhãn dán: chạy khi nhãn vào màn hình (nhãn ở đầu trang thì chạy ngay khi vừa vào web).
     // Không dùng IntersectionObserver vì lúc chưa dán, nhãn bị cắt (clip-path) về 0 nên luôn bị coi là "không thấy".
     // Đoạn kiểm tra chạy ở mục 3 (scrollJobs), sau khi khai báo.
-    var pendingWipes = reveals.filter(function (el) { return el.getAttribute('data-tc-reveal') === 'wipe'; });
+    var pendingWipes = reveals.filter(function (el) {
+      var t = el.getAttribute('data-tc-reveal');
+      return t === 'wipe' || t === 'underline';
+    });
     wipeJob = function () {
       if (!pendingWipes.length) return;
       var h = window.innerHeight;
@@ -85,7 +88,7 @@
   function runScroll() { ticking = false; for (var i = 0; i < scrollJobs.length; i++) scrollJobs[i](); }
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(runScroll); } }
   window.addEventListener('scroll', onScroll, { passive: true });
-  if (wipeJob) scrollJobs.push(wipeJob);
+  if (wipeJob) { scrollJobs.push(wipeJob); wipeJob(); }
   var resizeJobs = [];
   var rT = null;
   window.addEventListener('resize', function () { clearTimeout(rT); rT = setTimeout(function () { resizeJobs.forEach(function (f) { f(); }); onScroll(); }, 150); });
@@ -284,15 +287,6 @@
     }
   }
   $$('[data-tc-faq]').forEach(function (it) { it.setAttribute('role', 'button'); it.setAttribute('aria-expanded', 'false'); });
-
-  // ---------- 6. giờ Việt Nam ở chân trang ----------
-  var clockEls = $$('[data-framer-name="Footer"] span.framer-text').filter(function (s) { return /^VN \d{1,2}:\d{2}$/.test(s.textContent.trim()); });
-  function tick() {
-    var t;
-    try { t = 'VN ' + new Intl.DateTimeFormat('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Ho_Chi_Minh' }).format(new Date()); } catch (e) { t = 'Việt Nam'; }
-    clockEls.forEach(function (s) { if (s.textContent !== t) s.textContent = t; });
-  }
-  if (clockEls.length) { tick(); setInterval(tick, 30000); }
 
   // ---------- 7. form đăng ký tư vấn (popup + form trên trang Liên hệ) ----------
   var modal = null, lastFocus = null;
