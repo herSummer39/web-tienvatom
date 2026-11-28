@@ -160,7 +160,7 @@ function projectPages() {
       <span class="tcp-sticker tcp-bg-pink">Dự án</span>
       <h1 class="tcp-title">Xem tận mắt<br>rồi hẵng tin</h1>
       <p class="tcp-lead">Dự án Tiệm Code đã làm cho khách hàng và kho mẫu giao diện có sẵn. Thích mẫu nào, chúng mình làm theo phong cách đó cho bạn.</p>
-      <div class="tcp-actions">${lead('Đăng ký tư vấn')}${btn('Xem báo giá', '/bao-gia', 'ghost')}</div>
+      <div class="tcp-actions">${lead('Đăng ký tư vấn')}${btn('Xem bảng giá', '/bao-gia', 'ghost')}</div>
     </header>
     <div class="tcp-cats" role="group" aria-label="Lọc dự án">
       <button type="button" aria-pressed="true" data-k="type" data-v="">Tất cả (${projects.length})</button>

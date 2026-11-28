@@ -15,7 +15,7 @@ export const SERVICES: Service[] = [
     id: 'website',
     name: 'Website chuẩn SEO, tự đăng bài bán hàng',
     short: 'Website trọn gói',
-    price: 'Từ 7.000.000đ',
+    price: 'Báo giá theo nhu cầu',
     pain: 'Web cũ tải chậm, vỡ giao diện trên điện thoại, muốn đăng bài mới lại phải nhờ người khác.',
     points: [
       'Giao diện thiết kế riêng, hiển thị mượt trên điện thoại',
@@ -31,7 +31,7 @@ export const SERVICES: Service[] = [
     id: 'design',
     name: 'Landing page bán hàng, chạy quảng cáo',
     short: 'Landing page',
-    price: 'Từ 4.500.000đ',
+    price: 'Báo giá theo nhu cầu',
     pain: 'Chạy quảng cáo mà khách bấm vào lại rơi vào fanpage hay một trang chung chung, không biết đặt hàng ở đâu.',
     points: [
       'Một trang tập trung vào một sản phẩm hoặc chương trình',

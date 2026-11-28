@@ -542,14 +542,13 @@
     }
   }, true);
 
-  // ---------- 10. công cụ ước tính chi phí (trang Báo giá) ----------
+  // ---------- 10. form "Gửi yêu cầu nhanh" 5 câu hỏi (trang Bảng giá) ----------
   (function estimator() {
     var box = $('[data-est]');
     if (!box) return;
     var kinds = [];
     try { kinds = JSON.parse($('[data-est-config]', box).textContent); } catch (err) { return; }
     var TOTAL = 5, step = 1;
-    var tr = function (n) { return (n / 1e6).toLocaleString('vi-VN') + ' triệu'; };
     var val = function (name) { var i = $('input[name="' + name + '"]:checked', box); return i ? i.value : ''; };
     var kind = function () { var v = val('kind'); for (var i = 0; i < kinds.length; i++) if (kinds[i].v === v) return kinds[i]; return null; };
     var stepEl = function (n) {
@@ -574,40 +573,29 @@
       if (n === 'done') result();
     }
     function result() {
+      // không hiện giá: tóm tắt nhu cầu, gửi kèm vào form đăng ký để Tiệm Code báo giá riêng
       var k = kind() || kinds[0];
-      var lines = [], total = k.price || 0;
-      if (k.price) lines.push([k.label, k.price]);
       var extras = [];
-      $$('.tcp-est-step[data-group="' + k.group + '"] input:checked', box).forEach(function (i) {
-        extras.push(i.value);
-        var p = Number(i.getAttribute('data-price') || 0);
-        if (p) { lines.push([i.value, p]); total += p; }
-      });
-      var price = $('[data-est-price]', box), days = $('[data-est-days]', box), note = $('[data-est-note]', box);
-      if (k.price) price.textContent = (k.from ? 'Từ ' : 'Khoảng ') + tr(total);
-      else price.textContent = 'Báo giá theo tính năng';
-      var d = k.days ? 'Thời gian: ' + k.days : '';
-      if (k.group === 'web' && lines.length > 2) d += ', thêm vài ngày cho các tính năng gắn thêm';
-      days.textContent = d;
-      days.hidden = !d;
-      $('[data-est-lines]', box).innerHTML = lines.length > 1 ? lines.map(function (l) {
-        return '<li><span>' + l[0] + '</span><b>' + l[1].toLocaleString('vi-VN') + 'đ</b></li>';
-      }).join('') : '';
-      var notes = [];
-      if (!k.price) notes.push('Phần mềm nhỏ được làm riêng nên giá tùy vào số tính năng. Để lại số điện thoại, chúng mình hỏi thêm vài câu rồi báo giá miễn phí.');
-      {
-        var dm = val('domain');
-        if (dm && dm !== 'Đã có tên miền') notes.push('Chưa gồm tên miền và hosting. Chúng mình hướng dẫn bạn mua tên miền đứng tên chính bạn.');
-        else notes.push('Chưa gồm hosting.');
-      }
-      if (val('when') === 'Rất gấp') notes.push('Cần gấp: ghi ngày bạn cần có web khi gửi đăng ký, chúng mình báo ngay có kịp không.');
-      note.textContent = notes.join(' ');
+      $$('.tcp-est-step[data-group="' + k.group + '"] input:checked', box).forEach(function (i) { extras.push(i.value); });
+      var biz = val('biz'), dm = val('domain'), when = val('when');
+      var lines = extras.slice();
+      if (biz) lines.push('Lĩnh vực: ' + biz);
+      if (dm) lines.push(dm);
+      if (when) lines.push('Thời gian: ' + when);
+      $('[data-est-price]', box).textContent = k.label;
+      var days = $('[data-est-days]', box);
+      days.textContent = '';
+      days.hidden = true;
+      $('[data-est-lines]', box).innerHTML = lines.map(function (l) { return '<li><span>' + l + '</span></li>'; }).join('');
+      var notes = ['Mỗi dự án một khác, nên chúng mình trao đổi thêm vài câu để nắm đúng yêu cầu rồi mới báo giá trọn gói, miễn phí.'];
+      if (dm && dm !== 'Đã có tên miền') notes.push('Chúng mình hướng dẫn bạn mua tên miền đứng tên chính bạn.');
+      if (when === 'Rất gấp') notes.push('Cần gấp: ghi ngày bạn cần có web khi gửi đăng ký, chúng mình báo ngay có kịp không.');
+      $('[data-est-note]', box).textContent = notes.join(' ');
       // gửi kèm các câu trả lời vào form đăng ký
-      var summary = ['Ước tính: ' + k.label, val('biz'), extras.join(', '), val('domain'), val('when'), price.textContent]
-        .filter(Boolean).join(' · ');
-      var a = $('[data-est-lead]', box);
-      a.setAttribute('data-tc-lead', k.service);
-      a.setAttribute('data-tc-note', summary);
+      var summary = ['Yêu cầu: ' + k.label, biz, extras.join(', '), dm, when].filter(Boolean).join(' · ');
+      var lead = $('[data-est-lead]', box);
+      lead.setAttribute('data-tc-lead', k.service);
+      lead.setAttribute('data-tc-note', summary);
     }
     function reset() {
       $$('input', box).forEach(function (i) { i.checked = false; });

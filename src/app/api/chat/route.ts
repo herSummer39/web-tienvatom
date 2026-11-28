@@ -5,22 +5,22 @@ import { FAQS, PROCESS, SERVICES } from '@/lib/services';
 const STUDIO_CONTEXT = `
 Bạn là trợ lý tư vấn của Tiệm Code (Việt Nam). Xưng "mình", gọi khách là "bạn", nói về studio là "tụi mình".
 Về tụi mình (trả lời khi khách hỏi "bên bạn là ai", "có uy tín không"): ${SITE.about.join(" ")}
-Thông tin chính xác để tư vấn (tuyệt đối không bịa giá hay dịch vụ ngoài danh sách này):
+Thông tin chính xác để tư vấn (tuyệt đối không bịa dịch vụ ngoài danh sách này). KHÔNG nêu con số giá: mỗi website một khác nên Tiệm Code chỉ báo giá riêng sau khi nắm rõ yêu cầu; mời khách gửi yêu cầu ở trang /bao-gia hoặc để lại SĐT/Zalo:
 Dịch vụ (website nhiều tính năng / hệ thống: liên hệ báo giá riêng):
 ${SERVICES.map((s, i) => `${i + 1}. ${s.name} — Giá: ${s.price}. Phù hợp khi: ${s.pain} Gồm: ${s.points.join('; ')}.`).join('\n')}
 Quy trình: ${PROCESS.map((p, i) => `${i + 1}. ${p.title}`).join(' → ')}.
 Câu hỏi thường gặp:
 ${FAQS.map((f) => `- ${f.q} ${f.a}`).join('\n')}
 Tính năng thêm cho website:
-   - Chatbot AI tư vấn theo bảng giá / tài liệu của khách: +3.000.000đ (phí API OpenAI hằng tháng do khách hàng chi trả)
-   - Báo khách mới tự động về Zalo / Telegram / Google Sheet: +2.000.000đ
-   - Thanh toán trực tuyến (VietQR / MoMo / VNPay): +2.500.000đ
-   - Xuất báo cáo Excel / đồng bộ Google Sheet: +1.000.000đ
+   - Chatbot AI tư vấn theo bảng giá / tài liệu của khách (phí API OpenAI hằng tháng do khách hàng chi trả)
+   - Báo khách mới tự động về Zalo / Telegram / Google Sheet
+   - Thanh toán trực tuyến (VietQR / MoMo / VNPay)
+   - Xuất báo cáo Excel / đồng bộ Google Sheet
 - Giá chưa bao gồm tên miền và hosting (khách tự đăng ký, tụi mình hỗ trợ cài đặt).
 - Bảo hành trọn đời: website tụi mình làm gặp sự cố hay ngừng chạy thì tụi mình sửa miễn phí (không áp dụng khi tên miền/hosting hết hạn hoặc bên khác sửa mã nguồn).
 - Thời gian làm website: khoảng 5–14 ngày làm việc.
 - Liên hệ: Zalo / điện thoại ${SITE.zalo}.
-Trả lời ngắn gọn, thân thiện, bằng tiếng Việt. Khi khách quan tâm, gợi ý vào trang /bao-gia để tự tính chi phí hoặc để lại SĐT/Zalo ngay trong khung chat.
+Trả lời ngắn gọn, thân thiện, bằng tiếng Việt. Khi khách quan tâm, gợi ý vào trang /bao-gia để gửi yêu cầu nhanh hoặc để lại SĐT/Zalo ngay trong khung chat.
 `;
 
 function fallbackReply(message: string): string {
@@ -29,14 +29,13 @@ function fallbackReply(message: string): string {
     return `Phần mềm Zalo Marketing của tụi mình giúp bạn quản lý nhiều tài khoản Zalo trên một màn hình, trả lời tin nhắn tự động, tự động đăng bài theo giờ, hỗ trợ tìm khách và quét thành viên nhóm ẩn. Bạn nhắn Zalo ${SITE.zalo} để nhận video demo và báo giá nhé!`;
   }
   if (q.includes("giá") || q.includes("bao nhiêu") || q.includes("chi phí")) {
-    return `Chi phí tham khảo bên mình:
-• Website trọn gói: từ 7 triệu
-• Landing page: từ 4,5 triệu
-• Phần mềm theo nhu cầu, phần mềm Zalo: liên hệ
-• Thêm Chatbot AI: +3 triệu (phí OpenAI hằng tháng do bạn trả)
-• Báo khách mới về Zalo/Telegram: +2 triệu
+    return `Mỗi website một khác nên Tiệm Code báo giá riêng theo đúng nhu cầu của bạn:
+• Website trọn gói
+• Landing page chạy quảng cáo
+• Phần mềm theo nhu cầu, phần mềm Zalo Marketing
+• Gắn thêm: Chatbot AI, báo khách mới về Zalo/Telegram, thanh toán online
 
-Giá chưa gồm tên miền & hosting, bảo hành trọn đời. Bạn tự tính chi phí ở trang /bao-gia hoặc để lại SĐT/Zalo để tụi mình tư vấn nhé!`;
+Giá chưa gồm tên miền & hosting, bảo hành trọn đời. Bạn gửi yêu cầu nhanh ở trang /bao-gia (30 giây) hoặc để lại SĐT/Zalo để tụi mình báo giá miễn phí nhé!`;
   }
   if (q.includes("bao lâu") || q.includes("thời gian")) {
     return "Website thường mất khoảng 5–14 ngày làm việc tùy số trang và tính năng. Phần mềm theo nhu cầu thì tụi mình báo tiến độ sau khi trao đổi yêu cầu. Bạn cần làm gấp không?";

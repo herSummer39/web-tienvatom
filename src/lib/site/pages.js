@@ -93,14 +93,14 @@ const SERVICES = [
   {
     color: 'orange', id: 'website',
     name: 'Website chuẩn SEO, tự đăng bài bán hàng',
-    price: 'Từ 7.000.000đ',
+    price: 'Báo giá theo nhu cầu',
     pain: 'Web cũ tải chậm, vỡ giao diện trên điện thoại, muốn đăng bài mới lại phải nhờ người khác.',
     points: ['Giao diện thiết kế riêng theo thương hiệu', 'Trang quản trị đơn giản: tự đăng bài, sản phẩm, hình ảnh', 'Gắn thêm Zalo, Chatbot AI, thanh toán khi bạn cần', 'Bàn giao toàn bộ mã nguồn và tài khoản quản trị'],
   },
   {
     color: 'yellow', id: 'design',
     name: 'Landing page bán hàng, chạy quảng cáo',
-    price: 'Từ 4.500.000đ',
+    price: 'Báo giá theo nhu cầu',
     pain: 'Chạy quảng cáo mà khách bấm vào lại rơi vào fanpage hay một trang chung chung, không biết đặt hàng ở đâu.',
     points: ['Một trang tập trung vào một sản phẩm hoặc chương trình', 'Nút đặt hàng, nhắn Zalo, form đăng ký luôn dễ thấy', 'Hiển thị mượt trên mọi thiết bị, tải nhanh', 'Gắn Google Analytics để xem quảng cáo mang về bao nhiêu khách'],
   },
@@ -146,7 +146,7 @@ const dichVuContent = `
       color: 'green',
       title: 'Chỉ làm đúng<br>thứ bạn cần',
       text: 'Website, giao diện, phần mềm quản lý và phần mềm Zalo Marketing cho shop và doanh nghiệp nhỏ.',
-      actions: lead('Đăng ký tư vấn') + btn('Ước tính chi phí', '/bao-gia#uoc-tinh', 'ghost'),
+      actions: lead('Đăng ký tư vấn') + btn('Gửi yêu cầu nhanh', '/bao-gia#uoc-tinh', 'ghost'),
     })}
     <div class="tcp-grid-2">
       ${SERVICES.map((s, i) => `
@@ -181,7 +181,7 @@ const aboutContent = `
       sticker: 'Về chúng mình',
       color: 'yellow',
       title: 'Xin chào,<br>chúng mình là Tiệm Code',
-      text: 'Một nhóm sinh viên IT mê làm ra những sản phẩm người ta dùng thật. Chúng mình theo shop và doanh nghiệp nhỏ từ lúc mới có ý tưởng tới khi website chạy ổn định.',
+      text: 'Một nhóm làm web trẻ, mê làm ra những sản phẩm người ta dùng thật. Chúng mình theo shop và doanh nghiệp nhỏ từ lúc mới có ý tưởng tới khi website chạy ổn định.',
       actions: lead('Đăng ký tư vấn') + btn('Xem dịch vụ', '/dich-vu', 'ghost'),
     })}
     <div class="tcp-split" style="margin-top:10px">
@@ -192,8 +192,8 @@ const aboutContent = `
       </div>
       <div class="tcp-card tcp-bg-dark">
         <span class="tcp-price">Điểm khác biệt</span>
-        <h3 class="tcp-card-title">Vì sao chọn một nhóm sinh viên?</h3>
-        ${list(['Chi phí hợp lý vì không tốn mặt bằng, bộ máy quản lý', 'Luôn cập nhật công nghệ mới: AI, tự động hóa', 'Có thời gian theo sát từng dự án', 'Làm bằng cái tâm: website nào làm ra cũng muốn khoe với bạn bè'])}
+        <h3 class="tcp-card-title">Vì sao chọn Tiệm Code?</h3>
+        ${list(['Làm việc trực tiếp với người làm, không qua trung gian', 'Chi phí hợp lý vì không tốn mặt bằng, bộ máy cồng kềnh', 'Một đầu mối theo sát dự án từ đầu tới cuối', 'Luôn cập nhật công nghệ mới: AI, tự động hóa', 'Bàn giao đủ mã nguồn và tài khoản, bạn toàn quyền với website'])}
       </div>
     </div>
   </section>`;
@@ -302,38 +302,37 @@ const zaloContent = `
     <p class="tcp-note">Lưu ý: người dùng tự chịu trách nhiệm sử dụng phần mềm đúng chính sách của Zalo và quy định pháp luật về tin nhắn quảng cáo, dữ liệu cá nhân.</p>
   </section>`;
 
-// ================= BÁO GIÁ =================
+// ================= BẢNG GIÁ (đường dẫn /bao-gia) =================
 const baoGiaHead = `
   <section class="tcp-wrap" style="padding-bottom:10px">
     ${header({
-      sticker: 'Báo giá',
+      sticker: 'Bảng giá',
       color: 'orange',
-      title: 'Giá rõ ràng<br>trước khi làm',
-      text: 'Website trọn gói có giá cố định. Phần mềm làm riêng được báo giá miễn phí sau khi trao đổi nhu cầu.',
-      actions: btn('Ước tính trong 30 giây', '#uoc-tinh') + lead('Đăng ký nhận báo giá', 'tuvan', 'ghost'),
+      title: 'Báo giá theo<br>đúng nhu cầu',
+      text: 'Mỗi website một khác, nên Tiệm Code không ghi giá cố định. Bạn kể rõ yêu cầu, chúng mình nắm đúng việc cần làm rồi mới báo giá trọn gói, chốt trước khi làm, không phát sinh.',
+      actions: btn('Gửi yêu cầu trong 30 giây', '#uoc-tinh') + lead('Đăng ký nhận báo giá', 'tuvan', 'ghost'),
     })}
   </section>`;
 const ADDONS = [
-  ['orange', 'Chatbot AI tư vấn khách', '+3.000.000đ', 'Trả lời khách theo đúng bảng giá, tài liệu của bạn, cả lúc nửa đêm. Phí API OpenAI hằng tháng do bạn trả theo mức dùng thực tế.'],
-  ['yellow', 'Báo khách mới tự động', '+2.000.000đ', 'Khách điền form trên web là thông tin báo ngay về Zalo / Telegram / Google Sheet của bạn.'],
-  ['blue', 'Thanh toán trực tuyến', '+2.500.000đ', 'Khách thanh toán bằng VietQR, MoMo hoặc VNPay ngay trên website.'],
-  ['green', 'Báo cáo Excel / Google Sheet', '+1.000.000đ', 'Xuất đơn hàng, khách hàng ra Excel hoặc đồng bộ Google Sheet để bạn theo dõi.'],
+  ['orange', 'Chatbot AI tư vấn khách', 'Gắn thêm', 'Trả lời khách theo đúng bảng giá, tài liệu của bạn, cả lúc nửa đêm. Phí API OpenAI hằng tháng do bạn trả theo mức dùng thực tế.'],
+  ['yellow', 'Báo khách mới tự động', 'Gắn thêm', 'Khách điền form trên web là thông tin báo ngay về Zalo / Telegram / Google Sheet của bạn.'],
+  ['blue', 'Thanh toán trực tuyến', 'Gắn thêm', 'Khách thanh toán bằng VietQR, MoMo hoặc VNPay ngay trên website.'],
+  ['green', 'Báo cáo Excel / Google Sheet', 'Gắn thêm', 'Xuất đơn hàng, khách hàng ra Excel hoặc đồng bộ Google Sheet để bạn theo dõi.'],
 ];
-const vnd = (n) => n.toLocaleString('vi-VN') + 'đ';
 
-// ---------- Công cụ "Ước tính chi phí" (trang Báo giá, id="uoc-tinh") ----------
-// Sửa giá / thời gian ở đây. price: null = chưa có giá cố định -> hiện "báo giá sau khi trao đổi".
-// from: true = hiện chữ "Từ" trước giá.  service: mục chọn sẵn trong form đăng ký.
+// ---------- Form "Gửi yêu cầu nhanh" (trang Bảng giá, id="uoc-tinh") ----------
+// 5 câu hỏi, không hiện giá: cuối cùng tóm tắt nhu cầu và gửi kèm vào form đăng ký.
+// service: mục chọn sẵn trong form đăng ký.
 const EST_KINDS = [
-  { v: 'website', label: 'Website giới thiệu', hint: 'Cửa hàng, công ty, cá nhân', price: 7000000, from: true, days: 'khoảng 14 ngày', service: 'website', group: 'web' },
-  { v: 'shop', label: 'Website bán hàng', hint: 'Tự đăng sản phẩm, nhận đơn', price: 7000000, from: true, days: 'khoảng 14 ngày', service: 'website', group: 'web' },
-  { v: 'landing', label: 'Landing page', hint: 'Một trang bán hàng, chạy quảng cáo', price: 4500000, from: true, days: '', service: 'design', group: 'web' },
-  { v: 'software', label: 'Phần mềm nhỏ', hint: 'Bán vé, đặt lịch, quản lý đơn…', price: null, days: '', service: 'software', group: 'software' },
+  { v: 'website', label: 'Website giới thiệu', hint: 'Cửa hàng, công ty, cá nhân', service: 'website', group: 'web' },
+  { v: 'shop', label: 'Website bán hàng', hint: 'Tự đăng sản phẩm, nhận đơn', service: 'website', group: 'web' },
+  { v: 'landing', label: 'Landing page', hint: 'Một trang bán hàng, chạy quảng cáo', service: 'design', group: 'web' },
+  { v: 'software', label: 'Phần mềm nhỏ', hint: 'Bán vé, đặt lịch, quản lý đơn…', service: 'software', group: 'software' },
 ];
 const EST_BIZ = ['Shop, bán lẻ', 'Quán ăn, cafe', 'Spa, làm đẹp', 'Lớp học, giáo dục', 'Sự kiện, workshop', 'Công ty dịch vụ', 'Khác'];
 // câu 3 đổi theo loại đã chọn ở câu 1
 const EST_EXTRAS = {
-  web: { q: 'Cần gắn thêm gì?', multi: true, items: ADDONS.map(([, t, p]) => [t, Number(p.replace(/\D/g, ''))]) },
+  web: { q: 'Cần gắn thêm gì?', multi: true, items: ADDONS.map(([, t]) => [t]) },
   software: { q: 'Phần mềm cần làm được gì?', multi: true, items: [['Đặt vé / đặt lịch online'], ['Vé hoặc mã QR, check-in'], ['Quản lý đơn hàng, kho'], ['Phân quyền nhân viên'], ['Thống kê doanh thu, báo cáo']] },
 };
 const estChip = (name, value, label, type = 'radio', extra = '') =>
@@ -343,8 +342,8 @@ const estimator = () => `
   <section class="tcp-wrap tcp-est-wrap" id="uoc-tinh">
     <div class="tcp-est" data-est>
       <div class="tcp-est-head">
-        <span class="tcp-sticker tcp-bg-blue">Ước tính chi phí</span>
-        <h2 class="tcp-est-title">5 câu hỏi, 30 giây.<br>Biết ngay khoảng giá.</h2>
+        <span class="tcp-sticker tcp-bg-blue">Gửi yêu cầu nhanh</span>
+        <h2 class="tcp-est-title">5 câu hỏi, 30 giây.<br>Gửi đúng nhu cầu của bạn.</h2>
         <div class="tcp-est-bar" aria-hidden="true"><i></i></div>
         <p class="tcp-est-count" aria-live="polite">Câu <b>1</b>/5</p>
       </div>
@@ -361,7 +360,7 @@ const estimator = () => `
       <div class="tcp-est-step" data-step="3" data-group="${g}" hidden>
         <h3>${x.q}</h3>
         ${x.multi ? '<p class="tcp-est-hint">Chọn bao nhiêu cũng được, hoặc bỏ qua.</p>' : ''}
-        <div class="tc-chips">${x.items.map(([t, p]) => estChip('extra-' + g, t, p ? `${t} <em>+${(p / 1e6).toLocaleString('vi-VN')} tr</em>` : t, x.multi ? 'checkbox' : 'radio', p ? ` data-price="${p}"` : '')).join('')}</div>
+        <div class="tc-chips">${x.items.map(([t]) => estChip('extra-' + g, t, t, x.multi ? 'checkbox' : 'radio')).join('')}</div>
       </div>`).join('')}
       <div class="tcp-est-step" data-step="4" hidden>
         <h3>Bạn có tên miền chưa?</h3>
@@ -374,16 +373,16 @@ const estimator = () => `
       </div>
 
       <div class="tcp-est-step tcp-est-result" data-step="done" hidden>
-        <p class="tcp-est-label">Chi phí ước tính</p>
+        <p class="tcp-est-label">Nhu cầu của bạn</p>
         <p class="tcp-est-price" data-est-price></p>
         <p class="tcp-est-days" data-est-days></p>
         <ul class="tcp-est-lines" data-est-lines></ul>
         <p class="tcp-est-note" data-est-note></p>
         <div class="tcp-actions">
-          <a class="tcp-btn" href="/lien-he#dang-ky" data-tc-lead="tuvan" data-est-lead><span>Nhận báo giá chi tiết</span>${arrow}</a>
+          <a class="tcp-btn" href="/lien-he#dang-ky" data-tc-lead="tuvan" data-est-lead><span>Gửi yêu cầu nhận báo giá</span>${arrow}</a>
           <button type="button" class="tcp-btn" data-variant="ghost" data-est-reset><span>Làm lại</span></button>
         </div>
-        <p class="tcp-est-small">Con số chỉ để tham khảo. Giá chính thức được chốt sau khi trao đổi.</p>
+        <p class="tcp-est-small">Báo giá miễn phí, chốt giá trước khi làm.</p>
       </div>
 
       <div class="tcp-est-nav">
@@ -395,14 +394,14 @@ const estimator = () => `
   </section>`;
 const baoGiaContent = baoGiaHead + estimator();
 const EXAMPLES = [
-  ['yellow', 'Shop mỹ phẩm online', [['Website trọn gói', 7000000], ['Thanh toán trực tuyến', 2500000], ['Báo khách mới tự động', 2000000]]],
-  ['pink', 'Spa & thẩm mỹ', [['Website trọn gói', 7000000], ['Chatbot AI tư vấn khách', 3000000]], 'Cộng phí API OpenAI hằng tháng theo mức dùng.'],
-  ['blue', 'Công ty dịch vụ', [['Website trọn gói', 7000000], ['Báo cáo Google Sheet', 1000000]]],
+  ['yellow', 'Shop mỹ phẩm online', ['Website bán hàng, có giỏ hàng', 'Thanh toán trực tuyến', 'Báo đơn mới tự động về Zalo']],
+  ['pink', 'Spa & thẩm mỹ', ['Website có bảng giá dịch vụ, đặt lịch', 'Chatbot AI tư vấn khách'], 'Chatbot dùng API OpenAI, phí hằng tháng tính theo mức dùng.'],
+  ['blue', 'Công ty dịch vụ', ['Website giới thiệu công ty', 'Báo cáo khách hàng về Google Sheet']],
 ];
 const baoGiaAfter = `
   <section class="tcp-wrap">
     <div class="tcp-sec">
-      ${secHead('Tính năng<br>gắn thêm', 'Website nào cũng gắn thêm được, lúc làm hoặc sau này. Giá cộng thẳng vào gói.')}
+      ${secHead('Tính năng<br>gắn thêm', 'Website nào cũng gắn thêm được, lúc làm hoặc sau này. Chúng mình báo giá cùng lúc với website.')}
       <div class="tcp-grid-4">${ADDONS.map(([c, t, p, d], i) => `
         <article class="tcp-card tcp-card-sm tcp-bg-${c}" style="--tilt:${tilt(i)}">
           <span class="tcp-price">${p}</span>
@@ -411,15 +410,14 @@ const baoGiaAfter = `
         </article>`).join('')}</div>
     </div>
     <div class="tcp-sec" style="margin-bottom:20px">
-      ${secHead('Ví dụ<br>chi phí thực tế', 'Cách tính cho vài trường hợp hay gặp, để bạn hình dung trước ngân sách.')}
+      ${secHead('Ví dụ<br>gói hay chọn', 'Vài cách kết hợp hay gặp, để bạn hình dung mình cần những gì.')}
       <div class="tcp-grid-3">${EXAMPLES.map(([c, t, rows, note], i) => `
         <article class="tcp-card tcp-card-sm tcp-example tcp-bg-${c}" style="--tilt:${tilt(i)}">
           <h3 class="tcp-card-title">${t}</h3>
-          <table><tbody>${rows.map(([n, v]) => `<tr><td>${n}</td><td>${vnd(v)}</td></tr>`).join('')}
-            <tr class="tcp-total"><td>Tổng</td><td>${vnd(rows.reduce((s, r) => s + r[1], 0))}</td></tr></tbody></table>
+          ${list(rows)}
           ${note ? `<p>${note}</p>` : ''}
         </article>`).join('')}</div>
-      <p class="tcp-note">Ví dụ chỉ để tham khảo, chưa gồm tên miền và hosting. Giá chính thức được chốt sau khi trao đổi.</p>
+      <p class="tcp-note">Mỗi dự án được báo giá riêng sau khi trao đổi, chưa gồm tên miền và hosting.</p>
     </div>
   </section>`;
 
@@ -558,13 +556,13 @@ const pages = [
   {
     slug: 'home',
     title: 'Tiệm Code - Làm website trọn gói & phần mềm cho doanh nghiệp',
-    description: 'Tiệm Code làm website chuẩn SEO tự đăng bài, landing page, phần mềm quản lý làm riêng và phần mềm Zalo Marketing cho shop, doanh nghiệp. Website chỉ từ 7 triệu đồng.',
+    description: 'Tiệm Code làm website chuẩn SEO tự đăng bài, landing page, phần mềm quản lý làm riêng và phần mềm Zalo Marketing cho shop, doanh nghiệp. Báo giá riêng theo đúng nhu cầu, tư vấn miễn phí.',
     show: ['hero', 'expert', 'ideas', 'methods'],
   },
   {
     slug: 'about',
     title: 'Về chúng mình | Tiệm Code',
-    description: 'Tiệm Code là nhóm sinh viên IT cùng nhau làm website và phần mềm cho shop, doanh nghiệp nhỏ trên toàn quốc.',
+    description: 'Tiệm Code làm website và phần mềm may đo cho shop, doanh nghiệp nhỏ trên toàn quốc. Làm việc trực tiếp, bàn giao đủ mã nguồn và bảo hành trọn đời.',
     show: ['why'],
     content: aboutContent,
     after: aboutAfter,
@@ -585,8 +583,8 @@ const pages = [
   },
   {
     slug: 'bao-gia',
-    title: 'Báo giá | Tiệm Code',
-    description: 'Website từ 7 triệu, landing page từ 4,5 triệu, tính năng gắn thêm từ 1 triệu. Phần mềm theo nhu cầu và phần mềm Zalo Marketing báo giá miễn phí.',
+    title: 'Bảng giá | Tiệm Code',
+    description: 'Tiệm Code báo giá riêng theo đúng nhu cầu cho website, landing page, phần mềm theo yêu cầu và phần mềm Zalo Marketing. Gửi yêu cầu trong 30 giây, tư vấn miễn phí.',
     show: ['pricing'],
     content: baoGiaContent,
     after: baoGiaAfter,
