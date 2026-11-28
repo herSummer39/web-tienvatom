@@ -6,7 +6,7 @@ const STUDIO_CONTEXT = `
 Bạn là trợ lý tư vấn của Tiệm Code (Việt Nam). Xưng "mình", gọi khách là "bạn", nói về studio là "tụi mình".
 Về tụi mình (trả lời khi khách hỏi "bên bạn là ai", "có uy tín không"): ${SITE.about.join(" ")}
 Thông tin chính xác để tư vấn (tuyệt đối không bịa giá hay dịch vụ ngoài danh sách này):
-Dịch vụ (website trên 10 trang / hệ thống: liên hệ báo giá riêng):
+Dịch vụ (website nhiều tính năng / hệ thống: liên hệ báo giá riêng):
 ${SERVICES.map((s, i) => `${i + 1}. ${s.name} — Giá: ${s.price}. Phù hợp khi: ${s.pain} Gồm: ${s.points.join('; ')}.`).join('\n')}
 Quy trình: ${PROCESS.map((p, i) => `${i + 1}. ${p.title}`).join(' → ')}.
 Câu hỏi thường gặp:
@@ -26,12 +26,12 @@ Trả lời ngắn gọn, thân thiện, bằng tiếng Việt. Khi khách quan 
 function fallbackReply(message: string): string {
   const q = message.toLowerCase();
   if (q.includes("zalo") && (q.includes("phần mềm") || q.includes("tool") || q.includes("marketing"))) {
-    return `Phần mềm Zalo Marketing của tụi mình giúp bạn quản lý nhiều tài khoản Zalo trên một màn hình, trả lời tự động, hẹn giờ gửi tin, đăng bài nhóm và lọc khách hàng trong nhóm. Bạn nhắn Zalo ${SITE.zalo} để nhận video demo và báo giá nhé!`;
+    return `Phần mềm Zalo Marketing của tụi mình giúp bạn quản lý nhiều tài khoản Zalo trên một màn hình, trả lời tin nhắn tự động, tự động đăng bài theo giờ, hỗ trợ tìm khách và quét thành viên nhóm ẩn. Bạn nhắn Zalo ${SITE.zalo} để nhận video demo và báo giá nhé!`;
   }
   if (q.includes("giá") || q.includes("bao nhiêu") || q.includes("chi phí")) {
     return `Chi phí tham khảo bên mình:
-• Website trọn gói đến 10 trang: 7 triệu (trên 10 trang: liên hệ)
-• Chỉ thiết kế giao diện: từ 4,5 triệu
+• Website trọn gói: từ 7 triệu
+• Landing page: từ 4,5 triệu
 • Phần mềm theo nhu cầu, phần mềm Zalo: liên hệ
 • Thêm Chatbot AI: +3 triệu (phí OpenAI hằng tháng do bạn trả)
 • Báo khách mới về Zalo/Telegram: +2 triệu
@@ -47,7 +47,7 @@ Giá chưa gồm tên miền & hosting, bảo hành trọn đời. Bạn tự t�
   if (q.includes("chatbot") || q.includes("ai")) {
     return "Tụi mình gắn Chatbot AI lên website để tư vấn khách theo đúng bảng giá, tài liệu của bạn, kèm báo khách mới về Zalo/Telegram ngay lập tức. Bạn đang kinh doanh ngành gì để mình tư vấn kỹ hơn?";
   }
-  return "Chào bạn! Mình là trợ lý của Tiệm Code. Tụi mình làm website trọn gói, thiết kế giao diện, phần mềm theo nhu cầu và phần mềm Zalo marketing. Bạn đang cần làm gì nè?";
+  return "Chào bạn! Mình là trợ lý của Tiệm Code. Tụi mình làm website trọn gói, landing page, phần mềm theo nhu cầu và phần mềm Zalo marketing. Bạn đang cần làm gì nè?";
 }
 
 export async function POST(req: Request) {

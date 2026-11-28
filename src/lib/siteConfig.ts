@@ -3,7 +3,7 @@ export const SITE = {
   name: 'Tiệm Code',
   tagline: 'Làm website trọn gói & phần mềm cho doanh nghiệp',
   description:
-    'Tiệm Code làm website trọn gói có trang quản trị tự đăng bài, thiết kế giao diện, phần mềm theo nhu cầu doanh nghiệp và phần mềm Zalo marketing.',
+    'Tiệm Code làm website trọn gói có trang quản trị tự đăng bài, landing page, phần mềm theo nhu cầu doanh nghiệp và phần mềm Zalo marketing.',
   zalo: '0565567789',
   zaloUrl: 'https://zalo.me/0565567789',
   // TODO: điền link Fanpage khi có, ví dụ 'https://facebook.com/tiemcode'

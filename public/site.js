@@ -365,7 +365,7 @@
     if ((e.key === 'Enter' || e.key === ' ') && e.target && e.target.matches && e.target.matches('[data-tc-faq]')) { e.preventDefault(); toggleFaq(e.target); }
   });
 
-  var SERVICE_LABEL = { website: 'Website trọn gói', design: 'Thiết kế giao diện', software: 'Phần mềm theo nhu cầu', zalo: 'Phần mềm Zalo Marketing', tuvan: 'Chưa rõ, cần tư vấn' };
+  var SERVICE_LABEL = { website: 'Website trọn gói', design: 'Landing page', software: 'Phần mềm theo nhu cầu', zalo: 'Phần mềm Zalo Marketing', tuvan: 'Chưa rõ, cần tư vấn' };
   window.addEventListener('submit', function (e) {
     var form = e.target;
     if (!form.matches || !form.matches('form[data-tcp-lead]')) return;
@@ -595,8 +595,7 @@
       }).join('') : '';
       var notes = [];
       if (!k.price) notes.push('Phần mềm nhỏ được làm riêng nên giá tùy vào số tính năng. Để lại số điện thoại, chúng mình hỏi thêm vài câu rồi báo giá miễn phí.');
-      if (k.group === 'design') notes.push('Giá thiết kế tùy số trang và độ phức tạp.');
-      if (k.group !== 'design') {
+      {
         var dm = val('domain');
         if (dm && dm !== 'Đã có tên miền') notes.push('Chưa gồm tên miền và hosting. Chúng mình hướng dẫn bạn mua tên miền đứng tên chính bạn.');
         else notes.push('Chưa gồm hosting.');

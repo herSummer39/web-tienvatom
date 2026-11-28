@@ -56,7 +56,7 @@ const icon = (k) => `<span class="tcp-ico"><svg viewBox="0 0 24 24" fill="none" 
 // ---------- Form đăng ký tư vấn (dùng cho popup trên mọi trang + form ở trang Liên hệ) ----------
 const SERVICE_CHOICES = [
   ['website', 'Website trọn gói'],
-  ['design', 'Thiết kế giao diện'],
+  ['design', 'Landing page'],
   ['software', 'Phần mềm theo nhu cầu'],
   ['zalo', 'Phần mềm Zalo Marketing'],
   ['tuvan', 'Chưa rõ, cần tư vấn'],
@@ -93,16 +93,16 @@ const SERVICES = [
   {
     color: 'orange', id: 'website',
     name: 'Website chuẩn SEO, tự đăng bài bán hàng',
-    price: '7.000.000đ · đến 10 trang',
+    price: 'Từ 7.000.000đ',
     pain: 'Web cũ tải chậm, vỡ giao diện trên điện thoại, muốn đăng bài mới lại phải nhờ người khác.',
     points: ['Giao diện thiết kế riêng theo thương hiệu', 'Trang quản trị đơn giản: tự đăng bài, sản phẩm, hình ảnh', 'Gắn thêm Zalo, Chatbot AI, thanh toán khi bạn cần', 'Bàn giao toàn bộ mã nguồn và tài khoản quản trị'],
   },
   {
     color: 'yellow', id: 'design',
-    name: 'Thiết kế giao diện web dễ dùng, dễ ra đơn',
+    name: 'Landing page bán hàng, chạy quảng cáo',
     price: 'Từ 4.500.000đ',
-    pain: 'Đã có người lập trình nhưng giao diện rối mắt, khách vào không biết bấm vào đâu.',
-    points: ['Bố cục rõ ràng, nút liên hệ và mua hàng dễ thấy', 'Bản cho cả máy tính và điện thoại', 'Chỉnh theo góp ý trước khi bàn giao', 'Bàn giao file Figma cho đội lập trình'],
+    pain: 'Chạy quảng cáo mà khách bấm vào lại rơi vào fanpage hay một trang chung chung, không biết đặt hàng ở đâu.',
+    points: ['Một trang tập trung vào một sản phẩm hoặc chương trình', 'Nút đặt hàng, nhắn Zalo, form đăng ký luôn dễ thấy', 'Hiển thị mượt trên mọi thiết bị, tải nhanh', 'Gắn Google Analytics để xem quảng cáo mang về bao nhiêu khách'],
   },
   {
     color: 'blue', id: 'software',
@@ -116,7 +116,7 @@ const SERVICES = [
     name: 'Phần mềm Zalo Marketing',
     price: 'Báo giá theo số tài khoản',
     pain: 'Phải dùng nhiều điện thoại cho nhiều tài khoản Zalo, khách nhắn tới mà trả lời không xuể.',
-    points: ['Nhiều tài khoản Zalo trên một màn hình', 'Trả lời tự động, hẹn giờ gửi tin', 'Đăng bài lên nhiều nhóm cùng lúc', 'Lọc khách hàng tiềm năng trong nhóm'],
+    points: ['Quản lý nhiều tài khoản Zalo trên một màn hình duy nhất', 'Trả lời tin nhắn tự động', 'Tự động đăng bài theo giờ hẹn', 'Hỗ trợ tìm khách, quét cả nhóm ẩn thành viên'],
     more: ['Xem phần mềm', '/phan-mem-zalo'],
   },
 ];
@@ -165,7 +165,7 @@ const dichVuContent = `
       <div class="tcp-grid-4">${FEATURES.map(([ic, c, t, d], i) => `<article class="tcp-feature tcp-bg-${c}" style="--tilt:${tilt(i)}">${icon(ic)}<h3>${t}</h3><p>${d}</p></article>`).join('')}</div>
     </div>
     <div class="tcp-sec">
-      ${secHead('14 ngày<br>của một website', 'Thời gian tham khảo cho website khoảng 10 trang. Ngày nào bạn cũng biết dự án đang tới đâu.')}
+      ${secHead('14 ngày<br>của một website', 'Thời gian tham khảo cho một website trọn gói. Ngày nào bạn cũng biết dự án đang tới đâu.')}
       <ol class="tcp-timeline">${TIMELINE.map(([c, d, t, p]) => `<li class="tcp-bg-${c}"><b>${d}</b><div><h3>${t}</h3><p>${p}</p></div></li>`).join('')}</ol>
     </div>
     <div class="tcp-sec" style="margin-bottom:0">
@@ -227,7 +227,7 @@ const INDUSTRIES = [
   ['pink', 'Spa & thẩm mỹ', 'Khách muốn xem dịch vụ, bảng giá và đặt lịch nhanh.', ['Trang dịch vụ, bảng giá, hình trước – sau', 'Form đặt lịch hẹn', 'Phần mềm quản lý lịch và khách quen']],
   ['yellow', 'Nhà hàng, quán cà phê', 'Thực đơn hay đổi, khách muốn đặt bàn trước.', ['Thực đơn online tự cập nhật', 'Đặt bàn, gọi món qua Zalo', 'Chatbot trả lời giờ mở cửa, địa chỉ']],
   ['blue', 'Trung tâm, lớp học', 'Phụ huynh, học viên cần thông tin khóa học rõ ràng.', ['Trang khóa học, lịch khai giảng', 'Form đăng ký học thử', 'Quản lý học viên, học phí']],
-  ['dark', 'Kinh doanh qua Zalo', 'Nhiều tài khoản, nhiều nhóm, trả lời khách không xuể.', ['Gom tài khoản về một màn hình', 'Tin nhắn chăm sóc theo lịch', 'Danh sách khách tiềm năng từ nhóm']],
+  ['dark', 'Kinh doanh qua Zalo', 'Nhiều tài khoản, nhiều nhóm, trả lời khách không xuể.', ['Gom tài khoản về một màn hình', 'Tự động đăng bài theo giờ hẹn', 'Tìm khách, quét thành viên nhóm']],
 ];
 const industriesHtml = `
     <div class="tcp-sec" style="margin-bottom:20px">
@@ -244,17 +244,15 @@ const industriesHtml = `
 // ================= PHẦN MỀM ZALO =================
 const ZALO_GROUPS = [
   ['Tiết kiệm thời gian', 'orange', [
-    ['Nhiều tài khoản, một màn hình', 'Quản lý nhiều tài khoản Zalo cùng lúc, không cần chuyển qua lại giữa các điện thoại.'],
-    ['Hẹn giờ gửi tin', 'Soạn tin trước, hẹn giờ gửi cho từng nhóm khách theo lịch bạn muốn.'],
-    ['Đăng bài nhóm', 'Đăng bài lên nhiều nhóm Zalo cùng lúc thay vì đăng tay từng nhóm.'],
+    ['Nhiều tài khoản, một màn hình', 'Quản lý nhiều tài khoản Zalo trên một màn hình duy nhất, không cần chuyển qua lại giữa các điện thoại.'],
+    ['Tự động đăng bài theo giờ', 'Soạn bài trước, hẹn giờ là phần mềm tự đăng đúng lúc, kể cả khi bạn đang bận.'],
   ]],
   ['Không bỏ sót khách', 'yellow', [
-    ['Trả lời tự động', 'Cài sẵn câu trả lời theo từ khóa, khách nhắn lúc nào cũng được phản hồi.'],
-    ['Chăm sóc hàng loạt', 'Gửi thông báo, ưu đãi tới danh sách khách hàng của bạn nhanh chóng.'],
+    ['Trả lời tin nhắn tự động', 'Cài sẵn câu trả lời theo từ khóa, khách nhắn lúc nào cũng được phản hồi.'],
   ]],
   ['Tìm thêm khách mới', 'blue', [
-    ['Kết bạn tự động', 'Gửi lời mời kết bạn tới danh sách số điện thoại khách hàng bạn đã có.'],
-    ['Lọc khách trong nhóm', 'Lấy danh sách thành viên các nhóm để tìm khách hàng tiềm năng phù hợp.'],
+    ['Hỗ trợ tìm khách', 'Tìm khách hàng tiềm năng phù hợp với sản phẩm của bạn ngay trên Zalo.'],
+    ['Quét nhóm ẩn thành viên', 'Lấy được danh sách thành viên cả ở những nhóm đã ẩn thành viên.'],
   ]],
 ];
 const zaloContent = `
@@ -298,7 +296,7 @@ const zaloContent = `
       ${faq([
         { q: 'Mình không rành máy tính có dùng được không?', a: 'Được. Chúng mình hỗ trợ cài đặt và hướng dẫn từng bước cho đến khi bạn dùng quen.' },
         { q: 'Dùng phần mềm có bị khóa tài khoản Zalo không?', a: 'Zalo có thể hạn chế tài khoản nếu gửi tin hoặc kết bạn với tần suất quá cao. Chúng mình hướng dẫn cách cài đặt tốc độ gửi hợp lý để dùng an toàn hơn.' },
-        { q: 'Có cần để máy tính mở suốt không?', a: 'Các tính năng tự động (trả lời, hẹn giờ) chạy khi phần mềm đang mở. Chúng mình tư vấn cách sắp xếp phù hợp với cách bạn làm việc.' },
+        { q: 'Có cần để máy tính mở suốt không?', a: 'Các tính năng tự động (trả lời tin nhắn, đăng bài theo giờ) chạy khi phần mềm đang mở. Chúng mình tư vấn cách sắp xếp phù hợp với cách bạn làm việc.' },
       ])}
     </div>
     <p class="tcp-note">Lưu ý: người dùng tự chịu trách nhiệm sử dụng phần mềm đúng chính sách của Zalo và quy định pháp luật về tin nhắn quảng cáo, dữ liệu cá nhân.</p>
@@ -327,16 +325,15 @@ const vnd = (n) => n.toLocaleString('vi-VN') + 'đ';
 // Sửa giá / thời gian ở đây. price: null = chưa có giá cố định -> hiện "báo giá sau khi trao đổi".
 // from: true = hiện chữ "Từ" trước giá.  service: mục chọn sẵn trong form đăng ký.
 const EST_KINDS = [
-  { v: 'website', label: 'Website giới thiệu', hint: 'Cửa hàng, công ty, cá nhân', price: 7000000, days: 'khoảng 14 ngày', service: 'website', group: 'web' },
-  { v: 'shop', label: 'Website bán hàng', hint: 'Tự đăng sản phẩm, nhận đơn', price: 7000000, days: 'khoảng 14 ngày', service: 'website', group: 'web' },
-  { v: 'design', label: 'Chỉ thiết kế giao diện', hint: 'Đã có người lập trình', price: 4500000, from: true, days: '', service: 'design', group: 'design' },
+  { v: 'website', label: 'Website giới thiệu', hint: 'Cửa hàng, công ty, cá nhân', price: 7000000, from: true, days: 'khoảng 14 ngày', service: 'website', group: 'web' },
+  { v: 'shop', label: 'Website bán hàng', hint: 'Tự đăng sản phẩm, nhận đơn', price: 7000000, from: true, days: 'khoảng 14 ngày', service: 'website', group: 'web' },
+  { v: 'landing', label: 'Landing page', hint: 'Một trang bán hàng, chạy quảng cáo', price: 4500000, from: true, days: '', service: 'design', group: 'web' },
   { v: 'software', label: 'Phần mềm nhỏ', hint: 'Bán vé, đặt lịch, quản lý đơn…', price: null, days: '', service: 'software', group: 'software' },
 ];
 const EST_BIZ = ['Shop, bán lẻ', 'Quán ăn, cafe', 'Spa, làm đẹp', 'Lớp học, giáo dục', 'Sự kiện, workshop', 'Công ty dịch vụ', 'Khác'];
 // câu 3 đổi theo loại đã chọn ở câu 1
 const EST_EXTRAS = {
   web: { q: 'Cần gắn thêm gì?', multi: true, items: ADDONS.map(([, t, p]) => [t, Number(p.replace(/\D/g, ''))]) },
-  design: { q: 'Cần thiết kế khoảng bao nhiêu trang?', multi: false, items: [['1 – 5 trang'], ['6 – 10 trang'], ['Trên 10 trang']] },
   software: { q: 'Phần mềm cần làm được gì?', multi: true, items: [['Đặt vé / đặt lịch online'], ['Vé hoặc mã QR, check-in'], ['Quản lý đơn hàng, kho'], ['Phân quyền nhân viên'], ['Thống kê doanh thu, báo cáo']] },
 };
 const estChip = (name, value, label, type = 'radio', extra = '') =>
@@ -398,9 +395,9 @@ const estimator = () => `
   </section>`;
 const baoGiaContent = baoGiaHead + estimator();
 const EXAMPLES = [
-  ['yellow', 'Shop mỹ phẩm online', [['Website trọn gói (10 trang)', 7000000], ['Thanh toán trực tuyến', 2500000], ['Báo khách mới tự động', 2000000]]],
-  ['pink', 'Spa & thẩm mỹ', [['Website trọn gói (8 trang)', 7000000], ['Chatbot AI tư vấn khách', 3000000]], 'Cộng phí API OpenAI hằng tháng theo mức dùng.'],
-  ['blue', 'Công ty dịch vụ', [['Website trọn gói (6 trang)', 7000000], ['Báo cáo Google Sheet', 1000000]]],
+  ['yellow', 'Shop mỹ phẩm online', [['Website trọn gói', 7000000], ['Thanh toán trực tuyến', 2500000], ['Báo khách mới tự động', 2000000]]],
+  ['pink', 'Spa & thẩm mỹ', [['Website trọn gói', 7000000], ['Chatbot AI tư vấn khách', 3000000]], 'Cộng phí API OpenAI hằng tháng theo mức dùng.'],
+  ['blue', 'Công ty dịch vụ', [['Website trọn gói', 7000000], ['Báo cáo Google Sheet', 1000000]]],
 ];
 const baoGiaAfter = `
   <section class="tcp-wrap">
@@ -537,7 +534,7 @@ const privacyHtml = prose('Bảo mật', 'Chính sách<br>bảo mật', `
 const termsHtml = prose('Điều khoản', 'Điều khoản<br>sử dụng', `
   <p>Khi truy cập website của Tiệm Code, bạn đồng ý với các điều khoản dưới đây.</p>
   <h2>1. Nội dung website</h2>
-  <p>Website giới thiệu dịch vụ làm website, thiết kế giao diện, phần mềm theo nhu cầu và phần mềm Zalo marketing của Tiệm Code. Thông tin mang tính tham khảo và có thể được cập nhật mà không cần báo trước.</p>
+  <p>Website giới thiệu dịch vụ làm website, landing page, phần mềm theo nhu cầu và phần mềm Zalo marketing của Tiệm Code. Thông tin mang tính tham khảo và có thể được cập nhật mà không cần báo trước.</p>
   <h2>2. Báo giá</h2>
   <p>Giá trên trang Báo giá là giá tham khảo. Giá chính thức được thống nhất sau khi trao đổi chi tiết nhu cầu. Gửi form hoặc nhắn tin không tự động tạo thành hợp đồng giữa bạn và Tiệm Code.</p>
   <ul><li>Giá chưa bao gồm tên miền và hosting.</li><li>Với tính năng Chatbot AI, phí sử dụng API OpenAI hằng tháng do khách hàng chi trả.</li></ul>
@@ -561,7 +558,7 @@ const pages = [
   {
     slug: 'home',
     title: 'Tiệm Code - Làm website trọn gói & phần mềm cho doanh nghiệp',
-    description: 'Tiệm Code là nhóm sinh viên IT làm website chuẩn SEO tự đăng bài, thiết kế giao diện, phần mềm quản lý làm riêng và phần mềm Zalo Marketing. Website đến 10 trang 7 triệu, bảo hành trọn đời.',
+    description: 'Tiệm Code làm website chuẩn SEO tự đăng bài, landing page, phần mềm quản lý làm riêng và phần mềm Zalo Marketing cho shop, doanh nghiệp. Website chỉ từ 7 triệu đồng.',
     show: ['hero', 'expert', 'ideas', 'methods'],
   },
   {
@@ -575,21 +572,21 @@ const pages = [
   {
     slug: 'dich-vu',
     title: 'Dịch vụ | Tiệm Code',
-    description: 'Website chuẩn SEO tự đăng bài, thiết kế giao diện, phần mềm quản lý làm riêng thay thế Excel và phần mềm Zalo Marketing.',
+    description: 'Website chuẩn SEO tự đăng bài, landing page chạy quảng cáo, phần mềm quản lý làm riêng thay thế Excel và phần mềm Zalo Marketing.',
     show: [],
     content: dichVuContent,
   },
   {
     slug: 'phan-mem-zalo',
     title: 'Phần mềm Zalo Marketing | Tiệm Code',
-    description: 'Quản lý nhiều tài khoản Zalo trên một màn hình, trả lời tự động, hẹn giờ gửi tin, đăng bài nhóm và lọc khách hàng trong nhóm.',
+    description: 'Quản lý nhiều tài khoản Zalo trên một màn hình, trả lời tin nhắn tự động, tự động đăng bài theo giờ, hỗ trợ tìm khách và quét thành viên nhóm ẩn.',
     show: [],
     content: zaloContent,
   },
   {
     slug: 'bao-gia',
     title: 'Báo giá | Tiệm Code',
-    description: 'Website đến 10 trang 7 triệu, thiết kế giao diện từ 4,5 triệu, tính năng gắn thêm từ 1 triệu. Phần mềm theo nhu cầu và phần mềm Zalo Marketing báo giá miễn phí.',
+    description: 'Website từ 7 triệu, landing page từ 4,5 triệu, tính năng gắn thêm từ 1 triệu. Phần mềm theo nhu cầu và phần mềm Zalo Marketing báo giá miễn phí.',
     show: ['pricing'],
     content: baoGiaContent,
     after: baoGiaAfter,

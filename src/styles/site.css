@@ -17,6 +17,25 @@
 @font-face { font-family: "Montserrat Alternates"; font-style: normal; font-weight: 800; font-display: swap; src: url(/framer/fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsH8ag.woff2) format("woff2"); unicode-range: U+0045, U+005A, U+007A, U+00C8-00CB; }
 @font-face { font-family: "Montserrat Alternates"; font-style: normal; font-weight: 800; font-display: swap; src: url(/framer/fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsI8ah8QA.woff2) format("woff2"); unicode-range: U+1EB8, U+1EBA, U+1EBC, U+1EBE, U+1EC0, U+1EC2, U+1EC4, U+1EC6; }
 
+/* ---------- gạch chân chữ "xứng đáng" ở tiêu đề trang chủ ----------
+   nét cọ màu cam, tự vẽ từ trái sang phải khi vừa vào web */
+.tc-underline { position: relative; display: inline-block; white-space: nowrap; isolation: isolate; }
+.tc-underline::after {
+  content: '';
+  position: absolute;
+  left: -3%;
+  right: -3%;
+  bottom: 0.02em;
+  height: 0.22em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 24' preserveAspectRatio='none'%3E%3Cpath d='M4 16 C 60 7, 125 5, 185 9 S 268 17, 296 7' fill='none' stroke='%23FC5702' stroke-width='10' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  clip-path: inset(0 100% 0 0);
+  animation: tcUnderline 0.9s var(--tc-ease, ease) 0.6s forwards;
+  pointer-events: none;
+  z-index: -1;
+}
+@keyframes tcUnderline { to { clip-path: inset(0 0 0 0); } }
+@media (prefers-reduced-motion: reduce) { .tc-underline::after { animation: none; clip-path: none; } }
+
 /* ---------- chuyển động lặp: dải chữ chạy, chữ xoay ---------- */
 [data-tc-loop] {
   animation-timing-function: linear;

@@ -24,7 +24,7 @@ export async function GET() {
     ),
     '',
     '## Báo giá',
-    `- [Công cụ tính báo giá](${siteUrl}/bao-gia): Website đến 10 trang 7.000.000đ, trên 10 trang liên hệ. Tính năng thêm: Chatbot AI +3.000.000đ (phí API OpenAI hằng tháng do khách trả), báo khách mới về Zalo/Telegram/Google Sheet +2.000.000đ, thanh toán trực tuyến +2.500.000đ, xuất Excel/Google Sheet +1.000.000đ.`,
+    `- [Công cụ tính báo giá](${siteUrl}/bao-gia): Website từ 7.000.000đ, landing page từ 4.500.000đ. Tính năng thêm: Chatbot AI +3.000.000đ (phí API OpenAI hằng tháng do khách trả), báo khách mới về Zalo/Telegram/Google Sheet +2.000.000đ, thanh toán trực tuyến +2.500.000đ, xuất Excel/Google Sheet +1.000.000đ.`,
     '- Giá chưa gồm tên miền và hosting. Website được bảo hành trọn đời.',
     '',
     ...(posts.length

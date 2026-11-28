@@ -24,9 +24,9 @@ Chi phí website thường chia làm hai phần: **tiền làm một lần** và
 
 | Hạng mục | Chi phí |
 | --- | --- |
-| Website trọn gói, đến 10 trang | 7.000.000đ |
-| Website trên 10 trang hoặc dạng hệ thống | Báo giá riêng |
-| Thiết kế giao diện (file Figma) | Từ 4.500.000đ |
+| Website trọn gói | Từ 7.000.000đ |
+| Website nhiều tính năng hoặc dạng hệ thống | Báo giá riêng |
+| Landing page chạy quảng cáo | Từ 4.500.000đ |
 | Chatbot AI tư vấn khách | +3.000.000đ |
 | Thanh toán trực tuyến (VietQR, MoMo, VNPay) | +2.500.000đ |
 | Báo khách mới tự động về Zalo / Telegram | +2.000.000đ |
@@ -38,7 +38,7 @@ Gói website trọn gói đã gồm giao diện riêng, trang quản trị để
 
 Giả sử bạn bán mỹ phẩm online, muốn khách đặt hàng và thanh toán ngay trên web, đơn mới báo về Zalo:
 
-- Website trọn gói 10 trang: 7.000.000đ
+- Website trọn gói: 7.000.000đ
 - Thanh toán trực tuyến: 2.500.000đ
 - Báo đơn mới về Zalo: 2.000.000đ
 
